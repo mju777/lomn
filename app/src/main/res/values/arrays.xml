@@ -13,18 +13,18 @@
     </string-array>
     <string-array name="income_from">
         <item>工资</item>
-        <item>小金库</item>
+        <item>理财</item>
         <item>转账</item>
-        <item>卖东西</item>
+        <item>买卖</item>
         <item>股票</item>
         <item>其他</item>
     </string-array>
 
 
 
-    <string-array name="pay_for">
+    <string-array name="pay_to">
         <item>吃喝玩乐</item>
-        <item>衣住行 </item>
+        <item>衣服出行 </item>
         <item>家具家电</item>
         <item>维修保洁</item>
         <item>搬家搬运</item>

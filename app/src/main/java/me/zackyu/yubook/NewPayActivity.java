@@ -79,7 +79,7 @@ public class NewPayActivity extends AppCompatActivity {
         newPayType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                source = getResources().getStringArray(R.array.pay_for)[position];
+                source = getResources().getStringArray(R.array.pay_to)[position];
             }
 
             @Override

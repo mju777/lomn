@@ -38,7 +38,7 @@ public class iDBHelper extends SQLiteOpenHelper {
         try {
             sqLiteDatabase.execSQL(CREATE_ACCOUNT_DETAIL_TABLE);
             sqLiteDatabase.execSQL(CREATE_ACCOUNT_NAME_TABLE);
-            Toast.makeText(mContext, "创建成功", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "create table！", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Log.e("DB_CREATE_ERROR", "创建表时出错: " + e.getMessage());
         }

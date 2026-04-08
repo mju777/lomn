@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setListeners();
         initDatabase();
 
-        String html = "<u>关于应用</u>";
+        String html = "<u>about</u>";
         textviewAboutMe.setText(Html.fromHtml(html));
         showData();
     }

@@ -22,7 +22,7 @@ public class AboutMeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_me);
 
         textWechatAccount = findViewById(R.id.text_wechat_account);
-        setUpCopyClickListener(textWechatAccount, "微信");
+        setUpCopyClickListener(textWechatAccount, "WeChat");
 
         textQqAccount = findViewById(R.id.text_qq_account);
         setUpCopyClickListener(textQqAccount, "QQ");
@@ -34,7 +34,7 @@ public class AboutMeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 cm.setText(textView.getText());
-                Toast.makeText(AboutMeActivity.this, "复制成功，打开" + appName + "即可粘贴", Toast.LENGTH_LONG).show();
+                Toast.makeText(AboutMeActivity.this, "copy！open" + appName + "to paste", Toast.LENGTH_LONG).show();
             }
         });
     }

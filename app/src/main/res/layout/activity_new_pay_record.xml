@@ -52,7 +52,7 @@
             android:id="@+id/new_pay_type"
             android:layout_width="match_parent"
             android:layout_height="77dp"
-            android:entries="@array/pay_for"
+            android:entries="@array/pay_to"
             android:theme="@style/CustomSpinnerStyle"
             android:textColor="#000000"
             android:textAlignment="center"
