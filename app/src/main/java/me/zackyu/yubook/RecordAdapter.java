@@ -41,9 +41,9 @@ public class RecordAdapter extends ArrayAdapter<Record> {
         TextView textSource = convertView.findViewById(R.id.text_source);
 
         textAmount.setText("￥ " + record.getAmount());
-        textSource.setText("来源: " + record.getSource());
+        textSource.setText("source: " + record.getSource());
         textType.setText("去向: " + record.getType());
-        textAccount.setText("账号: " + record.getAccount());
+        textAccount.setText("account number: " + record.getAccount());
         textTime.setText("时间: " + simpleDateFormat.format(record.getCrttime()));
 
         return convertView;

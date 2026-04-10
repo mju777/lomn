@@ -13,18 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AboutMeActivity extends AppCompatActivity {
 
-    private TextView textWechatAccount;
-    private TextView textQqAccount;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
 
-        textWechatAccount = findViewById(R.id.text_wechat_account);
+        TextView textWechatAccount = findViewById(R.id.text_wechat_account);
         setUpCopyClickListener(textWechatAccount, "WeChat");
 
-        textQqAccount = findViewById(R.id.text_qq_account);
+        TextView textQqAccount = findViewById(R.id.text_qq_account);
         setUpCopyClickListener(textQqAccount, "QQ");
     }
 

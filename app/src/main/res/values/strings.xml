@@ -26,7 +26,7 @@
     <string name="about_app">about app</string>
     <string name="intro_app">a list</string>
     <string name="version_string">version</string>
-    <string name="version">3.2</string>
+    <string name="version">29</string>
     <string name="incomesource">Income allocation</string>
     <string name="incomeaccount">account of receipts</string>
     <string name="incomeamount">amount received</string>

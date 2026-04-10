@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="37" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="37" />
 
     <application
 
@@ -20,11 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="me.zackyu.yubook.NewRecordActivity"></activity>
-        <activity android:name="me.zackyu.yubook.RecordsActivity"></activity>
-        <activity android:name="me.zackyu.yubook.NewPayActivity"></activity>
-        <activity android:name="me.zackyu.yubook.NewIncomeActivity"></activity>
-        <activity android:name="me.zackyu.yubook.AboutMeActivity"></activity>
+        <activity android:name="me.zackyu.yubook.NewRecordActivity" />
+        <activity android:name="me.zackyu.yubook.RecordsActivity" />
+        <activity android:name="me.zackyu.yubook.NewPayActivity" />
+        <activity android:name="me.zackyu.yubook.NewIncomeActivity" />
+        <activity android:name="me.zackyu.yubook.AboutMeActivity" />
+        <activity android:name=".QuicklyRecordActivity" />
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import me.zackyu.yubook.db.iDBHelper;
 
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         if (cursorIncome.moveToFirst()) {
             income = cursorIncome.getDouble(0);
             textIncome.setText(new BigDecimal(income)
-                    .setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .setScale(2, RoundingMode.HALF_UP)
                     .toString());
         }
 
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         double total = 0.0;
-        if (income!= null && pay!= null) {
+        if (pay != null) {
             total = income + pay;
         }
         textTotal.setText(new BigDecimal(total)

@@ -108,15 +108,15 @@ public class NewIncomeActivity extends AppCompatActivity {
                 contentValues.put(DBConstant.CRTTIME, simpleDateFormat.format(crtTime));
 
                 if (TextUtils.isEmpty(account)) {
-                    showDialog("提示", "请输入账号！");
+                    showDialog("point out", "Enter your account！");
                 } else if (amount <= 0) {
-                    showDialog("提示", "请检查输入的金额！");
+                    showDialog("point out", "Check the amount you entered！");
                 } else {
                     sqLiteDatabase.insert(DBConstant.TNAME, null, contentValues);
                     Intent intent = new Intent(NewIncomeActivity.this, MainActivity.class);
                     startActivity(intent);
                     Context context = getApplicationContext();
-                    Toast toast = Toast.makeText(context, "记录成功，返回主页", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(context, "Record saved. Return to homepage", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
                 }
@@ -134,7 +134,7 @@ public class NewIncomeActivity extends AppCompatActivity {
 
     private void showDialog(String title, String message) {
         NeutralDialogFragment neutralDialogFragment = new NeutralDialogFragment();
-        neutralDialogFragment.show(title, message, "确定", new DialogInterface.OnClickListener() {
+        neutralDialogFragment.show(title, message, "confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // 可以根据需要添加点击确定后的操作

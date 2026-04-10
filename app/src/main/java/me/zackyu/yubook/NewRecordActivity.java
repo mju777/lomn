@@ -22,7 +22,7 @@ public class NewRecordActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_record);
-        setTitle("记账");
+        setTitle("charge to an account");
 
         initViews();
         initDBHelper();
@@ -43,11 +43,11 @@ public class NewRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(iDBHelper.getDatabaseName())) {
-                    Toast.makeText(NewRecordActivity.this, "数据库名称为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewRecordActivity.this, "数据库名称为空The database name is empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 iDBHelper.getWritableDatabase();
-                Toast.makeText(NewRecordActivity.this, "记账: " + iDBHelper.getDatabaseName(), Toast.LENGTH_LONG);
+                Toast.makeText(NewRecordActivity.this, "记账charge to an account: " + iDBHelper.getDatabaseName(), Toast.LENGTH_LONG);
                 Intent intent = new Intent(NewRecordActivity.this, NewIncomeActivity.class);
                 startActivity(intent);
             }
