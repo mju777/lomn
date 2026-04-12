@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+/**
+ *
+ */
 public class NeutralDialogFragment extends DialogFragment {
 
     private DialogInterface.OnClickListener neutralCallback;
