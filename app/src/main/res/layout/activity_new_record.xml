@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="#FAF9F6">  <!-- 背景改为米白色 -->
+    android:background="#FFF8BE">  <!-- 背景改为米白色 -->
 
     <LinearLayout
         android:orientation="vertical"
@@ -28,8 +28,8 @@
         <Button
             android:background="@drawable/button_gradient_background"
             android:id="@+id/button_income"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
             android:text="@string/income"
             android:textSize="25sp"
             android:textColor="#000000"
@@ -40,9 +40,9 @@
         <Button
             android:background="@drawable/button_gradient_background"
             android:id="@+id/button_pay"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="14dp"
             android:text="@string/pay"
             android:textSize="25sp"
             android:textColor="#000000"
@@ -53,9 +53,9 @@
         <Button
             android:background="@drawable/button_gradient_background"
             android:id="@+id/button_shortcut"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="14dp"
             android:text="@string/shortcut"
             android:textSize="25sp"
             android:textColor="#000000"
@@ -66,9 +66,9 @@
         <Button
             android:background="@drawable/button_gradient_background"
             android:id="@+id/button_sound_record"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="14dp"
             android:text="@string/sound_record"
             android:textSize="25sp"
             android:textColor="#000000"

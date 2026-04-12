@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="#FAF9F6">  <!-- 背景改为米白色 -->
+    android:background="#FFFABE">  <!-- 背景改为米白色 -->
 
     <LinearLayout
         android:orientation="vertical"
