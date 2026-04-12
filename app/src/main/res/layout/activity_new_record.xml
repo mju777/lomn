@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="#FFF8BE">  <!-- 背景改为米白色 -->
+    android:background="#FFFBC5">  <!-- 背景改为米白色 -->
 
     <LinearLayout
         android:orientation="vertical"
@@ -26,7 +26,7 @@
         </TextView>
 
         <Button
-            android:background="@drawable/button_gradient_background"
+            android:background="#FFFBC5"
             android:id="@+id/button_income"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -38,7 +38,7 @@
         </Button>
 
         <Button
-            android:background="@drawable/button_gradient_background"
+            android:background="#FFFBC5"
             android:id="@+id/button_pay"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -51,7 +51,7 @@
         </Button>
 
         <Button
-            android:background="@drawable/button_gradient_background"
+            android:background="#FFFBC5"
             android:id="@+id/button_shortcut"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -64,7 +64,7 @@
         </Button>
 
         <Button
-            android:background="@drawable/button_gradient_background"
+            android:background="#FFFBC5"
             android:id="@+id/button_sound_record"
             android:layout_width="wrap_content"
             android:layout_height="48dp"

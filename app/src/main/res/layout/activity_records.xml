@@ -3,12 +3,13 @@
     <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+    android:background="#FFFBC5">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="77dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="@string/thisisallrecords"
             android:textColor="#000000"
@@ -21,10 +22,11 @@
             android:gravity="center">
 
             <Button
-                android:background="@drawable/button_gradient_background"
+                android:background="#FFFBC5"
                 android:id="@+id/button_records_income"
-                android:layout_width="115dp"
-                android:layout_height="52dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 style="@style/Widget.AppCompat.Button"
                 android:text="@string/income"
                 android:textColor="#000000"
@@ -32,11 +34,12 @@
                 android:gravity="center" />
 
             <Button
-                android:background="@drawable/button_gradient_background"
+                android:background="#FFFBC5"
                 android:id="@+id/button_records_pay"
-                android:layout_width="115dp"
-                android:layout_height="52dp"
-                android:layout_toRightOf="@id/button_records_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@id/button_records_income"
                 style="@style/Widget.AppCompat.Button"
                 android:text="@string/pay"
                 android:textColor="#000000"
@@ -44,11 +47,11 @@
                 android:gravity="center" />
 
             <Button
-                android:background="@drawable/button_gradient_background"
+                android:background="#FFFBC5"
                 android:id="@+id/button_records_all"
-                android:layout_width="115dp"
-                android:layout_height="52dp"
-                android:layout_toRightOf="@id/button_records_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/button_records_pay"
                 style="@style/Widget.AppCompat.Button"
                 android:text="@string/all"
                 android:textColor="#000000"
@@ -66,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:text="@string/all"
-                android:textSize="16sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:gravity="center"
