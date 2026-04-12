@@ -1,5 +1,6 @@
 package me.zackyu.yubook;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,10 +41,14 @@ public class NewPayActivity extends AppCompatActivity {
     private String source;
     private String crtTime;
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private Date newPayCrtTime = new Date();
+    @SuppressLint("SimpleDateFormat")
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final Date newPayCrtTime = new Date();
 
     private iDBHelper iDBHelper;
+
+    public NewPayActivity() {
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -1,5 +1,6 @@
 package me.zackyu.yubook;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +18,16 @@ import me.zackyu.yubook.db.Record;
 
 public class RecordAdapter extends ArrayAdapter<Record> {
 
-    private int resourceId;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final int resourceId;
+    @SuppressLint("SimpleDateFormat")
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public RecordAdapter(@NonNull Context context, int resource, @NonNull List<Record> objs) {
         super(context, resource, objs);
         this.resourceId = resource;
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -40,6 +43,7 @@ public class RecordAdapter extends ArrayAdapter<Record> {
         TextView textTime = convertView.findViewById(R.id.text_time);
         TextView textSource = convertView.findViewById(R.id.text_source);
 
+        assert record != null;
         textAmount.setText("￥ " + record.getAmount());
         textSource.setText("source: " + record.getSource());
         textType.setText("去向: " + record.getType());

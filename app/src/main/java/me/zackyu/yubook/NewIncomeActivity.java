@@ -1,5 +1,6 @@
 package me.zackyu.yubook;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,8 +38,9 @@ public class NewIncomeActivity extends AppCompatActivity {
     private String account;
     private Double amount;
     private String source;
-    private Date crtTime = new Date();
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final Date crtTime = new Date();
+    @SuppressLint("SimpleDateFormat")
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private iDBHelper iDBHelper;
 
@@ -85,60 +87,52 @@ public class NewIncomeActivity extends AppCompatActivity {
             }
         });
 
-        buttonNewIncomeRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                account = newIncomeAccount.getText().toString();
-                String strAmount = newIncomeAmount.getText().toString();
+        buttonNewIncomeRecord.setOnClickListener(_ -> {
+            account = newIncomeAccount.getText().toString();
+            String strAmount = newIncomeAmount.getText().toString();
 
-                if (TextUtils.isEmpty(strAmount)) {
-                    amount = 0d;
-                } else {
-                    amount = Double.parseDouble(strAmount);
-                }
-
-                iDBHelper = new iDBHelper(NewIncomeActivity.this, DBConstant.NAME, null, 1);
-                SQLiteDatabase sqLiteDatabase = iDBHelper.getWritableDatabase();
-
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(DBConstant.SOURCE, source);
-                contentValues.put(DBConstant.TYPE, type);
-                contentValues.put(DBConstant.ACCOUNT, account);
-                contentValues.put(DBConstant.AMOUNT, amount);
-                contentValues.put(DBConstant.CRTTIME, simpleDateFormat.format(crtTime));
-
-                if (TextUtils.isEmpty(account)) {
-                    showDialog("point out", "Enter your account！");
-                } else if (amount <= 0) {
-                    showDialog("point out", "Check the amount you entered！");
-                } else {
-                    sqLiteDatabase.insert(DBConstant.TNAME, null, contentValues);
-                    Intent intent = new Intent(NewIncomeActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    Context context = getApplicationContext();
-                    Toast toast = Toast.makeText(context, "Record saved. Return to homepage", Toast.LENGTH_LONG);
-                    toast.show();
-                    finish();
-                }
+            if (TextUtils.isEmpty(strAmount)) {
+                amount = 0d;
+            } else {
+                amount = Double.parseDouble(strAmount);
             }
-        });
 
-        buttonNewIncomeBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            iDBHelper = new iDBHelper(NewIncomeActivity.this, DBConstant.NAME, null, 1);
+            SQLiteDatabase sqLiteDatabase = iDBHelper.getWritableDatabase();
 
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DBConstant.SOURCE, source);
+            contentValues.put(DBConstant.TYPE, type);
+            contentValues.put(DBConstant.ACCOUNT, account);
+            contentValues.put(DBConstant.AMOUNT, amount);
+            contentValues.put(DBConstant.CRTTIME, simpleDateFormat.format(crtTime));
+
+            if (TextUtils.isEmpty(account)) {
+                showDialog("Enter your account！");
+            } else if (amount <= 0) {
+                showDialog("Check the amount you entered！");
+            } else {
+                sqLiteDatabase.insert(DBConstant.TNAME, null, contentValues);
+                Intent intent = new Intent(NewIncomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                Context context = getApplicationContext();
+                Toast toast = Toast.makeText(context, "Record saved. Return to homepage", Toast.LENGTH_LONG);
+                toast.show();
                 finish();
             }
         });
+
+        buttonNewIncomeBack.setOnClickListener(_ -> finish());
     }
 
-    private void showDialog(String title, String message) {
+    private void showDialog(String message) {
         NeutralDialogFragment neutralDialogFragment = new NeutralDialogFragment();
-        neutralDialogFragment.show(title, message, "confirm", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // 可以根据需要添加点击确定后的操作
-            }
-        }, getFragmentManager());
+        neutralDialogFragment.show("point out",
+                message,
+                "confirm",
+                (_, _) -> {
+                    // 可以根据需要添加点击确定后的操作
+                },
+                getFragmentManager());
     }
 }

@@ -2,6 +2,7 @@ package me.zackyu.yubook;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -39,7 +40,8 @@ public class RecordsActivity extends AppCompatActivity {
     private Button buttonRecordsIncome;
     private Button buttonRecordsPay;
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    @SuppressLint("SimpleDateFormat")
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -132,6 +132,7 @@ return super.onOptionsItemSelected(item);
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
 import android.content.Context;
 
@@ -218,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
         iDBHelper = new iDBHelper(MainActivity.this, "MyAccount.db", null, 1);
     }
 
+    @SuppressLint("SetTextI18n")
     private void showData() {
         SQLiteDatabase sqLiteDatabase = iDBHelper.getWritableDatabase();
         String sqlIncome = "select sum(amount) from record where amount > 0";
@@ -234,20 +236,18 @@ public class MainActivity extends AppCompatActivity {
                     .toString());
         }
 
-        Double pay = 0.0;
+        double pay = 0.0;
         if (cursorPay.moveToFirst()) {
             pay = cursorPay.getDouble(0);
             textPay.setText(BigDecimal.ZERO.subtract(new BigDecimal(pay))
-                    .setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .setScale(2, RoundingMode.HALF_UP)
                     .toString());
         }
 
         double total = 0.0;
-        if (pay != null) {
-            total = income + pay;
-        }
+        total = income + pay;
         textTotal.setText(new BigDecimal(total)
-                .setScale(2, BigDecimal.ROUND_HALF_UP)
+                .setScale(2, RoundingMode.HALF_UP)
                 .toString());
     }
 }
