@@ -102,7 +102,7 @@
         <Button
             android:background="@drawable/button_gradient_background"
             android:id="@+id/button_new_pay_record"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="77dp"
             android:text="@string/btn_records"
             android:textSize="20sp"
@@ -112,7 +112,7 @@
         <Button
             android:background="@drawable/button_gradient_background"
             android:id="@+id/button_new_pay_back"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="77dp"
             android:layout_marginTop="7dp"
             android:text="@string/back"
