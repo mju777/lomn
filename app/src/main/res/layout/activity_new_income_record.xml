@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="#FAF9F6">  <!-- 背景改为米白色 -->
+    android:background="#FFEFB4">  <!-- 背景改为米白色 -->
 
     <LinearLayout
         android:orientation="vertical"
@@ -70,12 +70,13 @@
             android:id="@+id/new_income_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:maxLines="1"
             android:inputType="text"
             android:singleLine="true"
-            android:textSize="77sp"
+            android:textSize="27sp"
             android:gravity="center"
-            android:hint="请输入内容"
+            android:hint="@string/Pleaseenterthecontent"
             />
 
         <TextView
@@ -91,27 +92,28 @@
             android:id="@+id/new_income_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:inputType="numberDecimal"
-            android:textSize="77sp"
+            android:textSize="27sp"
             android:maxLength="9"
             android:gravity="center"
             android:singleLine="true"
-            android:hint="请输入内容"
+            android:hint="@string/Pleaseenterthecontent"
             />  <!-- 输入内容不可换行 -->
 
         <Button
             android:background="@drawable/button_gradient_background"
             android:id="@+id/button_new_income_record"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
             android:text="@string/btn_records"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:textColor="#000000"
             android:gravity="center" />
         <Button
             android:background="@drawable/button_gradient_background"
             android:id="@+id/button_new_income_back"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="52dp"
             android:layout_marginTop="7dp"
             android:text="@string/back"
