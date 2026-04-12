@@ -45,10 +45,10 @@ public class RecordAdapter extends ArrayAdapter<Record> {
 
         assert record != null;
         textAmount.setText("￥ " + record.getAmount());
-        textSource.setText("source: " + record.getSource());
-        textType.setText("去向: " + record.getType());
-        textAccount.setText("account number: " + record.getAccount());
-        textTime.setText("时间: " + simpleDateFormat.format(record.getCrttime()));
+        textSource.setText("Source of funds: " + record.getSource());
+        textType.setText("Destination of funds: " + record.getType());
+        textAccount.setText("Funds Account: " + record.getAccount());
+        textTime.setText("Trading hours: " + simpleDateFormat.format(record.getCrttime()));
 
         return convertView;
     }
