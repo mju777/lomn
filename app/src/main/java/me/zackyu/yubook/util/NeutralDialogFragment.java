@@ -23,6 +23,13 @@ public class NeutralDialogFragment extends DialogFragment {
 
     private String hint;
 
+    private NeutralDialogFragment() {
+    }
+
+    public static NeutralDialogFragment createNeutralDialogFragment() {
+        return new NeutralDialogFragment();
+    }
+
     public void show(String title, String message, String hint, DialogInterface.OnClickListener neutralCallback,
                      FragmentManager fragmentManager) {
         this.title = title;

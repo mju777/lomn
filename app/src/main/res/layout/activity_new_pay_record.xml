@@ -9,7 +9,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center">
 
         <TextView
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/pay"
             android:textColor="#000000"
-            android:textSize="59sp"
+            android:textSize="26sp"
             android:gravity="center" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="@string/paysource"
             android:textColor="#000000"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:gravity="center" />
 
         <Spinner
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:text="@string/paytype"
             android:textColor="#000000"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:gravity="center" />
 
         <Spinner
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:text="@string/payaccount"
             android:textColor="#000000"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:gravity="center" />
 
         <EditText
@@ -74,9 +74,9 @@
             android:maxLines="1"
             android:inputType="text"
             android:singleLine="true"
-            android:textSize="77sp"
+            android:textSize="26sp"
             android:gravity="center"
-            android:hint="请输入内容"
+            android:hint="input"
             />
 
         <TextView
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:text="@string/payamount"
             android:textColor="#000000"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:gravity="center" />
 
         <EditText
@@ -96,7 +96,7 @@
             android:maxLength="9"
             android:gravity="center"
             android:singleLine="true"
-            android:hint="请输入内容"
+            android:hint="input"
             />  <!-- 输入内容不可换行 -->
 
         <Button

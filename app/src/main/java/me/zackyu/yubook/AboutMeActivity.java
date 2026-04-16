@@ -439,6 +439,7 @@ import android.content.Context;
 
 
  */
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.PersistableBundle;
@@ -660,6 +661,7 @@ import android.view.View;
  *
  * **最终效果：** 有了这行代码，你就可以在你的 Android 程序中创建和控制一个可以显示文字的区域了。这是几乎所有 Android 应用的起点。
  */
+import android.widget.Button;
 import android.widget.TextView;
 /**
  *
@@ -1436,8 +1438,17 @@ public class AboutMeActivity extends AppCompatActivity {
          */
         setUpCopyClickListener(textWechatAccount, "WeChat");
 
+
         TextView textQqAccount = findViewById(R.id.text_qq_account);
         setUpCopyClickListener(textQqAccount, "QQ");
+
+        Button button_about_back = findViewById(R.id.button_about_me_back);
+        button_about_back.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+          finish();
+         }
+        });
     }
 
     private void setUpCopyClickListener(TextView textView, String appName) {

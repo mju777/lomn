@@ -126,7 +126,7 @@ public class NewIncomeActivity extends AppCompatActivity {
     }
 
     private void showDialog(String message) {
-        NeutralDialogFragment neutralDialogFragment = new NeutralDialogFragment();
+        NeutralDialogFragment neutralDialogFragment = NeutralDialogFragment.createNeutralDialogFragment();
         neutralDialogFragment.show("point out",
                 message,
                 "confirm",

@@ -12,22 +12,22 @@
         <item>其他</item>
     </string-array>
     <string-array name="income_from">
-        <item>工资</item>
-        <item>理财</item>
-        <item>转账</item>
-        <item>买卖</item>
-        <item>股票</item>
+        <item>工资wage</item>
+        <item>理财finance</item>
+        <item>转账transfer</item>
+        <item>买卖business</item>
+        <item>股票stock</item>
         <item>其他</item>
     </string-array>
 
 
 
     <string-array name="pay_to">
-        <item>吃喝玩乐</item>
-        <item>衣服出行 </item>
-        <item>家具家电</item>
-        <item>维修保洁</item>
-        <item>搬家搬运</item>
+        <item>吃喝玩乐 cakes and ale</item>
+        <item>衣服出行 clothes</item>
+        <item>家具家电 Home Appliances</item>
+        <item>维修保洁 Maintenance and Cleaning</item>
+        <item>搬家搬运 Moving and transporting</item>
         <item>送礼物</item>
         <item>借给别人</item>
         <item>其他</item>
@@ -36,10 +36,10 @@
 
 
     <string-array name="income_to">
-        <item>银行卡</item>
-        <item>支付宝</item>
-        <item>微信</item>
-        <item>现金存款</item>
+        <item>card</item>
+        <item>ali</item>
+        <item>we</item>
+        <item>rmb</item>
     </string-array>
 
 </resources>

@@ -8,15 +8,24 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center">
+
+        <Button
+            android:id="@+id/button_quickly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#FFFBC5"
+            android:text="@string/quickly">
+        </Button>
     <Button
         android:id="@+id/button_quickly_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
         android:background="#FFFBC5"
         android:text="@string/back">
 

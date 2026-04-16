@@ -6,46 +6,55 @@
     android:background="#FFFBC5">
     <LinearLayout
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_gravity="center">
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/about"
         android:textColor="#000000"
-        android:textSize="77sp" />
+        android:textSize="26sp" />
+        <Button
+            android:background="#FFFBC5"
+            android:id="@+id/button_about_me_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/back"
+            android:textSize="26sp"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:gravity="center" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:text="@string/about_me"
         android:textColor="#000000"
-        android:textSize="52sp"
+        android:textSize="26sp"
         android:textAlignment="center"/>
 
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/author"
-            android:textSize="25sp" />
+            android:textSize="26sp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/myname"
             android:textColor="#000000"
-            android:textSize="52sp" />
+            android:textSize="26sp" />
 
 
 
@@ -55,17 +64,17 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/wechat"
-            android:textSize="25sp" />
+            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/text_wechat_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-android:layout_gravity="center"
+            android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/wechat_no"
             android:textColor="#000000"
-            android:textSize="52sp" />
+            android:textSize="26sp" />
 
 
 
@@ -75,7 +84,7 @@ android:layout_gravity="center"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/qq"
-            android:textSize="25sp" />
+            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/text_qq_account"
@@ -85,7 +94,7 @@ android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/qq_no"
             android:textColor="#000000"
-            android:textSize="52sp" />
+            android:textSize="26sp" />
 
 
     <TextView
@@ -93,17 +102,16 @@ android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/clickcopy"
-        android:textSize="10sp"
+        android:textSize="26sp"
         tools:ignore="SmallSp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:text="@string/about_app"
         android:textColor="#000000"
-        android:textSize="25sp"
+        android:textSize="26sp"
         android:textAlignment="center"/>
 
     <TextView
@@ -111,16 +119,15 @@ android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/intro_app"
-        android:textSize="16sp"/>
+        android:textSize="26sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:text="@string/version_string"
         android:textColor="#000000"
-        android:textSize="25sp"
+        android:textSize="26sp"
         android:textAlignment="center"/>
 
     <TextView
@@ -128,7 +135,7 @@ android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/version"
-        android:textSize="52sp"
+        android:textSize="26sp"
         />
     </LinearLayout>
 </ScrollView>

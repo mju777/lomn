@@ -40,6 +40,8 @@ public class RecordsActivity extends AppCompatActivity {
     private Button buttonRecordsIncome;
     private Button buttonRecordsPay;
 
+    private Button buttonRecordsBack;
+
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -61,6 +63,7 @@ public class RecordsActivity extends AppCompatActivity {
         buttonRecordsPay = findViewById(R.id.button_records_pay);
         textTitle = findViewById(R.id.text_title);
         recordListView = findViewById(R.id.record_list);
+        buttonRecordsBack = findViewById(R.id.button_records_back);
     }
 
     private void initDBHelper() {
@@ -84,6 +87,7 @@ public class RecordsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textTitle.setText("所有");
+                setTitle("all");
                 getAllRecords();
                 recordAdapter = new RecordAdapter(RecordsActivity.this, R.layout.record_item, records);
                 recordListView.setAdapter(recordAdapter);
@@ -94,6 +98,7 @@ public class RecordsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textTitle.setText("收入");
+                setTitle("in");
                 getIncomeRecords();
                 recordAdapter = new RecordAdapter(RecordsActivity.this, R.layout.record_item, recordsIncome);
                 recordListView.setAdapter(recordAdapter);
@@ -104,11 +109,14 @@ public class RecordsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textTitle.setText("支出");
+                setTitle("on");
                 getPayRecords();
                 recordAdapter = new RecordAdapter(RecordsActivity.this, R.layout.record_item, recordsPay);
                 recordListView.setAdapter(recordAdapter);
             }
         });
+
+        buttonRecordsBack.setOnClickListener(_ -> finish());
     }
 
     public void getAllRecords() {

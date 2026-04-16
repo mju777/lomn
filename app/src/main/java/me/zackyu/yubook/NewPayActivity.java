@@ -145,7 +145,7 @@ public class NewPayActivity extends AppCompatActivity {
     }
 
     private void showDialog(String title, String message) {
-        NeutralDialogFragment neutralDialogFragment = new NeutralDialogFragment();
+        NeutralDialogFragment neutralDialogFragment = NeutralDialogFragment.createNeutralDialogFragment();
         neutralDialogFragment.show(title, message, "确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

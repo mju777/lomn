@@ -10,55 +10,58 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:text="@string/thisisallrecords"
             android:textColor="#000000"
-            android:textSize="52sp"
+            android:textSize="26sp"
             android:gravity="center" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center">
+
 
             <Button
                 android:background="#FFFBC5"
+                android:layout_gravity="center"
                 android:id="@+id/button_records_income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 style="@style/Widget.AppCompat.Button"
                 android:text="@string/income"
                 android:textColor="#000000"
-                android:textSize="25sp"
+                android:textSize="26sp"
                 android:gravity="center" />
 
             <Button
                 android:background="#FFFBC5"
+                android:layout_gravity="center"
                 android:id="@+id/button_records_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_toEndOf="@id/button_records_income"
                 style="@style/Widget.AppCompat.Button"
                 android:text="@string/pay"
                 android:textColor="#000000"
-                android:textSize="25sp"
+                android:textSize="26sp"
                 android:gravity="center" />
 
             <Button
                 android:background="#FFFBC5"
+                android:layout_gravity="center"
                 android:id="@+id/button_records_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/button_records_pay"
                 style="@style/Widget.AppCompat.Button"
                 android:text="@string/all"
                 android:textColor="#000000"
-                android:textSize="25sp"
+                android:textSize="26sp"
                 android:gravity="center" />
-        </RelativeLayout>
 
+    <Button
+        android:background="#FFFBC5"
+        android:id="@+id/button_records_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/back"
+        android:textSize="26sp"
+        android:textAlignment="center"
+        android:gravity="center" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -66,11 +69,11 @@
 
             <TextView
                 android:id="@+id/text_title"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="34dp"
+                android:layout_height="wrap_content"
                 android:text="@string/all"
                 android:textSize="26sp"
-                android:textStyle="bold"
                 android:textAlignment="center"
                 android:gravity="center"
                 />

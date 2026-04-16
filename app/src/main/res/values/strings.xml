@@ -23,7 +23,7 @@
     <string name="author">author</string>
     <string name="about">about</string>
     <string name="about_me">about me</string>
-    <string name="about_app">about app</string>
+    <string name="about_app">about</string>
     <string name="intro_app">a list</string>
     <string name="version_string">version</string>
     <string name="version">29</string>
@@ -36,9 +36,9 @@
     <string name="payamount">amount paid</string>
     <string name="paytype">Destination of expenditure</string>
     <string name="shortcut">stenography</string>
-    <string name="back">return</string>
-    <string name="thisisallrecords">This is all records</string>
-    <string name="btn_records">Keep a record of your happiness</string>
+    <string name="back">back</string>
+    <string name="thisisallrecords">This is records</string>
+    <string name="btn_records">record of your happiness</string>
     <string name="settings">set up</string>
     <string name="share" >go shares</string>
     <string name="sound_record">Voice Accounting</string>
@@ -48,4 +48,5 @@
     <string name="_0_00">0.00</string>
     <string name="cashsurplus">cash surplus</string>
     <string name="Pleaseenterthecontent">Please enter the content</string>
+    <string name="quickly">quickly</string>
 </resources>

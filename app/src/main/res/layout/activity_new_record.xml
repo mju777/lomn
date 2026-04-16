@@ -8,17 +8,17 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="77dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/new_record"
-            android:textSize="52sp"
+            android:textSize="26sp"
             android:textColor="#000000"
             android:textStyle="bold"
             android:textAlignment="center">
@@ -29,9 +29,9 @@
             android:background="#FFFBC5"
             android:id="@+id/button_income"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:text="@string/income"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:textColor="#000000"
             android:layout_gravity="center_horizontal">
 
@@ -41,10 +41,9 @@
             android:background="#FFFBC5"
             android:id="@+id/button_pay"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="14dp"
+            android:layout_height="wrap_content"
             android:text="@string/pay"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:textColor="#000000"
             android:layout_gravity="center_horizontal">
 
@@ -54,10 +53,9 @@
             android:background="#FFFBC5"
             android:id="@+id/button_shortcut"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="14dp"
+            android:layout_height="wrap_content"
             android:text="@string/shortcut"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:textColor="#000000"
             android:layout_gravity="center_horizontal">
 
@@ -67,13 +65,22 @@
             android:background="#FFFBC5"
             android:id="@+id/button_sound_record"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="14dp"
+            android:layout_height="wrap_content"
             android:text="@string/sound_record"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:textColor="#000000"
             android:layout_gravity="center_horizontal">
 
         </Button>
+        <Button
+            android:background="#FFFBC5"
+            android:id="@+id/button_new_record_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:textSize="26sp"
+            android:textColor="#000000"
+            android:gravity="center" />
+
     </LinearLayout>
 </ScrollView>

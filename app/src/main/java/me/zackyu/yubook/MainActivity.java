@@ -157,8 +157,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView textIncome;
     private TextView textPay;
     private TextView textTotal;
-    private TextView textviewAboutMe;
     private iDBHelper iDBHelper;
+
+    private Button buttonAboutMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,10 +169,17 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         setListeners();
         initDatabase();
-
-        String html = "<u>about</u>";
-        textviewAboutMe.setText(Html.fromHtml(html));
         showData();
+
+        Button button_main_back = findViewById(R.id.button_main_back);
+        button_main_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
     }
 
     @Override
@@ -183,14 +191,14 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         buttonNewRecord = findViewById(R.id.button_new_record);
         buttonRecords = findViewById(R.id.button_records);
-        textviewAboutMe = findViewById(R.id.textview_about_me);
         textIncome = findViewById(R.id.text_income);
         textPay = findViewById(R.id.text_pay);
         textTotal = findViewById(R.id.text_total);
+        buttonAboutMe = findViewById(R.id.button_main_about_me);
     }
 
     private void setListeners() {
-        textviewAboutMe.setOnClickListener(new View.OnClickListener() {
+        buttonAboutMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AboutMeActivity.class);
