@@ -161,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonAboutMe;
 
+    private Button buttonPlsRcd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
         textPay = findViewById(R.id.text_pay);
         textTotal = findViewById(R.id.text_total);
         buttonAboutMe = findViewById(R.id.button_main_about_me);
+        buttonPlsRcd = findViewById(R.id.button_main_pls);
     }
 
     private void setListeners() {
@@ -221,6 +224,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        buttonPlsRcd.setOnClickListener(_ -> {
+            Toast.makeText(MainActivity.this, "！！！！！！！！！！！！！！！vry impt for yrslf!!!!!!!!!!!!! " + iDBHelper.getDatabaseName(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void initDatabase() {
@@ -235,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
 
         Cursor cursorIncome = sqLiteDatabase.rawQuery(sqlIncome, null);
         Cursor cursorPay = sqLiteDatabase.rawQuery(sqlPay, null);
-        Double income = 0.0;
+        double income = 0.0;
 
         if (cursorIncome.moveToFirst()) {
             income = cursorIncome.getDouble(0);

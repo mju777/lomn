@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Micro Bill</string>
-    <string name="new_record">Record here</string>
-    <string name="records">View records here</string>
+    <string name="app_name">Micro Bill 微账单</string>
+    <string name="new_record">Record here开始记录</string>
+    <string name="records">View records here历史记录</string>
     <string name="action_about">with regard to</string>
-    <string name="income">earning</string>
-    <string name="pay">expenditure</string>
+    <string name="income">earning收入</string>
+    <string name="pay">expenditure支出</string>
     <string name="all">all</string>
     <string name="plus">+</string>
     <string name="subtract">-</string>
@@ -36,17 +36,18 @@
     <string name="payamount">amount paid</string>
     <string name="paytype">Destination of expenditure</string>
     <string name="shortcut">stenography</string>
-    <string name="back">back</string>
-    <string name="thisisallrecords">This is records</string>
-    <string name="btn_records">record of your happiness</string>
-    <string name="settings">set up</string>
-    <string name="share" >go shares</string>
+    <string name="back">back返回</string>
+    <string name="thisisallrecords">This is records历史</string>
+    <string name="btn_records">record of your happiness开心记下</string>
+    <string name="settings">set up设置</string>
+    <string name="share" >go shares导入导出分享</string>
     <string name="sound_record">Voice Accounting</string>
     <string name="new_account">Manage account</string>
     <string name="new_incomesource" >Manage revenue sources</string>
     <string name="new_paytype" >management expenditure allocation</string>
     <string name="_0_00">0.00</string>
-    <string name="cashsurplus">cash surplus</string>
+    <string name="cashsurplus">cash surplus 结余</string>
     <string name="Pleaseenterthecontent">Please enter the content</string>
     <string name="quickly">quickly</string>
+    <string name="pls">pls rcd its vry impt for yrslf</string>
 </resources>
