@@ -1,5 +1,6 @@
 package me.zackyu.yubook.util;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -23,6 +24,7 @@ public class NeutralDialogFragment extends DialogFragment {
 
     private String hint;
 
+    @SuppressLint("ValidFragment")
     private NeutralDialogFragment() {
     }
 
