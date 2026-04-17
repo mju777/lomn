@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
         <TextView
@@ -8,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:textColor="#000000"
             android:text="￥10000">
 
@@ -18,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="26sp"
+            android:textSize="16sp"
 
             android:text="2019-4-15 21:20:21">
         </TextView>
@@ -27,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="26sp"
+        android:textSize="16sp"
 
         android:text="来源">
     </TextView>
@@ -36,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="26sp"
+        android:textSize="16sp"
 
         android:text="去向">
     </TextView>
@@ -45,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="26sp"
+        android:textSize="16sp"
 
         android:text="7777777">
 

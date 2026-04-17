@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/everywhere"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:background="#FFFBC5"
             android:gravity="center"/>
 
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/new_record"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:background="#FFFBC5"
             style="@style/Widget.AppCompat.Button" />
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/records"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:background="#FFFBC5"
             style="@style/Widget.AppCompat.Button" />
 
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/back"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:textAlignment="center"
             android:gravity="center" />
 
@@ -60,7 +60,7 @@
                 android:gravity="center"
                 android:text="@string/income"
                 android:background="#FFFBC5"
-                android:textSize="26sp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/text_income"
@@ -70,7 +70,7 @@
                 android:gravity="center"
                 android:background="#FFFBC5"
                 android:text="@string/_0_00"
-                android:textSize="26sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <Button
@@ -80,7 +80,7 @@
                 android:gravity="center"
                 android:background="#FFFBC5"
                 android:text="@string/pay"
-                android:textSize="26sp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/text_pay"
@@ -90,7 +90,7 @@
                 android:gravity="center"
                 android:background="#FFFBC5"
                 android:text="0.00"
-                android:textSize="26sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <Button
@@ -100,7 +100,7 @@
                 android:gravity="center"
                 android:background="#FFFBC5"
                 android:text="@string/cashsurplus"
-                android:textSize="26sp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/text_total"
@@ -110,7 +110,7 @@
                 android:gravity="center"
                 android:text="0.00"
                 android:background="#FFFBC5"
-                android:textSize="26sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/new_account"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:background="#FFFBC5"
             style="@style/Widget.AppCompat.Button" />
 
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/new_incomesource"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:background="#FFFBC5"
             style="@style/Widget.AppCompat.Button" />
 
@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/new_paytype"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:background="#FFFBC5"
             style="@style/Widget.AppCompat.Button" />
 
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/settings"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:textColor="#000000"
             android:background="#FFFBC5"
             style="@style/Widget.AppCompat.Button" />
@@ -163,7 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/share"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:textColor="#000000"
             android:background="#FFFBC5"
             style="@style/Widget.AppCompat.Button" />
@@ -174,7 +174,7 @@
             android:layout_gravity="center"
             android:text="@string/about_app"
             android:textColor="#000000"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:background="#FFFBC5" />
         <Button
             android:id="@+id/button_main_pls"
@@ -183,7 +183,7 @@
             android:layout_gravity="center"
             android:text="@string/pls"
             android:textColor="#000000"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:layout_marginBottom="52dp"
             android:background="#FFFBC5" />
 
