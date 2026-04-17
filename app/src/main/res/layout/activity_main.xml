@@ -3,20 +3,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-     android:background="#FFFBC5" >
+     android:background="#FFFBC5"
+    android:fitsSystemWindows="true">  <!-- 自动适配状态栏 -->
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical"
         android:background="#FFFBC5">
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <View
+            android:id="@+id/status_bar_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="1111dp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <CalendarView
-            android:layout_marginTop="200dp"
             android:id="@+id/main_calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <TextClock
@@ -26,6 +88,22 @@
             android:layout_gravity="center"
             android:gravity="center"/>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,6 +112,26 @@
             android:textSize="16sp"
             android:background="#FFFBC5"
             android:gravity="center"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <Button
             android:id="@+id/button_new_record"
@@ -45,6 +143,26 @@
             android:background="#FFFBC5"
             style="@style/Widget.AppCompat.Button" />
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <Button
             android:id="@+id/button_records"
             android:layout_width="wrap_content"
@@ -54,6 +172,23 @@
             android:textSize="16sp"
             android:background="#FFFBC5"
             style="@style/Widget.AppCompat.Button" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <Button
             android:background="#FFFBC5"
@@ -70,6 +205,22 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,6 +229,27 @@
                 android:text="@string/income"
                 android:background="#FFFBC5"
                 android:textSize="16sp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <Button
                 android:id="@+id/text_income"
@@ -90,6 +262,21 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,6 +285,22 @@
                 android:background="#FFFBC5"
                 android:text="@string/pay"
                 android:textSize="16sp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <Button
                 android:id="@+id/text_pay"
@@ -110,6 +313,23 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,6 +338,34 @@
                 android:background="#FFFBC5"
                 android:text="@string/cashsurplus"
                 android:textSize="16sp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <Button
                 android:id="@+id/text_total"
@@ -132,6 +380,36 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <Button
             android:id="@+id/button_new_account"
             android:layout_width="wrap_content"
@@ -140,7 +418,38 @@
             android:text="@string/new_account"
             android:textSize="16sp"
             android:background="#FFFBC5"
-            style="@style/Widget.AppCompat.Button" />
+            />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <Button
             android:id="@+id/button_new_incometype"
@@ -150,7 +459,35 @@
             android:text="@string/new_incomesource"
             android:textSize="16sp"
             android:background="#FFFBC5"
-            style="@style/Widget.AppCompat.Button" />
+            />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <Button
             android:id="@+id/button_new_paytype"
@@ -160,7 +497,37 @@
             android:text="@string/new_paytype"
             android:textSize="16sp"
             android:background="#FFFBC5"
-            style="@style/Widget.AppCompat.Button" />
+            />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <Button
@@ -172,7 +539,41 @@
             android:textSize="16sp"
             android:textColor="#000000"
             android:background="#FFFBC5"
-            style="@style/Widget.AppCompat.Button" />
+            />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <Button
             android:id="@+id/button_share"
@@ -183,7 +584,39 @@
             android:textSize="16sp"
             android:textColor="#000000"
             android:background="#FFFBC5"
-            style="@style/Widget.AppCompat.Button" />
+            />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <Button
             android:id="@+id/button_main_about_me"
             android:layout_width="wrap_content"
@@ -193,15 +626,85 @@
             android:textColor="#000000"
             android:textSize="16sp"
             android:background="#FFFBC5" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <Button
             android:id="@+id/button_main_pls"
+
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
+
             android:layout_gravity="center"
+
             android:text="@string/pls"
+
             android:textColor="#000000"
+
             android:textSize="16sp"
+
             android:background="#FFFBC5" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
