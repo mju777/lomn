@@ -17,6 +17,8 @@
             android:id="@+id/main_calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+
         <TextClock
             android:id="@+id/textClock"
             android:layout_width="match_parent"
