@@ -12,8 +12,19 @@
         android:orientation="vertical"
         android:background="#FFFBC5">
 
-        <Button
+        <CalendarView
             android:layout_marginTop="200dp"
+            android:id="@+id/main_calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextClock
+            android:id="@+id/textClock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -189,6 +200,8 @@
             android:textColor="#000000"
             android:textSize="16sp"
             android:background="#FFFBC5" />
+
+
 
     </LinearLayout>
 </ScrollView>
