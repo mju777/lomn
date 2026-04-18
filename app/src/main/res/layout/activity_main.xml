@@ -1,712 +1,443 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-     android:background="#FFFBC5"
-    android:fitsSystemWindows="true">  <!-- 自动适配状态栏 -->
+    android:background="@drawable/bg_main_gradient"
+    android:fitsSystemWindows="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
         android:orientation="vertical"
-        android:background="#FFFBC5">
+        android:paddingBottom="32dp">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <!-- 状态栏占位 -->
         <View
-            android:id="@+id/status_bar_placeholder"
             android:layout_width="match_parent"
-            android:layout_height="1111dp" />
+            android:layout_height="32dp" />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <CalendarView
-            android:id="@+id/main_calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <TextClock
-            android:id="@+id/textClock"
+        <!-- ========== 头部欢迎区域 ========== -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/everywhere"
-            android:textSize="16sp"
-            android:background="#FFFBC5"
-            android:gravity="center"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:id="@+id/button_new_record"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/new_record"
-            android:textSize="16sp"
-            android:background="#FFFBC5"
-            style="@style/Widget.AppCompat.Button" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:id="@+id/button_records"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/records"
-            android:textSize="16sp"
-            android:background="#FFFBC5"
-            style="@style/Widget.AppCompat.Button" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:background="#FFFBC5"
-            android:id="@+id/button_main_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/back"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:gravity="center" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <Button
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💰 小金库"
+                    android:textColor="#D4AF37"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextClock
+                    android:id="@+id/textClock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:format12Hour="hh:mm:ss"
+                    android:format24Hour="HH:mm:ss"
+                    android:textColor="#673AB7"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- 设置和分享按钮 -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_home_settings"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/btn_icon_round"
+                    android:text="⚙️"
+                    android:textSize="20sp"
+                    android:textColor="#D4AF37" />
+
+                <Button
+                    android:id="@+id/button_share"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/btn_icon_round"
+                    android:text="📤"
+                    android:textSize="20sp"
+                    android:textColor="#D4AF37" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ========== 资产总览卡片 ========== -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#1A1A2E">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💰 总资产"
+                    android:textColor="#888888"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/text_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="0.00"
+                    android:textColor="#D4AF37"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <!-- 收入区域 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📈 总收入"
+                            android:textColor="#888888"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/text_income"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="0.00"
+                            android:textColor="#4CAF50"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- 分隔线 -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:background="#333333" />
+
+                    <!-- 支出区域 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingStart="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📉 总支出"
+                            android:textColor="#888888"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/text_pay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="0.00"
+                            android:textColor="#FF6B6B"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ========== 日历卡片 ========== -->
+
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="4dp"
+            android:layout_gravity="center"
+
+            app:cardBackgroundColor="#FFFFFF">
+
+            <TextClock
                 android:gravity="center"
-                android:text="@string/income"
-                android:background="#FFFBC5"
-                android:textSize="16sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+            <CalendarView
 
+                android:firstDayOfWeek="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
+        </androidx.cardview.widget.CardView>
 
+        <!-- ========== 快捷操作区域 ========== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
+            android:text="⚡ 快捷操作"
+            android:textColor="#1A1A1A"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <!-- 快捷按钮网格 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
             <Button
-                android:id="@+id/text_income"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:id="@+id/button_new_record"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_quick_action"
                 android:gravity="center"
-                android:background="#FFFBC5"
-                android:text="@string/_0_00"
-                android:textSize="16sp"
+                android:text="@string/new_record"
+                android:textAllCaps="false"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button_records"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_quick_action"
+                android:gravity="center"
+                android:text="@string/records"
+                android:textAllCaps="false"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button_new_account"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_quick_action"
+                android:gravity="center"
+                android:text="@string/new_account"
+                android:textAllCaps="false"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- ========== 分类管理区域 ========== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:text="📂 分类管理"
+            android:textColor="#1A1A1A"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <Button
+                android:id="@+id/button_new_incometype"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_quick_action"
+                android:gravity="center"
+                android:text="@string/new_incomesource"
+                android:textAllCaps="false"
+                android:textColor="#333333"
+                android:textSize="11sp" />
+
+            <Button
+                android:id="@+id/button_new_paytype"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_quick_action"
+                android:gravity="center"
+                android:text="@string/new_paytype"
+                android:textAllCaps="false"
+                android:textColor="#333333"
+                android:textSize="11sp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_quick_action"
+                android:gravity="center"
+                android:text="@string/everywhere"
+                android:textAllCaps="false"
+                android:textColor="#333333"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- ========== 收支快速入口 ========== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:text="➕ 快速记账"
+            android:textColor="#1A1A1A"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_income"
+                android:gravity="center"
+                android:text="💰 收入"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_expense"
                 android:gravity="center"
-                android:background="#FFFBC5"
-                android:text="@string/pay"
-                android:textSize="16sp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <Button
-                android:id="@+id/text_pay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="#FFFBC5"
-                android:text="0.00"
-                android:textSize="16sp"
+                android:text="💸 支出"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
                 android:textStyle="bold" />
+        </LinearLayout>
 
+        <!-- ========== 底部导航按钮 ========== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:text="🔧 更多功能"
+            android:textColor="#1A1A1A"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:id="@+id/button_main_about_me"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_secondary"
                 android:gravity="center"
-                android:background="#FFFBC5"
-                android:text="@string/cashsurplus"
-                android:textSize="16sp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                android:text="ℹ️ 关于"
+                android:textAllCaps="false"
+                android:textColor="#555555"
+                android:textSize="12sp" />
 
             <Button
-                android:id="@+id/text_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:id="@+id/button_main_pls"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_secondary"
                 android:gravity="center"
-                android:text="0.00"
-                android:background="#FFFBC5"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:id="@+id/button_new_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/new_account"
-            android:textSize="16sp"
-            android:background="#FFFBC5"
-            />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:id="@+id/button_new_incometype"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/new_incomesource"
-            android:textSize="16sp"
-            android:background="#FFFBC5"
-            />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:id="@+id/button_new_paytype"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/new_paytype"
-            android:textSize="16sp"
-            android:background="#FFFBC5"
-            />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:id="@+id/button_home_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/settings"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:background="#FFFBC5"
-            />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:id="@+id/button_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/share"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:background="#FFFBC5"
-            />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:id="@+id/button_main_about_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/about_app"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:background="#FFFBC5" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <Button
-            android:id="@+id/button_main_pls"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_gravity="center"
-
-            android:text="@string/pls"
-
-            android:textColor="#000000"
-
-            android:textSize="16sp"
-
-            android:background="#FFFBC5" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                android:text="👍 点赞"
+                android:textAllCaps="false"
+                android:textColor="#555555"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button_main_back"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_secondary"
+                android:gravity="center"
+                android:text="← 返回"
+                android:textAllCaps="false"
+                android:textColor="#555555"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 底部留白 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
 
     </LinearLayout>
 </ScrollView>

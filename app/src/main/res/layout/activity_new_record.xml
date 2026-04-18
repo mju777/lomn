@@ -12,8 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center">
+        <View
+            android:id="@+id/status_bar_placeholder_new"
+            android:layout_width="match_parent"
+            android:layout_height="3333dp" />
 
         <TextView
+            android:layout_marginTop="44dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -26,6 +31,8 @@
         </TextView>
 
         <Button
+            android:layout_marginTop="44dp"
+
             android:background="#FFFBC5"
             android:id="@+id/button_income"
             android:layout_width="wrap_content"
@@ -38,6 +45,8 @@
         </Button>
 
         <Button
+            android:layout_marginTop="44dp"
+
             android:background="#FFFBC5"
             android:id="@+id/button_pay"
             android:layout_width="wrap_content"
@@ -50,6 +59,8 @@
         </Button>
 
         <Button
+            android:layout_marginTop="44dp"
+
             android:background="#FFFBC5"
             android:id="@+id/button_shortcut"
             android:layout_width="wrap_content"
@@ -62,6 +73,8 @@
         </Button>
 
         <Button
+            android:layout_marginTop="44dp"
+
             android:background="#FFFBC5"
             android:id="@+id/button_sound_record"
             android:layout_width="wrap_content"
@@ -73,6 +86,8 @@
 
         </Button>
         <Button
+            android:layout_marginTop="44dp"
+
             android:background="#FFFBC5"
             android:id="@+id/button_new_record_return"
             android:layout_width="wrap_content"
@@ -81,6 +96,9 @@
             android:textSize="16sp"
             android:textColor="#000000"
             android:gravity="center" />
-
+        <View
+            android:id="@+id/status_bar_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="1111dp" />
     </LinearLayout>
 </ScrollView>

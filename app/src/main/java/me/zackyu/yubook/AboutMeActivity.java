@@ -1379,7 +1379,7 @@ public class AboutMeActivity extends AppCompatActivity {
 
 
  */
-        TextView textWechatAccount = findViewById(R.id.text_wechat_account);
+        TextView textWechatAccount = findViewById(R.id.tv_wechat_account);
         /**
          *
          Android Dialog导入说明
@@ -1439,7 +1439,7 @@ public class AboutMeActivity extends AppCompatActivity {
         setUpCopyClickListener(textWechatAccount, "WeChat");
 
 
-        TextView textQqAccount = findViewById(R.id.text_qq_account);
+        TextView textQqAccount = findViewById(R.id.tv_qq_account);
         setUpCopyClickListener(textQqAccount, "QQ");
 
         Button button_about_back = findViewById(R.id.button_about_me_back);

@@ -7,13 +7,22 @@
     android:background="#FFFBC5">  <!-- 背景改为米白色 -->
 
     <LinearLayout
+        android:layout_marginTop="44dp"
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2222dp" />
+
+
         <TextView
+            android:layout_marginTop="44dp"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/pay"
@@ -22,6 +31,8 @@
             android:gravity="center" />
 
         <TextView
+            android:layout_marginTop="44dp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/paysource"
@@ -30,6 +41,8 @@
             android:gravity="center" />
 
         <Spinner
+            android:layout_marginTop="44dp"
+
             android:id="@+id/new_pay_sources"
             android:layout_width="match_parent"
             android:theme="@style/CustomSpinnerStyle"
@@ -42,6 +55,8 @@
 
 
         <TextView
+            android:layout_marginTop="44dp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/paytype"
@@ -50,6 +65,8 @@
             android:gravity="center" />
 
         <Spinner
+            android:layout_marginTop="44dp"
+
             android:id="@+id/new_pay_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,6 +78,8 @@
             android:gravity="center"/>
 
         <TextView
+            android:layout_marginTop="44dp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/payaccount"
@@ -69,6 +88,8 @@
             android:gravity="center" />
 
         <EditText
+            android:layout_marginTop="44dp"
+
             android:id="@+id/new_pay_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,6 +102,8 @@
             />
 
         <TextView
+            android:layout_marginTop="44dp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/payamount"
@@ -89,6 +112,8 @@
             android:gravity="center" />
 
         <EditText
+            android:layout_marginTop="44dp"
+
             android:id="@+id/new_pay_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,6 +126,8 @@
             />  <!-- 输入内容不可换行 -->
 
         <Button
+            android:layout_marginTop="44dp"
+
             android:background="#FFFBC5"
             android:id="@+id/button_new_pay_record"
             android:layout_width="wrap_content"
@@ -111,6 +138,8 @@
             android:gravity="center" />
 
         <Button
+            android:layout_marginTop="44dp"
+
             android:background="#FFFBC5"
             android:id="@+id/button_new_pay_back"
             android:layout_width="wrap_content"
@@ -119,5 +148,9 @@
             android:textSize="16sp"
             android:textColor="#000000"
             android:gravity="center" />
+        <View
+            android:id="@+id/status_bar_placeholder_np1"
+            android:layout_width="match_parent"
+            android:layout_height="1111dp" />
     </LinearLayout>
 </ScrollView>

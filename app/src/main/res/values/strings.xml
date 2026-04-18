@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Micro Bill 微账单</string>
-    <string name="new_record">Record here开始记录</string>
-    <string name="records">View records here历史记录</string>
+    <string name="new_record">📝Record here开始记录</string>
+    <string name="records">📊View records here历史记录</string>
     <string name="action_about">with regard to</string>
     <string name="income">earning总收入</string>
     <string name="pay">expenditure总支出</string>
     <string name="all">all</string>
     <string name="plus">+</string>
     <string name="subtract">-</string>
-    <string name="everywhere">Track assets in real time</string>
+    <string name="everywhere">📍Track assets in real time</string>
     <string name="type">mold</string>
     <string name="account">account number</string>
     <string name="amount">sum of money</string>
@@ -42,9 +42,9 @@
     <string name="settings">set up设置</string>
     <string name="share" >go shares导入导出分享</string>
     <string name="sound_record">Voice Accounting</string>
-    <string name="new_account">Manage account</string>
-    <string name="new_incomesource" >Manage revenue sources</string>
-    <string name="new_paytype" >management expenditure allocation</string>
+    <string name="new_account">🏦Manage account</string>
+    <string name="new_incomesource" >💹Manage revenue sources</string>
+    <string name="new_paytype" >💳management expenditure allocation</string>
     <string name="_0_00">0.00</string>
     <string name="cashsurplus">cash surplus 总结余</string>
     <string name="Pleaseenterthecontent">Please enter the content</string>

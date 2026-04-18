@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 底层：基础金色渐变 -->
+    <item>
+        <shape>
+            <gradient
+                android:angle="135"
+                android:endColor="#FFF8E7"
+                android:centerColor="#FFFBC5"
+                android:startColor="#FFE4B5"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- 顶层：柔和光晕 -->
+    <item>
+        <shape>
+            <gradient
+                android:angle="45"
+                android:endColor="#00FFFFFF"
+                android:centerColor="#15FFFFFF"
+                android:startColor="#00FFFFFF"
+                android:type="linear" />
+        </shape>
+    </item>
+
+</layer-list>

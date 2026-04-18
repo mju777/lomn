@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- 金色渐变背景 -->
+    <gradient
+        android:angle="135"
+        android:endColor="#D4AF37"
+        android:startColor="#FFD700"
+        android:type="linear" />
+
+    <!-- 金色边框 -->
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFFF" />
+
+</shape>

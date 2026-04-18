@@ -3,7 +3,7 @@ plugins {
     id 'com.android.application'
 }
 android {
-    compileSdk 36
+    compileSdk 37
     defaultConfig {
         applicationId "me.zackyu.yubook"
         minSdk 30
@@ -39,7 +39,7 @@ android {
         includeInBundle true
     }
     namespace 'me.zackyu.yubook'
-    compileSdkMinor 1
+    compileSdkMinor 0
 }
 
 dependencies {
@@ -50,4 +50,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
 }

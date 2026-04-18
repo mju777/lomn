@@ -12,8 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center">
+        <View
+            android:id="@+id/status_bar_placeholder_qu"
+            android:layout_width="match_parent"
+            android:layout_height="3333dp" />
 
         <Button
+            android:layout_marginTop="44dp"
             android:id="@+id/button_quickly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,6 +27,7 @@
             android:text="@string/quickly">
         </Button>
     <Button
+        android:layout_marginTop="44dp"
         android:id="@+id/button_quickly_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +36,11 @@
         android:text="@string/back">
 
     </Button>
+
+        <View
+            android:id="@+id/status_bar_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="1111dp" />
 
 </LinearLayout>
 </ScrollView>
