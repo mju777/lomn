@@ -261,6 +261,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
+        Button btnIncomeQuick = findViewById(R.id.btn_income_quick);
+        if (btnIncomeQuick != null) {
+            btnIncomeQuick.setOnClickListener(v -> {
+                Intent intent = new Intent(MainActivity.this, QuickRecordActivity.class);
+                intent.putExtra("type", "income");
+                startActivity(intent);
+            });
+        }
+
+        // 支出按钮跳转
+        Button btnExpenseQuick = findViewById(R.id.btn_expense_quick);
+        if (btnExpenseQuick != null) {
+            btnExpenseQuick.setOnClickListener(v -> {
+                Intent intent = new Intent(MainActivity.this, QuickRecordActivity.class);
+                intent.putExtra("type", "expense");
+                startActivity(intent);
+            });
+        }
+
         buttonAboutMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,6 +297,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         buttonRecords.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RecordsActivity.class);
@@ -297,28 +317,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // 在 MainActivity 的 onCreate 或适当位置调用
-    private void initQuickButtons() {
-        // 收入快捷按钮
-        Button btnIncomeQuick = findViewById(R.id.btn_income_quick);
-        if (btnIncomeQuick != null) {
-            btnIncomeQuick.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, QuickRecordActivity.class);
-                intent.putExtra("type", "income");
-                startActivity(intent);
-            });
-        }
+    // 在 MainActivity 的 onCreate 或初始化方法中添加
 
-        // 支出快捷按钮
-        Button btnExpenseQuick = findViewById(R.id.btn_expense_quick);
-        if (btnExpenseQuick != null) {
-            btnExpenseQuick.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, QuickRecordActivity.class);
-                intent.putExtra("type", "expense");
-                startActivity(intent);
-            });
-        }
-    }
+    // 收入按钮跳转
+
 
     private void initDatabase() {
         iDBHelper = new iDBHelper(MainActivity.this, "MyAccount.db", null, 1);

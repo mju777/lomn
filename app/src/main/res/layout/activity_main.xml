@@ -349,6 +349,7 @@
             android:paddingEnd="16dp">
 
             <Button
+                android:id="@+id/btn_income_quick"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_margin="4dp"
@@ -362,6 +363,7 @@
                 android:textStyle="bold" />
 
             <Button
+                android:id="@+id/btn_expense_quick"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_margin="4dp"

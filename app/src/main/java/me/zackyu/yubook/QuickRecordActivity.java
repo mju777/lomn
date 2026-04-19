@@ -60,6 +60,18 @@ public class QuickRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_record);
 
+        // ========== 接收 Intent 参数 ==========
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("type")) {
+            String type = intent.getStringExtra("type");
+            if ("income".equals(type)) {
+                isIncome = true;
+            } else if ("expense".equals(type)) {
+                isIncome = false;
+            }
+        }
+        // ==================================
+
         // 初始化线程池
         executorService = Executors.newSingleThreadExecutor();
         mainHandler = new Handler(Looper.getMainLooper());
@@ -68,6 +80,9 @@ public class QuickRecordActivity extends AppCompatActivity {
         initDBHelper();
         setupListeners();
         updateCategoryButtons();
+
+        // 根据传入参数更新按钮样式
+        updateTypeButtons();
     }
 
     private void initViews() {
