@@ -3,11 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="37"
-        tools:ignore="ScopedStorage" />
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="37"
-        tools:ignore="ScopedStorage" />
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
 
@@ -32,6 +31,15 @@
         <activity android:name="me.zackyu.yubook.NewIncomeActivity" />
         <activity android:name="me.zackyu.yubook.AboutMeActivity" />
         <activity android:name=".QuicklyRecordActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".QuickRecordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

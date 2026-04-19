@@ -2,8 +2,6 @@ package me.zackyu.yubook;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -17,61 +15,66 @@ public class NewRecordActivity extends AppCompatActivity {
     private iDBHelper iDBHelper;
     private Button buttonIncome;
     private Button buttonPay;
-
-    private Button buttonNewRecordBack;
+    private Button buttonShortcut;
+    private Button buttonSoundRecord;
+    private Button buttonBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
         setContentView(R.layout.activity_new_record);
-        setTitle("charge to an account");
+
         initViews();
         initDBHelper();
-        setListeners();
-
-
+        setupListeners();
     }
 
     private void initViews() {
         buttonIncome = findViewById(R.id.button_income);
         buttonPay = findViewById(R.id.button_pay);
-        buttonNewRecordBack = findViewById(R.id.button_new_record_return);
+        buttonShortcut = findViewById(R.id.button_shortcut);
+        buttonSoundRecord = findViewById(R.id.button_sound_record);
+        buttonBack = findViewById(R.id.button_new_record_return);
     }
 
     private void initDBHelper() {
-        iDBHelper = new iDBHelper(this, "MyAccount.db", null, 1);
-        Toast.makeText(NewRecordActivity.this, "数据库 创建 成功 database MyAccount ", Toast.LENGTH_SHORT).show();
-
-        if (TextUtils.isEmpty(iDBHelper.getDatabaseName())) {
-            Toast.makeText(NewRecordActivity.this, "数据库名称为空The database name is empty", Toast.LENGTH_SHORT).show();
-            return;
+        try {
+            iDBHelper = new iDBHelper(this, "MyAccount.db", null, 1);
+            iDBHelper.getWritableDatabase();
+        } catch (Exception e) {
+            Toast.makeText(NewRecordActivity.this, "数据库初始化失败", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
-        iDBHelper.getWritableDatabase();
-        Toast.makeText(NewRecordActivity.this, "记账 charge to an account: " + iDBHelper.getDatabaseName(), Toast.LENGTH_LONG).show();
-
-
     }
 
-    private void setListeners() {
-        buttonIncome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             Intent intent = new Intent(NewRecordActivity.this, NewIncomeActivity.class);
-                startActivity(intent);
-            }
+    private void setupListeners() {
+        // 收入按钮
+        buttonIncome.setOnClickListener(v -> {
+            Intent intent = new Intent(NewRecordActivity.this, NewIncomeActivity.class);
+            startActivity(intent);
         });
 
-        buttonPay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NewRecordActivity.this, NewPayActivity.class);
-                startActivity(intent);
-            }
+        // 支出按钮
+        buttonPay.setOnClickListener(v -> {
+            Intent intent = new Intent(NewRecordActivity.this, NewPayActivity.class);
+            startActivity(intent);
         });
 
-        buttonNewRecordBack.setOnClickListener(_-> finish());
+        // 快捷记账
+        buttonShortcut.setOnClickListener(v -> {
+            Toast.makeText(NewRecordActivity.this, "快捷记账功能开发中...", Toast.LENGTH_SHORT).show();
+            // TODO: 实现快捷记账
+            Intent intent = new Intent(NewRecordActivity.this, QuickRecordActivity.class);
+            startActivity(intent);
+        });
+
+        // 语音记账
+        buttonSoundRecord.setOnClickListener(v -> {
+            Toast.makeText(NewRecordActivity.this, "语音记账功能开发中...", Toast.LENGTH_SHORT).show();
+            // TODO: 实现语音记账
+        });
+
+        // 返回按钮
+        buttonBack.setOnClickListener(v -> finish());
     }
 }

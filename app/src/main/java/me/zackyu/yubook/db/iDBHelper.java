@@ -14,6 +14,7 @@ public class iDBHelper extends SQLiteOpenHelper {
 
     private final Context mContext;
 
+
     public static final String CREATE_ACCOUNT_DETAIL_TABLE =
             "create table "+ DBConstant.TNAME +" (" +
                     "id integer primary key autoincrement, " +

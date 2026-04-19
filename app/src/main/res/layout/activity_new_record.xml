@@ -1,104 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_gravity="center"
-    android:background="#FFFBC5">  <!-- 背景改为米白色 -->
+    android:background="@drawable/bg_main_gradient"
+    android:scrollbars="none">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
-        <View
-            android:id="@+id/status_bar_placeholder_new"
-            android:layout_width="match_parent"
-            android:layout_height="3333dp" />
+        android:orientation="vertical"
+        android:paddingBottom="48dp">
 
-        <TextView
-            android:layout_marginTop="44dp"
-            android:layout_width="wrap_content"
+        <!-- 状态栏占位 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <!-- 头部 -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="16dp">
+
+            <Button
+                android:id="@+id/button_new_record_return"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_icon_round"
+                android:text="←"
+                android:textSize="24sp"
+                android:textColor="#D4AF37" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="💰 新增记账"
+                android:textColor="#1A1A1A"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <!-- 装饰金线 -->
+        <View
+            android:layout_width="80dp"
+            android:layout_height="3dp"
             android:layout_gravity="center"
-            android:text="@string/new_record"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:textAlignment="center">
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/gold_line" />
 
-        </TextView>
-
-        <Button
-            android:layout_marginTop="44dp"
-
-            android:background="#FFFBC5"
-            android:id="@+id/button_income"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/income"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:layout_gravity="center_horizontal">
-
-        </Button>
-
-        <Button
-            android:layout_marginTop="44dp"
-
-            android:background="#FFFBC5"
-            android:id="@+id/button_pay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pay"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:layout_gravity="center_horizontal">
-
-        </Button>
-
-        <Button
-            android:layout_marginTop="44dp"
-
-            android:background="#FFFBC5"
-            android:id="@+id/button_shortcut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/shortcut"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:layout_gravity="center_horizontal">
-
-        </Button>
-
-        <Button
-            android:layout_marginTop="44dp"
-
-            android:background="#FFFBC5"
-            android:id="@+id/button_sound_record"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sound_record"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:layout_gravity="center_horizontal">
-
-        </Button>
-        <Button
-            android:layout_marginTop="44dp"
-
-            android:background="#FFFBC5"
-            android:id="@+id/button_new_record_return"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/back"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:gravity="center" />
-        <View
-            android:id="@+id/status_bar_placeholder"
+        <!-- 图标装饰 -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1111dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/avatar_simple"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择记账类型"
+                android:textColor="#D4AF37"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- 主要操作卡片 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/card_white_bg"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:text="📋 请选择"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+            <!-- 收入按钮 -->
+            <Button
+                android:id="@+id/button_income"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/btn_income"
+                android:gravity="center"
+                android:text="📈 收入"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- 支出按钮 -->
+            <Button
+                android:id="@+id/button_pay"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/btn_expense"
+                android:gravity="center"
+                android:text="📉 支出"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- 分隔线 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="#F0F0F0" />
+
+            <!-- 快捷记账 -->
+            <Button
+                android:id="@+id/button_shortcut"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/btn_secondary"
+                android:gravity="center"
+                android:text="⚡ 快捷记账"
+                android:textAllCaps="false"
+                android:textColor="#555555"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- 语音记账 -->
+            <Button
+                android:id="@+id/button_sound_record"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/btn_secondary"
+                android:gravity="center"
+                android:text="🎤 语音记账"
+                android:textAllCaps="false"
+                android:textColor="#555555"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- 提示卡片 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/card_dark_bg"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="💡 小贴士"
+                android:textColor="#D4AF37"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="点击收入或支出，快速记录每一笔账"
+                android:textColor="#CCCCCC"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 底部装饰 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <View
+                android:layout_width="60dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:background="@drawable/gold_line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="记账，让生活更清晰"
+                android:textColor="#B8860B"
+                android:textSize="11sp"
+                android:alpha="0.6" />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

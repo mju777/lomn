@@ -1,8 +1,5 @@
 package me.zackyu.yubook;
 
-import static android.content.ContentValues.TAG;
-
-import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -11,8 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.ParseException;
@@ -20,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import me.zackyu.yubook.constant.DBConstant;
 import me.zackyu.yubook.db.Record;
@@ -27,43 +27,59 @@ import me.zackyu.yubook.db.iDBHelper;
 
 public class RecordsActivity extends AppCompatActivity {
 
+    private static final String TAG = "RecordsActivity";
+
+    // 视图组件
     private TextView textTitle;
+    private TextView tvTotalCount;
     private ListView recordListView;
+    private View emptyView;
 
-    private RecordAdapter recordAdapter;
-    private iDBHelper iDBHelper;
-    private List<Record> records;
-    private List<Record> recordsIncome;
-    private List<Record> recordsPay;
-
+    // 按钮
     private Button buttonRecordsAll;
     private Button buttonRecordsIncome;
     private Button buttonRecordsPay;
-
     private Button buttonRecordsBack;
 
-    @SuppressLint("SimpleDateFormat")
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    // 数据
+    private RecordAdapter recordAdapter;
+    private iDBHelper iDBHelper;
+    private List<Record> allRecords;
+    private List<Record> incomeRecords;
+    private List<Record> expenseRecords;
+    private List<Record> currentRecords;
+
+    // 当前筛选类型
+    private int currentFilter = 0; // 0:全部, 1:收入, 2:支出
+
+    // 日期格式化
+    private SimpleDateFormat dateFormat;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_records);
-        setTitle("all");
+
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
         initViews();
         initDBHelper();
         initData();
-        setListeners();
+        setupListeners();
+
+        // 默认加载全部数据
+        loadAllRecords();
     }
 
     private void initViews() {
         buttonRecordsAll = findViewById(R.id.button_records_all);
         buttonRecordsIncome = findViewById(R.id.button_records_income);
         buttonRecordsPay = findViewById(R.id.button_records_pay);
-        textTitle = findViewById(R.id.text_title);
-        recordListView = findViewById(R.id.record_list);
         buttonRecordsBack = findViewById(R.id.button_records_back);
+        textTitle = findViewById(R.id.text_title);
+        tvTotalCount = findViewById(R.id.tv_total_count);
+        recordListView = findViewById(R.id.record_list);
+        emptyView = findViewById(R.id.empty_view);
     }
 
     private void initDBHelper() {
@@ -71,146 +87,262 @@ public class RecordsActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        records = new ArrayList<>();
-        recordsIncome = new ArrayList<>();
-        recordsPay = new ArrayList<>();
-        getAllRecords();
-        recordAdapter = new RecordAdapter(this, R.layout.record_item, records);
-        recordListView.setAdapter(recordAdapter);
-
-
-
+        allRecords = new ArrayList<>();
+        incomeRecords = new ArrayList<>();
+        expenseRecords = new ArrayList<>();
+        currentRecords = allRecords;
     }
 
-    private void setListeners() {
-        buttonRecordsAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textTitle.setText("所有");
-                setTitle("all");
-                getAllRecords();
-                recordAdapter = new RecordAdapter(RecordsActivity.this, R.layout.record_item, records);
-                recordListView.setAdapter(recordAdapter);
-            }
+    private void setupListeners() {
+        // 全部按钮
+        buttonRecordsAll.setOnClickListener(v -> {
+            currentFilter = 0;
+            textTitle.setText("全部");
+            updateButtonStyles();
+            loadAllRecords();
         });
 
-        buttonRecordsIncome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textTitle.setText("收入");
-                setTitle("in");
-                getIncomeRecords();
-                recordAdapter = new RecordAdapter(RecordsActivity.this, R.layout.record_item, recordsIncome);
-                recordListView.setAdapter(recordAdapter);
-            }
+        // 收入按钮
+        buttonRecordsIncome.setOnClickListener(v -> {
+            currentFilter = 1;
+            textTitle.setText("收入");
+            updateButtonStyles();
+            loadIncomeRecords();
         });
 
-        buttonRecordsPay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textTitle.setText("支出");
-                setTitle("on");
-                getPayRecords();
-                recordAdapter = new RecordAdapter(RecordsActivity.this, R.layout.record_item, recordsPay);
-                recordListView.setAdapter(recordAdapter);
-            }
+        // 支出按钮
+        buttonRecordsPay.setOnClickListener(v -> {
+            currentFilter = 2;
+            textTitle.setText("支出");
+            updateButtonStyles();
+            loadExpenseRecords();
         });
 
-        buttonRecordsBack.setOnClickListener(_ -> finish());
+        // 返回按钮
+        buttonRecordsBack.setOnClickListener(v -> finish());
+
+        // 列表点击事件
+        recordListView.setOnItemClickListener((parent, view, position, id) -> {
+            if (currentRecords != null && position < currentRecords.size()) {
+                Record record = currentRecords.get(position);
+                showRecordDetail(record);
+            }
+        });
     }
 
-    public void getAllRecords() {
-        records.clear();
-        SQLiteDatabase sqLiteDatabase = iDBHelper.getWritableDatabase();
-        Cursor cursor = sqLiteDatabase.query(DBConstant.TNAME, null, null, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                Record record = new Record();
-                int id = cursor.getInt(0);
-                String source = cursor.getString(1);
-                String type = cursor.getString(2);
-                String account = cursor.getString(3);
-                double amount = cursor.getDouble(4);
-                String date = cursor.getString(5);
-                try {
-                    Date crtTime = simpleDateFormat.parse(date);
-                    record.setSource(source);
-                    record.setType(type);
-                    record.setAccount(account);
-                    record.setAmount(amount);
-                    record.setId(id);
-                    record.setCrttime(crtTime);
-                    records.add(record);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                cursor.moveToNext();
-            }
+    private void updateButtonStyles() {
+        // 重置所有按钮样式
+        buttonRecordsAll.setBackgroundResource(R.drawable.btn_filter_secondary);
+        buttonRecordsIncome.setBackgroundResource(R.drawable.btn_filter_secondary);
+        buttonRecordsPay.setBackgroundResource(R.drawable.btn_filter_secondary);
+
+        // 设置当前选中按钮样式
+        switch (currentFilter) {
+            case 0:
+                buttonRecordsAll.setBackgroundResource(R.drawable.btn_filter_all);
+                break;
+            case 1:
+                buttonRecordsIncome.setBackgroundResource(R.drawable.btn_filter_income);
+                break;
+            case 2:
+                buttonRecordsPay.setBackgroundResource(R.drawable.btn_filter_expense);
+                break;
         }
-        cursor.close();
     }
 
-    public void getIncomeRecords() {
-        recordsIncome.clear();
-        String sqlIncome = "select  * from record where amount > 0";
-        SQLiteDatabase sqLiteDatabase = iDBHelper.getWritableDatabase();
-        Cursor cursorIncome = sqLiteDatabase.rawQuery(sqlIncome, null);
-        if (cursorIncome.moveToFirst()) {
-            while (!cursorIncome.isAfterLast()) {
-                Record record = new Record();
-                int id = cursorIncome.getInt(0);
-                String source = cursorIncome.getString(1);
-                String type = cursorIncome.getString(2);
-                String account = cursorIncome.getString(3);
-                double amount = cursorIncome.getDouble(4);
-                String date = cursorIncome.getString(5);
-                try {
-                    Date crtTime = simpleDateFormat.parse(date);
-                    record.setSource(source);
-                    record.setType(type);
-                    record.setAccount(account);
-                    record.setAmount(amount);
-                    record.setId(id);
-                    record.setCrttime(crtTime);
-                    recordsIncome.add(record);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                cursorIncome.moveToNext();
+    private void loadAllRecords() {
+        allRecords.clear();
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+
+        try {
+            db = iDBHelper.getReadableDatabase();
+            cursor = db.query(DBConstant.TNAME, null, null, null, null, null, "id DESC");
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    Record record = parseRecordFromCursor(cursor);
+                    if (record != null) {
+                        allRecords.add(record);
+                    }
+                } while (cursor.moveToNext());
             }
+
+            currentRecords = allRecords;
+            updateAdapter();
+
+        } catch (Exception e) {
+            Log.e(TAG, "loadAllRecords error", e);
+            Toast.makeText(this, "加载数据失败", Toast.LENGTH_SHORT).show();
+        } finally {
+            if (cursor != null) cursor.close();
+            if (db != null && db.isOpen()) db.close();
         }
-        cursorIncome.close();
     }
 
-    public void getPayRecords() {
-        recordsPay.clear();
-        SQLiteDatabase sqLiteDatabase = iDBHelper.getWritableDatabase();
-        String sqlPay = "select * from record where amount < 0";
-        Cursor cursorPay = sqLiteDatabase.rawQuery(sqlPay, null);
-        if (cursorPay.moveToFirst()) {
-            while (!cursorPay.isAfterLast()) {
-                Record record = new Record();
-                int id = cursorPay.getInt(0);
-                String source = cursorPay.getString(1);
-                String type = cursorPay.getString(2);
-                String account = cursorPay.getString(3);
-                double amount = cursorPay.getDouble(4);
-                String date = cursorPay.getString(5);
-                try {
-                    Date crtTime = simpleDateFormat.parse(date);
-                    record.setSource(source);
-                    record.setType(type);
-                    record.setAccount(account);
-                    record.setAmount(amount);
-                    record.setId(id);
-                    record.setCrttime(crtTime);
-                    recordsPay.add(record);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                cursorPay.moveToNext();
+    private void loadIncomeRecords() {
+        incomeRecords.clear();
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+
+        try {
+            db = iDBHelper.getReadableDatabase();
+            String sql = "SELECT * FROM " + DBConstant.TNAME + " WHERE amount > 0 ORDER BY id DESC";
+            cursor = db.rawQuery(sql, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    Record record = parseRecordFromCursor(cursor);
+                    if (record != null) {
+                        incomeRecords.add(record);
+                    }
+                } while (cursor.moveToNext());
             }
+
+            currentRecords = incomeRecords;
+            updateAdapter();
+
+        } catch (Exception e) {
+            Log.e(TAG, "loadIncomeRecords error", e);
+            Toast.makeText(this, "加载收入失败", Toast.LENGTH_SHORT).show();
+        } finally {
+            if (cursor != null) cursor.close();
+            if (db != null && db.isOpen()) db.close();
         }
-        cursorPay.close();
+    }
+
+    private void loadExpenseRecords() {
+        expenseRecords.clear();
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+
+        try {
+            db = iDBHelper.getReadableDatabase();
+            String sql = "SELECT * FROM " + DBConstant.TNAME + " WHERE amount < 0 ORDER BY id DESC";
+            cursor = db.rawQuery(sql, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    Record record = parseRecordFromCursor(cursor);
+                    if (record != null) {
+                        expenseRecords.add(record);
+                    }
+                } while (cursor.moveToNext());
+            }
+
+            currentRecords = expenseRecords;
+            updateAdapter();
+
+        } catch (Exception e) {
+            Log.e(TAG, "loadExpenseRecords error", e);
+            Toast.makeText(this, "加载支出失败", Toast.LENGTH_SHORT).show();
+        } finally {
+            if (cursor != null) cursor.close();
+            if (db != null && db.isOpen()) db.close();
+        }
+    }
+
+    private Record parseRecordFromCursor(Cursor cursor) {
+        try {
+            Record record = new Record();
+            int id = cursor.getInt(0);
+            String source = cursor.getString(1);
+            String type = cursor.getString(2);
+            String account = cursor.getString(3);
+            double amount = cursor.getDouble(4);
+            String dateStr = cursor.getString(5);
+
+            Date crtTime = dateFormat.parse(dateStr);
+
+            record.setId(id);
+            record.setSource(source);
+            record.setType(type);
+            record.setAccount(account);
+            record.setAmount(amount);
+            record.setCrttime(crtTime);
+
+            return record;
+        } catch (ParseException e) {
+            Log.e(TAG, "parseRecordFromCursor error", e);
+            return null;
+        }
+    }
+
+    private void updateAdapter() {
+        runOnUiThread(() -> {
+            if (recordAdapter == null) {
+                recordAdapter = new RecordAdapter(RecordsActivity.this, R.layout.record_item, currentRecords);
+                recordListView.setAdapter(recordAdapter);
+            } else {
+                recordAdapter.updateData(currentRecords);
+            }
+
+            // 更新总条数
+            int count = currentRecords != null ? currentRecords.size() : 0;
+            tvTotalCount.setText(String.valueOf(count));
+
+            // 显示/隐藏空视图
+            if (count == 0) {
+                emptyView.setVisibility(View.VISIBLE);
+                recordListView.setVisibility(View.GONE);
+            } else {
+                emptyView.setVisibility(View.GONE);
+                recordListView.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void showRecordDetail(Record record) {
+        if (record == null) return;
+
+        String type = record.getAmount() > 0 ? "收入" : "支出";
+        String amountColor = record.getAmount() > 0 ? "#4CAF50" : "#FF6B6B";
+
+        String detail = String.format(Locale.getDefault(),
+                "📋 记账详情\n\n" +
+                        "类型：%s\n" +
+                        "来源：%s\n" +
+                        "分类：%s\n" +
+                        "账户：%s\n" +
+                        "金额：%.2f\n" +
+                        "时间：%s",
+                type,
+                record.getSource() != null ? record.getSource() : "未知",
+                record.getType() != null ? record.getType() : "未知",
+                record.getAccount() != null ? record.getAccount() : "未知",
+                Math.abs(record.getAmount()),
+                record.getCrttime() != null ? dateFormat.format(record.getCrttime()) : "未知"
+        );
+
+        new AlertDialog.Builder(this)
+                .setTitle("记账详情")
+                .setMessage(detail)
+                .setPositiveButton("关闭", null)
+                .show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 刷新当前列表
+        switch (currentFilter) {
+            case 0:
+                loadAllRecords();
+                break;
+            case 1:
+                loadIncomeRecords();
+                break;
+            case 2:
+                loadExpenseRecords();
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (iDBHelper != null) {
+            iDBHelper.close();
+        }
     }
 }

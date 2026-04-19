@@ -21,4 +21,20 @@
     <style name="CalendarDateText"></style>
 
 
+
+    <!-- Switch 金色主题 -->
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">#D4AF37</item>
+        <item name="colorSwitchThumbNormal">#E0E0E0</item>
+        <item name="android:colorForeground">#D4AF37</item>
+    </style>
+
+    <style name="CustomSpinnerStyle1" parent="Theme.AppCompat.Light">
+        <item name="android:popupBackground">#FFFFFF</item>
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
 </resources>

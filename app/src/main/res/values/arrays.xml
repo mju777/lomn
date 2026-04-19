@@ -21,6 +21,18 @@
     </string-array>
 
 
+        <!-- 账户类型 -->
+        <string-array name="account_types">
+            <item>💰 现金</item>
+            <item>💳 银行卡</item>
+            <item>📱 微信</item>
+            <item>💚 支付宝</item>
+            <item>🏦 储蓄卡</item>
+            <item>💎 信用卡</item>
+        </string-array>
+
+
+
 
     <string-array name="pay_to">
         <item>吃喝玩乐 cakes and ale</item>

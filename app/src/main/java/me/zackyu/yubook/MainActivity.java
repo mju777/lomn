@@ -131,12 +131,16 @@ return super.onOptionsItemSelected(item);
  */
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
 import android.content.Context;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -166,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        applyAppSettings();
+
         setContentView(R.layout.activity_main);
 
         initViews();
@@ -183,7 +189,61 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    private void applyAppSettings() {
+        SharedPreferences prefs = getSharedPreferences("app_settings", MODE_PRIVATE);
 
+        // 应用字体大小
+        String fontSize = prefs.getString("font_size", "medium");
+        applyFontSize(fontSize);
+
+        // 应用主题颜色（如果需要）
+        String themeColor = prefs.getString("theme_color", "gold");
+        applyThemeColor(themeColor);
+    }
+
+    private void applyFontSize(String fontSize) {
+        Resources res = getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+
+        switch (fontSize) {
+            case "small":
+                config.fontScale = 0.85f;
+                break;
+            case "medium":
+                config.fontScale = 1.0f;
+                break;
+            case "large":
+                config.fontScale = 1.15f;
+                break;
+            case "xlarge":
+                config.fontScale = 1.3f;
+                break;
+        }
+
+        res.updateConfiguration(config, res.getDisplayMetrics());
+    }
+    private void applyThemeColor(String themeColor) {
+        // 根据主题颜色设置按钮颜色等
+        // 这需要您在实际代码中实现
+        int color;
+        switch (themeColor) {
+            case "gold":
+                color = ContextCompat.getColor(this, R.color.gold);
+                break;
+            case "blue":
+                color = ContextCompat.getColor(this, R.color.blue);
+                break;
+            case "green":
+                color = ContextCompat.getColor(this, R.color.green);
+                break;
+            case "purple":
+                color = ContextCompat.getColor(this, R.color.purple);
+                break;
+            default:
+                color = ContextCompat.getColor(this, R.color.gold);
+        }
+        // 应用颜色到UI元素
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -228,6 +288,36 @@ public class MainActivity extends AppCompatActivity {
         buttonPlsRcd.setOnClickListener(_ -> {
             Toast.makeText(MainActivity.this, "！！！！！！！！！！！！！！！vry impt for yrslf!!!!!!!!!!!!! " + iDBHelper.getDatabaseName(), Toast.LENGTH_SHORT).show();
         });
+
+        // 在 MainActivity 中
+        Button btnSettings = findViewById(R.id.button_home_settings);
+        btnSettings.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    // 在 MainActivity 的 onCreate 或适当位置调用
+    private void initQuickButtons() {
+        // 收入快捷按钮
+        Button btnIncomeQuick = findViewById(R.id.btn_income_quick);
+        if (btnIncomeQuick != null) {
+            btnIncomeQuick.setOnClickListener(v -> {
+                Intent intent = new Intent(MainActivity.this, QuickRecordActivity.class);
+                intent.putExtra("type", "income");
+                startActivity(intent);
+            });
+        }
+
+        // 支出快捷按钮
+        Button btnExpenseQuick = findViewById(R.id.btn_expense_quick);
+        if (btnExpenseQuick != null) {
+            btnExpenseQuick.setOnClickListener(v -> {
+                Intent intent = new Intent(MainActivity.this, QuickRecordActivity.class);
+                intent.putExtra("type", "expense");
+                startActivity(intent);
+            });
+        }
     }
 
     private void initDatabase() {
