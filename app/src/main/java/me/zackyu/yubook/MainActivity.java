@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setupTransparentWindow();
+        applyAppSettings();
         setContentView(R.layout.activity_main);
 
         rootView = findViewById(android.R.id.content);
@@ -227,6 +228,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("app_settings", MODE_PRIVATE);
         String fontSize = prefs.getString("font_size", "medium");
         applyFontSize(fontSize);
+
+        // 应用主题颜色
+        String themeColor = prefs.getString("theme_color", "gold");
+        applyThemeColor(themeColor);
     }
 
     private void applyFontSize(String fontSize) {
@@ -247,6 +252,28 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         res.updateConfiguration(config, res.getDisplayMetrics());
+    }
+
+    private void applyThemeColor(String themeColor) {
+        // 根据主题颜色设置UI颜色
+        int color;
+        switch (themeColor) {
+            case "gold":
+                color = ContextCompat.getColor(this, R.color.gold);
+                break;
+            case "blue":
+                color = ContextCompat.getColor(this, R.color.blue);
+                break;
+            case "green":
+                color = ContextCompat.getColor(this, R.color.green);
+                break;
+            case "purple":
+                color = ContextCompat.getColor(this, R.color.purple);
+                break;
+            default:
+                color = ContextCompat.getColor(this, R.color.gold);
+        }
+        // 可以在这里设置主题色到UI元素
     }
 
     @Override
@@ -304,13 +331,17 @@ public class MainActivity extends AppCompatActivity {
             refreshBackground();
         });
 
+        // ========== 修复：设置按钮功能 ==========
         Button btnSettings = findViewById(R.id.button_home_settings);
         if (btnSettings != null) {
             btnSettings.setOnClickListener(v -> {
-                refreshBackground();
+                // 打开设置页面
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
             });
         }
 
+        // ========== 分享按钮功能 ==========
         Button btnShare = findViewById(R.id.button_share);
         if (btnShare != null) {
             btnShare.setOnClickListener(v -> {
