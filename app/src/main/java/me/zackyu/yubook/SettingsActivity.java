@@ -1,19 +1,20 @@
 package me.zackyu.yubook;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -24,9 +25,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.documentfile.provider.DocumentFile;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -40,10 +44,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -71,14 +73,16 @@ public class SettingsActivity extends AppCompatActivity {
     // 数据库帮助类
     private iDBHelper dbHelper;
 
+    // 文件选择器 - 必须在 onCreate 中尽早注册
+    private ActivityResultLauncher<String[]> restoreFileLauncher;
+    private ActivityResultLauncher<Intent> backupFolderLauncher;
+
     // 壁纸相关
     private final String[] WALLPAPER_URLS = {
             "https://picsum.photos/1080/2400",
             "https://picsum.photos/1080/2400?random=1",
             "https://picsum.photos/1080/2400?random=2",
-            "https://picsum.photos/1080/2400?random=3",
-            "https://picsum.photos/1080/2400?random=4",
-            "https://picsum.photos/1080/2400?random=5"
+            "https://picsum.photos/1080/2400?random=3"
     };
 
     private final int[][] GRADIENT_COLORS = {
@@ -94,8 +98,13 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // 1. 先读取设置
         sharedPreferences = getSharedPreferences("app_settings", MODE_PRIVATE);
         applyTheme();
+
+        // 2. 注册文件选择器 - 必须在 super.onCreate 之前或之后立即执行，不能在后面
+        registerFilePickers();
+
         super.onCreate(savedInstanceState);
 
         setupTransparentWindow();
@@ -112,6 +121,38 @@ public class SettingsActivity extends AppCompatActivity {
         loadSettings();
         setupListeners();
         calculateCacheSize();
+    }
+
+    /**
+     * 注册文件选择器 - 必须在 onCreate 中尽早调用
+     */
+    private void registerFilePickers() {
+        // 恢复文件选择器 - 使用 RegisterForActivityResult 的正确方式
+        restoreFileLauncher = registerForActivityResult(
+                new ActivityResultContracts.OpenDocument(),
+                uri -> {
+                    if (uri != null) {
+                        confirmRestore(uri);
+                    }
+                }
+        );
+
+        // 备份文件夹选择器
+        backupFolderLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        android.net.Uri treeUri = result.getData().getData();
+                        if (treeUri != null) {
+                            // 持久化权限
+                            getContentResolver().takePersistableUriPermission(treeUri,
+                                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION |
+                                            Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            performBackupToUri(treeUri);
+                        }
+                    }
+                }
+        );
     }
 
     private void setupTransparentWindow() {
@@ -318,8 +359,8 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         layoutFontSize.setOnClickListener(v -> showFontSizeDialog());
-        layoutBackup.setOnClickListener(v -> backupData());
-        layoutRestore.setOnClickListener(v -> restoreData());
+        layoutBackup.setOnClickListener(v -> selectBackupFolder());
+        layoutRestore.setOnClickListener(v -> selectRestoreFile());
         layoutClearCache.setOnClickListener(v -> showClearCacheDialog());
         layoutWallpaper.setOnClickListener(v -> showWallpaperDialog());
 
@@ -328,39 +369,31 @@ public class SettingsActivity extends AppCompatActivity {
         layoutAccounts.setOnClickListener(v -> manageAccounts());
     }
 
-    private void showWallpaperDialog() {
-        String[] items = {"渐变背景", "在线随机图片"};
-        int current = "online".equals(sharedPreferences.getString("wallpaper_mode", "gradient")) ? 1 : 0;
-
-        new AlertDialog.Builder(this)
-                .setTitle("壁纸设置")
-                .setSingleChoiceItems(items, current, (dialog, which) -> {
-                    String mode = which == 0 ? "gradient" : "online";
-                    editor = sharedPreferences.edit();
-                    editor.putString("wallpaper_mode", mode);
-                    editor.apply();
-
-                    tvWallpaperStatus.setText(items[which]);
-
-                    if (which == 0) {
-                        setGradientWallpaper();
-                    } else {
-                        currentUrlIndex = 0;
-                        isLoadingImage = false;
-                        loadOnlineWallpaper();
-                    }
-
-                    dialog.dismiss();
-                    Toast.makeText(this, "壁纸已切换为：" + items[which], Toast.LENGTH_SHORT).show();
-                })
-                .setNeutralButton("刷新壁纸", (dialog, which) -> refreshWallpaper())
-                .show();
+    /**
+     * 选择备份文件夹
+     */
+    private void selectBackupFolder() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+            backupFolderLauncher.launch(intent);
+        } else {
+            Toast.makeText(this, "请选择备份文件夹", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
-     * 备份数据 - 完整实现
+     * 选择恢复文件
      */
-    private void backupData() {
+    private void selectRestoreFile() {
+        restoreFileLauncher.launch(new String[]{"application/json"});
+    }
+
+    /**
+     * 执行备份到指定URI
+     */
+    private void performBackupToUri(android.net.Uri folderUri) {
         AlertDialog progressDialog = new AlertDialog.Builder(this)
                 .setTitle("正在备份")
                 .setMessage("请稍候...")
@@ -370,16 +403,27 @@ public class SettingsActivity extends AppCompatActivity {
 
         new Thread(() -> {
             try {
-                // 创建备份目录
-                File backupDir = new File(Environment.getExternalStorageDirectory(), "YooBook/Backup");
-                if (!backupDir.exists()) {
-                    backupDir.mkdirs();
+                DocumentFile folder = DocumentFile.fromTreeUri(this, folderUri);
+                if (folder == null) {
+                    runOnUiThread(() -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(this, "无法访问所选文件夹", Toast.LENGTH_SHORT).show();
+                    });
+                    return;
                 }
 
                 // 创建备份文件名
                 String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-                String backupFileName = "backup_" + timestamp + ".json";
-                File backupFile = new File(backupDir, backupFileName);
+                String backupFileName = "yubook_backup_" + timestamp + ".json";
+
+                DocumentFile backupFile = folder.createFile("application/json", backupFileName);
+                if (backupFile == null) {
+                    runOnUiThread(() -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(this, "无法创建备份文件", Toast.LENGTH_SHORT).show();
+                    });
+                    return;
+                }
 
                 // 创建JSON对象存储所有数据
                 JSONObject backupData = new JSONObject();
@@ -392,7 +436,11 @@ public class SettingsActivity extends AppCompatActivity {
                     backupData.put("database_name", "MyAccount.db");
                 }
 
-                // 2. 备份SharedPreferences
+                // 2. 导出所有记录到JSON
+                JSONObject recordsData = exportAllRecords();
+                backupData.put("records", recordsData);
+
+                // 3. 备份SharedPreferences设置
                 JSONObject settingsData = new JSONObject();
                 settingsData.put("night_mode", sharedPreferences.getBoolean("night_mode", false));
                 settingsData.put("notification", sharedPreferences.getBoolean("notification", true));
@@ -400,18 +448,18 @@ public class SettingsActivity extends AppCompatActivity {
                 settingsData.put("wallpaper_mode", sharedPreferences.getString("wallpaper_mode", "gradient"));
                 backupData.put("settings", settingsData);
 
-                // 3. 备份时间戳
+                // 4. 备份时间戳
                 backupData.put("backup_time", timestamp);
                 backupData.put("app_version", getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
 
                 // 写入文件
-                FileWriter writer = new FileWriter(backupFile);
-                writer.write(backupData.toString());
-                writer.close();
+                OutputStream os = getContentResolver().openOutputStream(backupFile.getUri());
+                os.write(backupData.toString().getBytes());
+                os.close();
 
                 runOnUiThread(() -> {
                     progressDialog.dismiss();
-                    Toast.makeText(this, "备份成功！\n保存位置：" + backupFile.getPath(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "备份成功！\n文件：" + backupFileName + "\n位置：" + folder.getName(), Toast.LENGTH_LONG).show();
                 });
 
             } catch (Exception e) {
@@ -425,47 +473,21 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * 恢复数据 - 完整实现
+     * 确认恢复
      */
-    private void restoreData() {
-        // 列出备份目录中的文件
-        File backupDir = new File(Environment.getExternalStorageDirectory(), "YooBook/Backup");
-
-        if (!backupDir.exists() || !backupDir.isDirectory()) {
-            Toast.makeText(this, "没有找到备份文件", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        File[] backupFiles = backupDir.listFiles((dir, name) -> name.startsWith("backup_") && name.endsWith(".json"));
-
-        if (backupFiles == null || backupFiles.length == 0) {
-            Toast.makeText(this, "没有找到备份文件", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // 提取文件名
-        String[] fileNames = new String[backupFiles.length];
-        for (int i = 0; i < backupFiles.length; i++) {
-            fileNames[i] = backupFiles[i].getName();
-        }
-
+    private void confirmRestore(android.net.Uri uri) {
         new AlertDialog.Builder(this)
-                .setTitle("选择备份文件")
-                .setItems(fileNames, (dialog, which) -> {
-                    File selectedFile = backupFiles[which];
-
-                    new AlertDialog.Builder(this)
-                            .setTitle("确认恢复")
-                            .setMessage("恢复数据将覆盖当前所有数据，此操作不可撤销！\n确定要继续吗？")
-                            .setPositiveButton("确定", (d, w) -> performRestore(selectedFile))
-                            .setNegativeButton("取消", null)
-                            .show();
-                })
+                .setTitle("确认恢复")
+                .setMessage("恢复数据将覆盖当前所有数据，此操作不可撤销！\n确定要继续吗？")
+                .setPositiveButton("确定", (d, w) -> performRestoreFromUri(uri))
                 .setNegativeButton("取消", null)
                 .show();
     }
 
-    private void performRestore(File backupFile) {
+    /**
+     * 执行恢复
+     */
+    private void performRestoreFromUri(android.net.Uri uri) {
         AlertDialog progressDialog = new AlertDialog.Builder(this)
                 .setTitle("正在恢复")
                 .setMessage("请稍候...")
@@ -476,13 +498,15 @@ public class SettingsActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // 读取备份文件
+                InputStream is = getContentResolver().openInputStream(uri);
                 StringBuilder content = new StringBuilder();
-                BufferedReader reader = new BufferedReader(new FileReader(backupFile));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     content.append(line);
                 }
                 reader.close();
+                is.close();
 
                 JSONObject backupData = new JSONObject(content.toString());
 
@@ -525,9 +549,11 @@ public class SettingsActivity extends AppCompatActivity {
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         Intent intent = getBaseContext().getPackageManager()
                                 .getLaunchIntentForPackage(getBaseContext().getPackageName());
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        if (intent != null) {
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
                         System.exit(0);
                     }, 1500);
                 });
@@ -543,9 +569,69 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
+     * 导出所有记录到JSON
+     */
+    private JSONObject exportAllRecords() throws Exception {
+        JSONObject recordsData = new JSONObject();
+        JSONArray recordsArray = new JSONArray();
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM record", null);
+
+        while (cursor.moveToNext()) {
+            JSONObject record = new JSONObject();
+            for (int i = 0; i < cursor.getColumnCount(); i++) {
+                String columnName = cursor.getColumnName(i);
+                String value = cursor.getString(i);
+                record.put(columnName, value);
+            }
+            recordsArray.put(record);
+        }
+        cursor.close();
+        db.close();
+
+        recordsData.put("records", recordsArray);
+        recordsData.put("record_count", recordsArray.length());
+
+        return recordsData;
+    }
+
+    /**
+     * 显示壁纸设置对话框
+     */
+    private void showWallpaperDialog() {
+        String[] items = {"渐变背景", "在线随机图片"};
+        int current = "online".equals(sharedPreferences.getString("wallpaper_mode", "gradient")) ? 1 : 0;
+
+        new AlertDialog.Builder(this)
+                .setTitle("壁纸设置")
+                .setSingleChoiceItems(items, current, (dialog, which) -> {
+                    String mode = which == 0 ? "gradient" : "online";
+                    editor = sharedPreferences.edit();
+                    editor.putString("wallpaper_mode", mode);
+                    editor.apply();
+
+                    tvWallpaperStatus.setText(items[which]);
+
+                    if (which == 0) {
+                        setGradientWallpaper();
+                    } else {
+                        currentUrlIndex = 0;
+                        isLoadingImage = false;
+                        loadOnlineWallpaper();
+                    }
+
+                    dialog.dismiss();
+                    Toast.makeText(this, "壁纸已切换为：" + items[which], Toast.LENGTH_SHORT).show();
+                })
+                .setNeutralButton("刷新壁纸", (dialog, which) -> refreshWallpaper())
+                .show();
+    }
+
+    /**
      * 将文件转换为Base64字符串
      */
-    private String encodeFileToBase64(File file) throws IOException {
+    private String encodeFileToBase64(File file) throws java.io.IOException {
         FileInputStream fis = new FileInputStream(file);
         byte[] buffer = new byte[(int) file.length()];
         fis.read(buffer);
