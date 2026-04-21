@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_main_gradient"
+    android:background="@android:color/transparent"
     android:fitsSystemWindows="true"
     android:scrollbars="none">
 
@@ -11,30 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="32dp">
+        android:paddingBottom="32dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
         <!-- 状态栏占位 -->
         <View
             android:layout_width="match_parent"
-            android:layout_height="32dp" />
+            android:layout_height="48dp" />
 
         <!-- ========== 头部 ========== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
             android:paddingBottom="16dp">
 
             <Button
                 android:id="@+id/btn_settings_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/btn_icon_round"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_3d_glass"
                 android:text="←"
+                android:textColor="#1C1C1E"
                 android:textSize="24sp"
-                android:textColor="#D4AF37" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="0dp"
@@ -42,137 +43,46 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="⚙️ 设置"
-                android:textColor="#1A1A1A"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <View
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
                 android:visibility="invisible" />
 
         </LinearLayout>
 
-        <!-- 装饰金线 -->
-        <View
-            android:layout_width="80dp"
-            android:layout_height="3dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/gold_line" />
-
-        <!-- ========== 用户信息卡片 ========== -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/card_white_bg"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- 头像 -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:background="@drawable/avatar_simple"
-                        android:gravity="center"
-                        android:text="👨‍💻"
-                        android:textColor="#FFFFFF"
-                        android:textSize="36sp" />
-
-                    <Button
-                        android:id="@+id/btn_change_avatar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@null"
-                        android:text="更换头像"
-                        android:textColor="#D4AF37"
-                        android:textSize="11sp" />
-                </LinearLayout>
-
-                <!-- 用户信息 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="16dp"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:id="@+id/tv_username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="用户名"
-                        android:textColor="#1A1A1A"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_user_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="ID: 10001"
-                        android:textColor="#888888"
-                        android:textSize="12sp" />
-
-                    <Button
-                        android:id="@+id/btn_edit_profile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/btn_secondary"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"
-                        android:text="编辑资料"
-                        android:textAllCaps="false"
-                        android:textColor="#555555"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- ========== 通用设置分组 ========== -->
+        <!-- ========== 个性化设置分组 ========== -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"
-            android:text="📱 通用设置"
-            android:textColor="#D4AF37"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:text="🎨 个性化"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:shadowColor="#80000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="3" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/card_white_bg"
-            android:orientation="vertical">
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_glass_card_clear"
+            android:orientation="vertical"
+            android:padding="4dp">
 
             <!-- 夜间模式 -->
             <LinearLayout
-                android:id="@+id/layout_night_mode"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="?attr/selectableItemBackground"
@@ -188,241 +98,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="🌙 夜间模式"
-                    android:textColor="#333333"
+                    android:textColor="#1C1C1E"
                     android:textSize="15sp" />
 
                 <Switch
                     android:id="@+id/switch_night_mode"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/SwitchTheme" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0" />
-
-            <!-- 通知提醒 -->
-            <LinearLayout
-                android:id="@+id/layout_notification"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="🔔 记账提醒"
-                    android:textColor="#333333"
-                    android:textSize="15sp" />
-
-                <Switch
-                    android:id="@+id/switch_notification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/SwitchTheme" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0" />
-
-            <!-- 字体大小 -->
-            <LinearLayout
-                android:id="@+id/layout_font_size"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="📝 字体大小"
-                    android:textColor="#333333"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tv_font_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="中等"
-                    android:textColor="#888888"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="›"
-                    android:textColor="#CCCCCC"
-                    android:textSize="20sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- ========== 数据管理分组 ========== -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="12dp"
-            android:text="💾 数据管理"
-            android:textColor="#D4AF37"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/card_white_bg"
-            android:orientation="vertical">
-
-            <!-- 备份数据 -->
-            <LinearLayout
-                android:id="@+id/layout_backup"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="💿 备份数据"
-                    android:textColor="#333333"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="›"
-                    android:textColor="#CCCCCC"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0" />
-
-            <!-- 恢复数据 -->
-            <LinearLayout
-                android:id="@+id/layout_restore"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="🔄 恢复数据"
-                    android:textColor="#333333"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="›"
-                    android:textColor="#CCCCCC"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0" />
-
-            <!-- 清除缓存 -->
-            <LinearLayout
-                android:id="@+id/layout_clear_cache"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="🗑️ 清除缓存"
-                    android:textColor="#333333"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tv_cache_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0 MB"
-                    android:textColor="#888888"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="›"
-                    android:textColor="#CCCCCC"
-                    android:textSize="20sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- ========== 其他分组 ========== -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="12dp"
-            android:text="🎨 个性化"
-            android:textColor="#D4AF37"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/card_white_bg"
-            android:orientation="vertical">
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
 
             <!-- 主题颜色 -->
             <LinearLayout
@@ -442,33 +130,25 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="🎨 主题颜色"
-                    android:textColor="#333333"
+                    android:textColor="#1C1C1E"
                     android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="金色"
-                    android:textColor="#D4AF37"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:text="›"
-                    android:textColor="#CCCCCC"
-                    android:textSize="20sp" />
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0" />
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
 
-            <!-- 启动页 -->
+            <!-- 字体大小 -->
             <LinearLayout
-                android:id="@+id/layout_splash"
+                android:id="@+id/layout_font_size"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="?attr/selectableItemBackground"
@@ -483,15 +163,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="🏠 启动页"
-                    android:textColor="#333333"
+                    android:text="📝 字体大小"
+                    android:textColor="#1C1C1E"
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_font_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="经典"
-                    android:textColor="#888888"
+                    android:text="中等"
+                    android:textColor="#666666"
                     android:textSize="14sp" />
 
                 <TextView
@@ -499,8 +180,333 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="›"
-                    android:textColor="#CCCCCC"
-                    android:textSize="20sp" />
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
+
+            <!-- 壁纸设置（新增） -->
+            <LinearLayout
+                android:id="@+id/layout_wallpaper"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🖼️ 壁纸设置"
+                    android:textColor="#1C1C1E"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_wallpaper_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="渐变背景"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="›"
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
+
+            <!-- 通知提醒 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🔔 记账提醒"
+                    android:textColor="#1C1C1E"
+                    android:textSize="15sp" />
+
+                <Switch
+                    android:id="@+id/switch_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ========== 数据管理分组 ========== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:text="💾 数据管理"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:shadowColor="#80000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_glass_card_clear"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <!-- 备份数据 -->
+            <LinearLayout
+                android:id="@+id/layout_backup"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="💿 备份数据"
+                    android:textColor="#1C1C1E"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="›"
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
+
+            <!-- 恢复数据 -->
+            <LinearLayout
+                android:id="@+id/layout_restore"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🔄 恢复数据"
+                    android:textColor="#1C1C1E"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="›"
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
+
+            <!-- 清除缓存 -->
+            <LinearLayout
+                android:id="@+id/layout_clear_cache"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🗑️ 清除缓存"
+                    android:textColor="#1C1C1E"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 MB"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="›"
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ========== 记账管理分组（新增） ========== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:text="📊 记账管理"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:shadowColor="#80000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_glass_card_clear"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <!-- 收入来源管理 -->
+            <LinearLayout
+                android:id="@+id/layout_income_sources"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="💰 收入来源管理"
+                    android:textColor="#1C1C1E"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="›"
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
+
+            <!-- 支出去向管理 -->
+            <LinearLayout
+                android:id="@+id/layout_expense_sources"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="💸 支出去向管理"
+                    android:textColor="#1C1C1E"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="›"
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
+
+            <!-- 账户管理 -->
+            <LinearLayout
+                android:id="@+id/layout_accounts"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🏦 账户管理"
+                    android:textColor="#1C1C1E"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="›"
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -508,31 +514,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"
             android:text="ℹ️ 关于"
-            android:textColor="#D4AF37"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:shadowColor="#80000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="3" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/card_white_bg"
-            android:orientation="vertical">
+            android:background="@drawable/bg_glass_card_clear"
+            android:orientation="vertical"
+            android:padding="4dp">
 
             <!-- 版本号 -->
             <LinearLayout
-                android:id="@+id/layout_version"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
@@ -543,7 +547,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="📌 版本号"
-                    android:textColor="#333333"
+                    android:textColor="#1C1C1E"
                     android:textSize="15sp" />
 
                 <TextView
@@ -551,14 +555,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1.0.0"
-                    android:textColor="#888888"
+                    android:textColor="#666666"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0" />
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
 
             <!-- 隐私政策 -->
             <LinearLayout
@@ -578,21 +582,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="🔒 隐私政策"
-                    android:textColor="#333333"
+                    android:textColor="#1C1C1E"
                     android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#CCCCCC"
-                    android:textSize="20sp" />
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0" />
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
 
             <!-- 用户协议 -->
             <LinearLayout
@@ -612,21 +616,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="📄 用户协议"
-                    android:textColor="#333333"
+                    android:textColor="#1C1C1E"
                     android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#CCCCCC"
-                    android:textSize="20sp" />
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0" />
+                android:layout_height="0.5dp"
+                android:background="#E0E0E0" />
 
             <!-- 开源许可 -->
             <LinearLayout
@@ -646,40 +650,36 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="📚 开源许可"
-                    android:textColor="#333333"
+                    android:textColor="#1C1C1E"
                     android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#CCCCCC"
-                    android:textSize="20sp" />
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 底部装饰 -->
+        <!-- 底部版权 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="32dp">
 
-            <View
-                android:layout_width="60dp"
-                android:layout_height="2dp"
-                android:layout_gravity="center"
-                android:background="@drawable/gold_line" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="12dp"
-                android:text="© 2025 YooBook · 至尊珍藏版"
-                android:textColor="#B8860B"
-                android:textSize="11sp"
-                android:alpha="0.6" />
+                android:text="© 2025 YooBook"
+                android:textColor="#CCCCCC"
+                android:textSize="12sp"
+                android:shadowColor="#80000000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2" />
         </LinearLayout>
 
     </LinearLayout>

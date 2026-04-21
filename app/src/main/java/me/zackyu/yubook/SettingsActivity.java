@@ -6,23 +6,39 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -33,17 +49,49 @@ public class SettingsActivity extends AppCompatActivity {
     private Button btnBack;
     private Switch switchNightMode, switchNotification;
     private TextView tvFontSize, tvCacheSize, tvVersion;
+    private TextView tvWallpaperStatus;
     private LinearLayout layoutBackup, layoutRestore, layoutClearCache;
     private LinearLayout layoutThemeColor, layoutPrivacy, layoutTerms, layoutLicenses;
     private LinearLayout layoutFontSize;
+    private LinearLayout layoutWallpaper;
+    private LinearLayout layoutIncomeSources, layoutExpenseSources, layoutAccounts;
+    private View rootView;
+
+    // 壁纸相关
+    private final String[] WALLPAPER_URLS = {
+            "https://picsum.photos/1080/2400",
+            "https://picsum.photos/1080/2400?random=1",
+            "https://picsum.photos/1080/2400?random=2",
+            "https://picsum.photos/1080/2400?random=3",
+            "https://picsum.photos/1080/2400?random=4",
+            "https://picsum.photos/1080/2400?random=5"
+    };
+
+    private final int[][] GRADIENT_COLORS = {
+            {0xFF667eea, 0xFF764ba2},
+            {0xFFf093fb, 0xFFf5576c},
+            {0xFF4facfe, 0xFF00f2fe},
+            {0xFF43e97b, 0xFF38f9d7}
+    };
+
+    private Handler mainHandler;
+    private boolean isLoadingImage = false;
+    private int currentUrlIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = getSharedPreferences("app_settings", MODE_PRIVATE);
-        // 在 super.onCreate 之前应用主题
         applyTheme();
         super.onCreate(savedInstanceState);
+
+        setupTransparentWindow();
         setContentView(R.layout.activity_settings);
+
+        rootView = findViewById(android.R.id.content);
+        mainHandler = new Handler(Looper.getMainLooper());
+
+        // 应用保存的壁纸设置
+        applyWallpaperSetting();
 
         initViews();
         loadSettings();
@@ -51,9 +99,93 @@ public class SettingsActivity extends AppCompatActivity {
         calculateCacheSize();
     }
 
-    /**
-     * 应用主题
-     */
+    private void setupTransparentWindow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.TRANSPARENT);
+
+            View decorView = window.getDecorView();
+            decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+    }
+
+    private void applyWallpaperSetting() {
+        String wallpaperMode = sharedPreferences.getString("wallpaper_mode", "gradient");
+
+        if ("online".equals(wallpaperMode)) {
+            loadOnlineWallpaper();
+        } else if ("gradient".equals(wallpaperMode)) {
+            setGradientWallpaper();
+        }
+    }
+
+    private void loadOnlineWallpaper() {
+        if (isLoadingImage) return;
+        isLoadingImage = true;
+
+        String imageUrl = WALLPAPER_URLS[currentUrlIndex] + "?t=" + System.currentTimeMillis();
+
+        Glide.with(this)
+                .load(imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .timeout(15000)
+                .into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                        if (rootView != null && resource != null) {
+                            rootView.setBackground(resource);
+                            isLoadingImage = false;
+                        }
+                    }
+
+                    @Override
+                    public void onLoadFailed(Drawable errorDrawable) {
+                        super.onLoadFailed(errorDrawable);
+                        currentUrlIndex++;
+                        if (currentUrlIndex < WALLPAPER_URLS.length) {
+                            loadOnlineWallpaper();
+                        } else {
+                            isLoadingImage = false;
+                            setGradientWallpaper();
+                        }
+                    }
+
+                    @Override
+                    public void onLoadCleared(Drawable placeholder) {}
+                });
+    }
+
+    private void setGradientWallpaper() {
+        Random random = new Random();
+        int[] colors = GRADIENT_COLORS[random.nextInt(GRADIENT_COLORS.length)];
+
+        GradientDrawable gradient = new GradientDrawable(
+                GradientDrawable.Orientation.TL_BR,
+                colors
+        );
+        gradient.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+        if (rootView != null) {
+            rootView.setBackground(gradient);
+        }
+    }
+
+    private void refreshWallpaper() {
+        String wallpaperMode = sharedPreferences.getString("wallpaper_mode", "gradient");
+        if ("online".equals(wallpaperMode)) {
+            currentUrlIndex = 0;
+            isLoadingImage = false;
+            loadOnlineWallpaper();
+        } else {
+            setGradientWallpaper();
+        }
+        Toast.makeText(this, "壁纸已更换", Toast.LENGTH_SHORT).show();
+    }
+
     private void applyTheme() {
         boolean isNightMode = sharedPreferences.getBoolean("night_mode", false);
         if (isNightMode) {
@@ -62,14 +194,10 @@ public class SettingsActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-        // 应用字体大小
         String fontSize = sharedPreferences.getString("font_size", "medium");
         applyFontSize(fontSize);
     }
 
-    /**
-     * 应用字体大小
-     */
     private void applyFontSize(String fontSize) {
         Resources res = getResources();
         Configuration config = new Configuration(res.getConfiguration());
@@ -102,6 +230,7 @@ public class SettingsActivity extends AppCompatActivity {
         tvFontSize = findViewById(R.id.tv_font_size);
         tvCacheSize = findViewById(R.id.tv_cache_size);
         tvVersion = findViewById(R.id.tv_version);
+        tvWallpaperStatus = findViewById(R.id.tv_wallpaper_status);
 
         layoutFontSize = findViewById(R.id.layout_font_size);
         layoutBackup = findViewById(R.id.layout_backup);
@@ -111,27 +240,30 @@ public class SettingsActivity extends AppCompatActivity {
         layoutPrivacy = findViewById(R.id.layout_privacy);
         layoutTerms = findViewById(R.id.layout_terms);
         layoutLicenses = findViewById(R.id.layout_licenses);
+        layoutWallpaper = findViewById(R.id.layout_wallpaper);
 
-        // 设置版本号
+        // 新增管理项
+        layoutIncomeSources = findViewById(R.id.layout_income_sources);
+        layoutExpenseSources = findViewById(R.id.layout_expense_sources);
+        layoutAccounts = findViewById(R.id.layout_accounts);
+
+        String version = sharedPreferences.getString("wallpaper_mode", "渐变");
+        tvWallpaperStatus.setText("online".equals(version) ? "在线图片" : "渐变背景");
+
         try {
-            String version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-            tvVersion.setText(version);
+            String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            tvVersion.setText(versionName);
         } catch (Exception e) {
             tvVersion.setText("1.0.0");
         }
     }
 
     private void loadSettings() {
-        // 加载夜间模式设置
         switchNightMode.setChecked(sharedPreferences.getBoolean("night_mode", false));
-
-        // 加载通知设置
         switchNotification.setChecked(sharedPreferences.getBoolean("notification", true));
 
-        // 加载字体大小设置
         String fontSize = sharedPreferences.getString("font_size", "medium");
-        String fontSizeText = getFontSizeText(fontSize);
-        tvFontSize.setText(fontSizeText);
+        tvFontSize.setText(getFontSizeText(fontSize));
     }
 
     private String getFontSizeText(String fontSize) {
@@ -155,65 +287,100 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        // 返回按钮
         btnBack.setOnClickListener(v -> finish());
 
-        // 夜间模式开关
         switchNightMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
             editor = sharedPreferences.edit();
             editor.putBoolean("night_mode", isChecked);
             editor.apply();
-
-            String message = isChecked ? "夜间模式已开启，重启应用后生效" : "夜间模式已关闭，重启应用后生效";
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-
-            // 保存后立即重启 Activity 使主题生效
+            Toast.makeText(this, isChecked ? "夜间模式已开启，重启应用后生效" : "夜间模式已关闭，重启应用后生效", Toast.LENGTH_LONG).show();
             recreate();
         });
 
-        // 通知开关
         switchNotification.setOnCheckedChangeListener((buttonView, isChecked) -> {
             editor = sharedPreferences.edit();
             editor.putBoolean("notification", isChecked);
             editor.apply();
-
-            String message = isChecked ? "已开启记账提醒" : "已关闭记账提醒";
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
-            // 如果开启通知，请求权限（Android 13+）
+            Toast.makeText(this, isChecked ? "已开启记账提醒" : "已关闭记账提醒", Toast.LENGTH_SHORT).show();
             if (isChecked && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 requestNotificationsPermission();
             }
         });
 
-        // 字体大小
         layoutFontSize.setOnClickListener(v -> showFontSizeDialog());
-
-        // 备份数据
         layoutBackup.setOnClickListener(v -> backupData());
-
-        // 恢复数据
         layoutRestore.setOnClickListener(v -> restoreData());
-
-        // 清除缓存
         layoutClearCache.setOnClickListener(v -> showClearCacheDialog());
-
-        // 主题颜色
         layoutThemeColor.setOnClickListener(v -> showThemeColorDialog());
-
-        // 隐私政策
         layoutPrivacy.setOnClickListener(v -> showPrivacyPolicy());
-
-        // 用户协议
         layoutTerms.setOnClickListener(v -> showTermsOfService());
-
-        // 开源许可
         layoutLicenses.setOnClickListener(v -> showOpenSourceLicenses());
+
+        // 壁纸设置
+        layoutWallpaper.setOnClickListener(v -> showWallpaperDialog());
+
+        // 新增管理项
+        layoutIncomeSources.setOnClickListener(v -> manageIncomeSources());
+        layoutExpenseSources.setOnClickListener(v -> manageExpenseSources());
+        layoutAccounts.setOnClickListener(v -> manageAccounts());
     }
 
     /**
-     * 字体大小选择对话框
+     * 壁纸设置对话框
      */
+    private void showWallpaperDialog() {
+        String[] items = {"渐变背景", "在线随机图片"};
+        int current = "online".equals(sharedPreferences.getString("wallpaper_mode", "gradient")) ? 1 : 0;
+
+        new AlertDialog.Builder(this)
+                .setTitle("壁纸设置")
+                .setSingleChoiceItems(items, current, (dialog, which) -> {
+                    String mode = which == 0 ? "gradient" : "online";
+                    editor = sharedPreferences.edit();
+                    editor.putString("wallpaper_mode", mode);
+                    editor.apply();
+
+                    tvWallpaperStatus.setText(items[which]);
+
+                    if (which == 0) {
+                        setGradientWallpaper();
+                    } else {
+                        currentUrlIndex = 0;
+                        isLoadingImage = false;
+                        loadOnlineWallpaper();
+                    }
+
+                    dialog.dismiss();
+                    Toast.makeText(this, "壁纸已切换为：" + items[which], Toast.LENGTH_SHORT).show();
+                })
+                .setNeutralButton("刷新壁纸", (dialog, which) -> refreshWallpaper())
+                .show();
+    }
+
+    /**
+     * 收入来源管理
+     */
+    private void manageIncomeSources() {
+        Intent intent = new Intent(this, IncomeSourceActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 支出去向管理
+     */
+    private void manageExpenseSources() {
+        Intent intent = new Intent(this, ExpenseSourceActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 账户管理
+     */
+    private void manageAccounts() {
+        Intent intent = new Intent(this, AccountManageActivity.class);
+        startActivity(intent);
+    }
+
     private void showFontSizeDialog() {
         String[] items = {"小", "中等", "大", "超大"};
         int current = getCurrentFontSizeIndex();
@@ -230,13 +397,10 @@ public class SettingsActivity extends AppCompatActivity {
                     editor.putString("font_size", sizeValue);
                     editor.apply();
 
-                    // 应用字体大小
                     applyFontSize(sizeValue);
 
                     dialog.dismiss();
                     Toast.makeText(this, "字体大小已设置为：" + sizeText, Toast.LENGTH_SHORT).show();
-
-                    // 重新创建 Activity 使字体生效
                     recreate();
                 })
                 .show();
@@ -253,12 +417,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 主题颜色选择对话框
-     */
     private void showThemeColorDialog() {
         String[] items = {"金色", "蓝色", "绿色", "紫色"};
-        int[] colors = {0xFFD4AF37, 0xFF2196F3, 0xFF4CAF50, 0xFF9C27B0};
         String[] colorValues = {"gold", "blue", "green", "purple"};
 
         int current = getCurrentThemeIndex();
@@ -266,10 +426,8 @@ public class SettingsActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("主题颜色")
                 .setSingleChoiceItems(items, current, (dialog, which) -> {
-                    String colorName = colorValues[which];
-
                     editor = sharedPreferences.edit();
-                    editor.putString("theme_color", colorName);
+                    editor.putString("theme_color", colorValues[which]);
                     editor.apply();
 
                     dialog.dismiss();
@@ -289,11 +447,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 备份数据
-     */
     private void backupData() {
-        // 显示加载对话框
         AlertDialog progressDialog = new AlertDialog.Builder(this)
                 .setTitle("正在备份")
                 .setMessage("请稍候...")
@@ -301,10 +455,8 @@ public class SettingsActivity extends AppCompatActivity {
                 .create();
         progressDialog.show();
 
-        // 在后台线程执行备份
         new Thread(() -> {
             try {
-                // 获取数据目录
                 File dataDir = getFilesDir();
                 File backupDir = new File(Environment.getExternalStorageDirectory(), "YooBook/Backup");
 
@@ -312,12 +464,8 @@ public class SettingsActivity extends AppCompatActivity {
                     backupDir.mkdirs();
                 }
 
-                // 创建备份文件名
                 String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
                 File backupFile = new File(backupDir, "backup_" + timestamp + ".json");
-
-                // TODO: 实现实际的备份逻辑
-                // 这里只是示例，实际需要导出数据库和SharedPreferences
 
                 runOnUiThread(() -> {
                     progressDialog.dismiss();
@@ -333,15 +481,9 @@ public class SettingsActivity extends AppCompatActivity {
         }).start();
     }
 
-    /**
-     * 恢复数据
-     */
     private void restoreData() {
-        // 显示文件选择器
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("选择备份文件");
-
-        // TODO: 列出备份目录中的文件供用户选择
         String[] backupFiles = {"backup_20240101_120000.json", "backup_20240102_120000.json"};
 
         builder.setItems(backupFiles, (dialog, which) -> {
@@ -354,14 +496,11 @@ public class SettingsActivity extends AppCompatActivity {
 
             new Thread(() -> {
                 try {
-                    // TODO: 实现实际的恢复逻辑
-                    Thread.sleep(1500); // 模拟恢复过程
-
+                    Thread.sleep(1500);
                     runOnUiThread(() -> {
                         progressDialog.dismiss();
                         Toast.makeText(this, "数据恢复成功！", Toast.LENGTH_SHORT).show();
                     });
-
                 } catch (Exception e) {
                     runOnUiThread(() -> {
                         progressDialog.dismiss();
@@ -375,9 +514,6 @@ public class SettingsActivity extends AppCompatActivity {
         builder.show();
     }
 
-    /**
-     * 清除缓存对话框
-     */
     private void showClearCacheDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("清除缓存")
@@ -391,19 +527,10 @@ public class SettingsActivity extends AppCompatActivity {
                 .show();
     }
 
-    /**
-     * 清除缓存
-     */
     private void clearCache() {
         try {
-            // 清除应用缓存目录
-            File cacheDir = getCacheDir();
-            deleteDir(cacheDir);
-
-            // 清除代码缓存
-            File codeCacheDir = getCodeCacheDir();
-            deleteDir(codeCacheDir);
-
+            deleteDir(getCacheDir());
+            deleteDir(getCodeCacheDir());
             Log.d("Settings", "Cache cleared");
         } catch (Exception e) {
             Log.e("Settings", "Error clearing cache", e);
@@ -428,9 +555,6 @@ public class SettingsActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
-     * 计算缓存大小
-     */
     private void calculateCacheSize() {
         new Thread(() -> {
             long size = getDirSize(getCacheDir()) + getDirSize(getCodeCacheDir());
@@ -469,18 +593,12 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 请求通知权限（Android 13+）
-     */
     private void requestNotificationsPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 100);
         }
     }
 
-    /**
-     * 显示隐私政策
-     */
     private void showPrivacyPolicy() {
         new AlertDialog.Builder(this)
                 .setTitle("隐私政策")
@@ -493,9 +611,6 @@ public class SettingsActivity extends AppCompatActivity {
                 .show();
     }
 
-    /**
-     * 显示用户协议
-     */
     private void showTermsOfService() {
         new AlertDialog.Builder(this)
                 .setTitle("用户协议")
@@ -509,15 +624,13 @@ public class SettingsActivity extends AppCompatActivity {
                 .show();
     }
 
-    /**
-     * 显示开源许可
-     */
     private void showOpenSourceLicenses() {
         new AlertDialog.Builder(this)
                 .setTitle("开源许可")
                 .setMessage("本应用使用了以下开源项目：\n\n" +
                         "• AndroidX - Apache 2.0\n" +
-                        "• Material Design Components - Apache 2.0\n\n" +
+                        "• Material Design Components - Apache 2.0\n" +
+                        "• Glide - BSD 3-Clause\n\n" +
                         "感谢所有开源贡献者！")
                 .setPositiveButton("关闭", null)
                 .show();

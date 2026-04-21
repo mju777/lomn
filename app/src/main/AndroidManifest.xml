@@ -41,6 +41,11 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="orientation|screenSize" />
+
+
+        <activity android:name=".IncomeSourceActivity" />
+        <activity android:name=".ExpenseSourceActivity" />
+        <activity android:name=".AccountManageActivity" />
     </application>
 
 </manifest>
