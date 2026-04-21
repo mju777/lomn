@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 阴影 -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#60000000" />
+        </shape>
+    </item>
+
+    <!-- 厚度 -->
+    <item android:bottom="4dp" android:left="1dp" android:right="1dp" android:top="1dp">
+        <shape android:shape="oval">
+            <solid android:color="#C0FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- 表面 -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#F2FFFFFF" />
+            <stroke
+                android:width="2dp"
+                android:color="#FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- 高光 -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#80FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:angle="45" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true" android:bottom="1dp">
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF" />
+        </shape>
+    </item>
+</layer-list>

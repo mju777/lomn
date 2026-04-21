@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 外层环境阴影 -->
+    <item android:bottom="6dp" android:left="3dp" android:right="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#60000000" />
+            <corners android:radius="34dp" />
+        </shape>
+    </item>
+
+    <!-- 玻璃底层（厚度） -->
+    <item android:bottom="5dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#A0FFFFFF" />
+            <corners android:radius="32dp" />
+        </shape>
+    </item>
+
+    <!-- 玻璃中层（半透明） -->
+    <item android:bottom="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#D9FFFFFF" />
+            <corners android:radius="32dp" />
+        </shape>
+    </item>
+
+    <!-- 玻璃表层（高光） -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#F2FFFFFF" />
+            <corners android:radius="32dp" />
+            <stroke
+                android:width="2dp"
+                android:color="#FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- 顶部高光反射 -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:angle="90" />
+            <corners android:radius="32dp" />
+        </shape>
+    </item>
+
+    <!-- 按压态效果 -->
+    <item android:state_pressed="true" android:bottom="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#E6FFFFFF" />
+            <corners android:radius="32dp" />
+        </shape>
+    </item>
+</layer-list>

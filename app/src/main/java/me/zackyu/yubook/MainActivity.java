@@ -2,16 +2,10 @@ package me.zackyu.yubook;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,12 +27,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import me.zackyu.yubook.db.iDBHelper;
-import me.zackyu.yubook.util.BlurUtils;
-import me.zackyu.yubook.util.BlurUtils;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int PERMISSION_REQUEST_CODE = 100;
-
     private Button buttonNewRecord;
     private Button buttonRecords;
     private TextView textIncome;
@@ -47,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private iDBHelper iDBHelper;
     private Button buttonAboutMe;
     private Button buttonPlsRcd;
-    private View blurBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +55,6 @@ public class MainActivity extends AppCompatActivity {
         initDatabase();
         showData();
 
-        // 应用高斯模糊到卡片背景
-        applyGaussianBlur();
-
         Button button_main_back = findViewById(R.id.button_main_back);
         button_main_back.setOnClickListener(v -> finish());
     }
@@ -79,29 +65,9 @@ public class MainActivity extends AppCompatActivity {
             Drawable wallpaperDrawable = wallpaperManager.getDrawable();
             if (wallpaperDrawable != null) {
                 getWindow().setBackgroundDrawable(wallpaperDrawable);
-            } else {
-                // 默认渐变背景
-                getWindow().setBackgroundDrawableResource(R.drawable.bg_gradient_glass);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            getWindow().setBackgroundDrawableResource(R.drawable.bg_gradient_glass);
-        }
-    }
-
-    private void applyGaussianBlur() {
-        // 对卡片内的模糊层应用高斯模糊
-        View blurView = findViewById(R.id.blur_background);
-        if (blurView != null) {
-            // 使用30px的模糊半径，产生强烈的毛玻璃效果
-            BlurUtils.applyBlur(blurView, 30f);
-        }
-
-        // 也可以对整个卡片应用轻微模糊（可选）
-        CardView cardView = findViewById(R.id.card_asset);
-        if (cardView != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // 给卡片本身添加轻微阴影效果
-            cardView.setCardElevation(16f);
         }
     }
 
@@ -158,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         textTotal = findViewById(R.id.text_total);
         buttonAboutMe = findViewById(R.id.button_main_about_me);
         buttonPlsRcd = findViewById(R.id.button_main_pls);
-        blurBackground = findViewById(R.id.blur_background);
     }
 
     private void setListeners() {
@@ -204,6 +169,16 @@ public class MainActivity extends AppCompatActivity {
             btnSettings.setOnClickListener(v -> {
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
+            });
+        }
+
+        Button btnShare = findViewById(R.id.button_share);
+        if (btnShare != null) {
+            btnShare.setOnClickListener(v -> {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "推荐使用小金库记账应用！");
+                startActivity(Intent.createChooser(shareIntent, "分享"));
             });
         }
     }
