@@ -1,12 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FFFBC5</item>  <!-- 深邃的蓝色，类似于海洋的颜色 -->
-        <item name="colorPrimaryDark">#FFFBC5</item>  <!-- 稍深的蓝色，增加层次感 -->
-        <item name="colorAccent">#FFFBC5</item>  <!-- 一种淡蓝色，带来清新和宁静感 -->
-    </style>
+
 
 
     <style name="CustomSpinnerStyle" parent="@android:style/Widget.TextView.SpinnerItem">

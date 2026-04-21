@@ -6,10 +6,11 @@
 
 
 
-        <color name="gold">#D4AF37</color>
-        <color name="blue">#2196F3</color>
-        <color name="green">#4CAF50</color>
-        <color name="purple">#9C27B0</color>
+
+        <color name="gold">#FFD700</color>
+        <color name="blue">#007AFF</color>
+        <color name="green">#34C759</color>
+        <color name="purple">#AF52DE</color>
 
 
 </resources>
