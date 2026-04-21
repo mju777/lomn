@@ -1,15 +1,22 @@
 package me.zackyu.yubook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.database.Cursor;
@@ -30,29 +37,142 @@ public class MainActivity extends AppCompatActivity {
     private TextView textIncome;
     private TextView textPay;
     private TextView textTotal;
+    private TextView titleApp;
+    private TextClock textClock;
+    private TextView labelTotal, labelIncome, labelPay;
+    private TextView sectionQuick, sectionQuickRecord, sectionMore;
     private iDBHelper iDBHelper;
     private Button buttonAboutMe;
     private Button buttonPlsRcd;
+
+    // 存储需要自适应颜色的View
+    private View[] textViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 设置透明状态栏和导航栏
         setupTransparentWindow();
-
         applyAppSettings();
         setContentView(R.layout.activity_main);
 
         initViews();
+        setupAdaptiveTextColors();  // 设置自适应颜色
         setListeners();
         initDatabase();
         showData();
 
-        // 注意：不再使用 RenderEffect 模糊，改用半透明背景实现玻璃效果
-
         Button button_main_back = findViewById(R.id.button_main_back);
         button_main_back.setOnClickListener(v -> finish());
+    }
+
+    private void setupAdaptiveTextColors() {
+        // 收集所有需要自适应颜色的TextView
+        textViews = new View[]{
+                findViewById(R.id.title_app),
+                findViewById(R.id.textClock),
+                findViewById(R.id.label_total),
+                findViewById(R.id.text_total),
+                findViewById(R.id.label_income),
+                findViewById(R.id.text_income),
+                findViewById(R.id.label_pay),
+                findViewById(R.id.text_pay),
+                findViewById(R.id.section_quick),
+                findViewById(R.id.section_quick_record),
+                findViewById(R.id.section_more)
+        };
+
+        // 获取背景颜色并应用自适应文字颜色
+        int backgroundColor = getBackgroundColor();
+        applyAdaptiveTextColors(backgroundColor);
+    }
+
+    private int getBackgroundColor() {
+        Drawable background = getWindow().getDecorView().getRootView().getBackground();
+        if (background instanceof GradientDrawable) {
+            GradientDrawable gradient = (GradientDrawable) background;
+            // 对于渐变，取平均色
+            return Color.parseColor("#667eea"); // 默认颜色
+        }
+        return Color.WHITE;
+    }
+
+    private void applyAdaptiveTextColors(int backgroundColor) {
+        // 计算背景亮度
+        double brightness = calculateBrightness(backgroundColor);
+
+        // 根据亮度选择文字颜色
+        int textColor;
+        int secondaryTextColor;
+        int labelColor;
+
+        if (brightness > 0.5) {
+            // 背景亮色，使用深色文字
+            textColor = Color.parseColor("#1C1C1E");
+            secondaryTextColor = Color.parseColor("#3A3A3C");
+            labelColor = Color.parseColor("#8E8E93");
+        } else {
+            // 背景暗色，使用浅色文字
+            textColor = Color.parseColor("#FFFFFF");
+            secondaryTextColor = Color.parseColor("#E5E5EA");
+            labelColor = Color.parseColor("#C6C6C8");
+        }
+
+        // 应用颜色到各个TextView
+        for (View view : textViews) {
+            if (view instanceof TextView) {
+                TextView textView = (TextView) view;
+                if (view.getId() == R.id.label_total ||
+                        view.getId() == R.id.label_income ||
+                        view.getId() == R.id.label_pay) {
+                    textView.setTextColor(labelColor);
+                } else if (view.getId() == R.id.section_quick ||
+                        view.getId() == R.id.section_quick_record ||
+                        view.getId() == R.id.section_more) {
+                    textView.setTextColor(secondaryTextColor);
+                } else {
+                    textView.setTextColor(textColor);
+                }
+            }
+        }
+
+        // 设置卡片背景颜色（半透明，根据亮度调整）
+        CardView cardView = findViewById(R.id.card_asset);
+        if (cardView != null) {
+            if (brightness > 0.5) {
+                cardView.setCardBackgroundColor(Color.parseColor("#E6FFFFFF"));
+            } else {
+                cardView.setCardBackgroundColor(Color.parseColor("#B31C1C1E"));
+            }
+        }
+    }
+
+    private double calculateBrightness(int color) {
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        // 使用感知亮度公式
+        return (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
+    }
+
+    // 可选：动态获取壁纸主色调
+    private int getWallpaperDominantColor() {
+        try {
+            Drawable wallpaper = getWallpaper();
+            if (wallpaper instanceof BitmapDrawable) {
+                Bitmap bitmap = ((BitmapDrawable) wallpaper).getBitmap();
+                if (bitmap != null && !bitmap.isRecycled()) {
+                    // 采样降低计算量
+                    Bitmap sampled = Bitmap.createScaledBitmap(bitmap, 10, 10, true);
+                    int pixel = sampled.getPixel(0, 0);
+                    sampled.recycle();
+                    return pixel;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Color.parseColor("#667eea");
     }
 
     private void setupTransparentWindow() {
@@ -60,10 +180,9 @@ public class MainActivity extends AppCompatActivity {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(android.graphics.Color.TRANSPARENT);
-            window.setNavigationBarColor(android.graphics.Color.TRANSPARENT);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.TRANSPARENT);
 
-            // 设置状态栏文字为浅色
             View decorView = window.getDecorView();
             decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
@@ -71,18 +190,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void applyAppSettings() {
         SharedPreferences prefs = getSharedPreferences("app_settings", MODE_PRIVATE);
-
         String fontSize = prefs.getString("font_size", "medium");
         applyFontSize(fontSize);
-
-        String themeColor = prefs.getString("theme_color", "gold");
-        applyThemeColor(themeColor);
     }
 
     private void applyFontSize(String fontSize) {
         Resources res = getResources();
         Configuration config = new Configuration(res.getConfiguration());
-
         switch (fontSize) {
             case "small":
                 config.fontScale = 0.85f;
@@ -97,18 +211,15 @@ public class MainActivity extends AppCompatActivity {
                 config.fontScale = 1.3f;
                 break;
         }
-
         res.updateConfiguration(config, res.getDisplayMetrics());
-    }
-
-    private void applyThemeColor(String themeColor) {
-        // 主题颜色应用逻辑（可选实现）
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         showData();
+        // 重新应用自适应颜色（防止设置页改变主题）
+        setupAdaptiveTextColors();
     }
 
     private void initViews() {
@@ -119,6 +230,14 @@ public class MainActivity extends AppCompatActivity {
         textTotal = findViewById(R.id.text_total);
         buttonAboutMe = findViewById(R.id.button_main_about_me);
         buttonPlsRcd = findViewById(R.id.button_main_pls);
+        titleApp = findViewById(R.id.title_app);
+        textClock = findViewById(R.id.textClock);
+        labelTotal = findViewById(R.id.label_total);
+        labelIncome = findViewById(R.id.label_income);
+        labelPay = findViewById(R.id.label_pay);
+        sectionQuick = findViewById(R.id.section_quick);
+        sectionQuickRecord = findViewById(R.id.section_quick_record);
+        sectionMore = findViewById(R.id.section_more);
     }
 
     private void setListeners() {
