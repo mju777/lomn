@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 极淡阴影 -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#20000000" />
+        </shape>
+    </item>
+
+    <!-- 厚度层 -->
+    <item android:bottom="4dp" android:left="1dp" android:right="1dp" android:top="1dp">
+        <shape android:shape="oval">
+            <solid android:color="#00FFFFFF" />
+        </shape>
+    </item>
+
+    <item android:bottom="2dp">
+        <shape android:shape="oval">
+            <solid android:color="#05FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- 玻璃表面 -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#10FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- 极淡高光 -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#15FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:angle="45" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true" android:bottom="1dp">
+        <shape android:shape="oval">
+            <solid android:color="#20FFFFFF" />
+        </shape>
+    </item>
+</layer-list>

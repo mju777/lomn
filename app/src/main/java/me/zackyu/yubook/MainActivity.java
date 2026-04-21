@@ -1,17 +1,9 @@
 package me.zackyu.yubook;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.WallpaperManager;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -34,8 +26,6 @@ import java.math.RoundingMode;
 import me.zackyu.yubook.db.iDBHelper;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int PERMISSION_REQUEST_CODE = 100;
-
     private Button buttonNewRecord;
     private Button buttonRecords;
     private TextView textIncome;
@@ -51,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         setupTransparentWindow();
 
-        // 设置桌面壁纸作为背景
-        setWallpaperAsBackground();
+        // 不设置任何背景，让布局的透明背景生效
+        // 删除所有设置背景的代码
 
         applyAppSettings();
         setContentView(R.layout.activity_main);
@@ -64,26 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button button_main_back = findViewById(R.id.button_main_back);
         button_main_back.setOnClickListener(v -> finish());
-    }
-
-    private void setWallpaperAsBackground() {
-        try {
-            // 方法1：直接获取桌面壁纸
-            WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-            Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-
-            if (wallpaperDrawable != null) {
-                // 直接设置壁纸作为窗口背景
-                getWindow().setBackgroundDrawable(wallpaperDrawable);
-            } else {
-                // 备用方案：使用默认渐变背景
-                getWindow().setBackgroundDrawableResource(R.drawable.bg_gradient_glass);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            // 如果获取失败，使用默认背景
-            getWindow().setBackgroundDrawableResource(R.drawable.bg_gradient_glass);
-        }
     }
 
     private void setupTransparentWindow() {

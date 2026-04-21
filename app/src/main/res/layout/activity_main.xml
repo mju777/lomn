@@ -71,7 +71,7 @@
                     android:id="@+id/button_home_settings"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="@drawable/btn_glass_thick"
+                    android:background="@drawable/btn_icon_ultraclear"
                     android:text="⚙️"
                     android:textSize="24sp" />
 
@@ -80,7 +80,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:layout_marginStart="12dp"
-                    android:background="@drawable/btn_glass_thick"
+                    android:background="@drawable/btn_icon_ultraclear"
                     android:text="📤"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_glass_card_thick"
+            android:background="@drawable/bg_glass_card_ultraclear"
             android:orientation="vertical"
             android:padding="28dp">
 
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="总资产"
-                android:textColor="#666666"
+                android:textColor="#CCCCCC"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="0.00"
-                android:textColor="#1C1C1E"
+                android:textColor="#FFFFFF"
                 android:textSize="44sp"
                 android:textStyle="bold" />
 
@@ -132,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📈 总收入"
-                        android:textColor="#666666"
+                        android:textColor="#CCCCCC"
                         android:textSize="13sp" />
 
                     <TextView
@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="0.00"
-                        android:textColor="#34C759"
+                        android:textColor="#4CD964"
                         android:textSize="22sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -149,7 +149,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="40dp"
-                    android:background="#E0E0E0" />
+                    android:background="#30FFFFFF" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -163,7 +163,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📉 总支出"
-                        android:textColor="#666666"
+                        android:textColor="#CCCCCC"
                         android:textSize="13sp" />
 
                     <TextView
@@ -179,7 +179,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 快捷操作按钮 -->
+        <!-- 快捷操作 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -206,11 +206,11 @@
                 android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_glass_thick"
+                android:background="@drawable/btn_glass_ultraclear"
                 android:gravity="center"
                 android:text="📝 记账"
                 android:textAllCaps="false"
-                android:textColor="#1C1C1E"
+                android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -220,11 +220,11 @@
                 android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_glass_thick"
+                android:background="@drawable/btn_glass_ultraclear"
                 android:gravity="center"
                 android:text="📋 记录"
                 android:textAllCaps="false"
-                android:textColor="#1C1C1E"
+                android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -234,16 +234,16 @@
                 android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_glass_thick"
+                android:background="@drawable/btn_glass_ultraclear"
                 android:gravity="center"
                 android:text="🏦 账户"
                 android:textAllCaps="false"
-                android:textColor="#1C1C1E"
+                android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- 快速记账按钮 -->
+        <!-- 快速记账 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -270,7 +270,7 @@
                 android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_income_thick"
+                android:background="@drawable/btn_income_ultraclear"
                 android:gravity="center"
                 android:text="💰 收入"
                 android:textAllCaps="false"
@@ -284,7 +284,7 @@
                 android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_expense_thick"
+                android:background="@drawable/btn_expense_ultraclear"
                 android:gravity="center"
                 android:text="💸 支出"
                 android:textAllCaps="false"
@@ -320,11 +320,11 @@
                 android:layout_height="68dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_glass_thick"
+                android:background="@drawable/btn_glass_ultraclear"
                 android:gravity="center"
                 android:text="ℹ️ 关于"
                 android:textAllCaps="false"
-                android:textColor="#1C1C1E"
+                android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -334,11 +334,11 @@
                 android:layout_height="68dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_glass_thick"
+                android:background="@drawable/btn_glass_ultraclear"
                 android:gravity="center"
                 android:text="👍 点赞"
                 android:textAllCaps="false"
-                android:textColor="#1C1C1E"
+                android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -348,11 +348,11 @@
                 android:layout_height="68dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_glass_thick"
+                android:background="@drawable/btn_glass_ultraclear"
                 android:gravity="center"
                 android:text="← 返回"
                 android:textAllCaps="false"
-                android:textColor="#1C1C1E"
+                android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
