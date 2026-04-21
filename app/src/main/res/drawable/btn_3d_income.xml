@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 阴影 -->
-    <item>
+    <!-- 外阴影 -->
+    <item android:bottom="4dp" android:left="2dp" android:right="2dp">
         <shape android:shape="rectangle">
-            <solid android:color="#20000000" />
+            <solid android:color="#40000000" />
             <corners android:radius="32dp" />
         </shape>
     </item>
 
-    <!-- 厚度 -->
-    <item android:bottom="3dp">
+    <!-- 厚度层 -->
+    <item android:bottom="4dp">
         <shape android:shape="rectangle">
-            <solid android:color="#804CD964" />
+            <solid android:color="#6034C759" />
             <corners android:radius="30dp" />
         </shape>
     </item>
 
-    <!-- 表面 -->
-    <item android:bottom="2dp">
+    <!-- 表面层 -->
+    <item>
         <shape android:shape="rectangle">
-            <solid android:color="#E534C759" />
+            <solid android:color="#CC34C759" />
             <corners android:radius="30dp" />
             <stroke
                 android:width="1.5dp"
                 android:color="#80FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- 按压态 -->
+    <item android:state_pressed="true" android:bottom="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#E534C759" />
+            <corners android:radius="30dp" />
         </shape>
     </item>
 </layer-list>

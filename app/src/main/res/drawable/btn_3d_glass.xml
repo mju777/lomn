@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 底部阴影层 -->
-    <item>
+    <!-- 外阴影层 - 增强立体感 -->
+    <item android:bottom="4dp" android:left="2dp" android:right="2dp">
         <shape android:shape="rectangle">
-            <solid android:color="#20000000" />
+            <solid android:color="#40000000" />
             <corners android:radius="32dp" />
         </shape>
     </item>
 
     <!-- 中间厚度层 -->
-    <item android:bottom="3dp">
+    <item android:bottom="4dp">
         <shape android:shape="rectangle">
-            <solid android:color="#60FFFFFF" />
+            <solid android:color="#80FFFFFF" />
             <corners android:radius="30dp" />
         </shape>
     </item>
 
     <!-- 顶部高亮层 -->
-    <item android:bottom="2dp">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#D9FFFFFF" />
+            <corners android:radius="30dp" />
+            <stroke
+                android:width="1.5dp"
+                android:color="#FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- 按压态阴影 -->
+    <item android:state_pressed="true" android:bottom="1dp">
         <shape android:shape="rectangle">
             <solid android:color="#B3FFFFFF" />
             <corners android:radius="30dp" />
-            <stroke
-                android:width="1dp"
-                android:color="#FFFFFF" />
         </shape>
     </item>
 </layer-list>
