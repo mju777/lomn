@@ -15,21 +15,16 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-        <!-- 状态栏占位 -->
         <View
             android:layout_width="match_parent"
             android:layout_height="48dp" />
 
-        <!-- ========== 头部欢迎区域（玻璃质感） ========== -->
+        <!-- 头部 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:background="@drawable/bg_glass_section"
+            android:padding="12dp"
             android:layout_marginBottom="16dp">
 
             <LinearLayout
@@ -43,9 +38,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="💰 小金库"
-                    android:textColor="#1C1C1E"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
 
                 <TextClock
                     android:id="@+id/textClock"
@@ -54,10 +53,13 @@
                     android:layout_marginTop="4dp"
                     android:format12Hour="hh:mm:ss"
                     android:format24Hour="HH:mm:ss"
-                    android:textColor="#1C1C1E"
+                    android:textColor="#FFFFFF"
                     android:textSize="32sp"
-                    android:textStyle="bold" />
-
+                    android:textStyle="bold"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
             </LinearLayout>
 
             <LinearLayout
@@ -67,30 +69,30 @@
 
                 <Button
                     android:id="@+id/button_home_settings"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:background="@drawable/btn_3d_icon_v2"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/btn_glass_thick"
                     android:text="⚙️"
-                    android:textSize="22sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/button_share"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     android:layout_marginStart="12dp"
-                    android:background="@drawable/btn_3d_icon_v2"
+                    android:background="@drawable/btn_glass_thick"
                     android:text="📤"
-                    android:textSize="22sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ========== 资产总览卡片（加厚玻璃） ========== -->
+        <!-- 资产卡片 -->
         <LinearLayout
             android:id="@+id/card_asset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_glass_card"
+            android:background="@drawable/bg_glass_card_thick"
             android:orientation="vertical"
             android:padding="28dp">
 
@@ -177,23 +179,21 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ========== 快捷操作区域 ========== -->
+        <!-- 快捷操作按钮 -->
         <TextView
-            android:id="@+id/section_quick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_glass_section"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:text="⚡ 快捷操作"
-            android:textColor="#1C1C1E"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:shadowColor="#80000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="3" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -203,10 +203,10 @@
             <Button
                 android:id="@+id/button_new_record"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_3d_glass_v2"
+                android:background="@drawable/btn_glass_thick"
                 android:gravity="center"
                 android:text="📝 记账"
                 android:textAllCaps="false"
@@ -217,10 +217,10 @@
             <Button
                 android:id="@+id/button_records"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_3d_glass_v2"
+                android:background="@drawable/btn_glass_thick"
                 android:gravity="center"
                 android:text="📋 记录"
                 android:textAllCaps="false"
@@ -231,10 +231,10 @@
             <Button
                 android:id="@+id/button_new_account"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_3d_glass_v2"
+                android:background="@drawable/btn_glass_thick"
                 android:gravity="center"
                 android:text="🏦 账户"
                 android:textAllCaps="false"
@@ -243,23 +243,21 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- ========== 快速记账 ========== -->
+        <!-- 快速记账按钮 -->
         <TextView
-            android:id="@+id/section_quick_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_glass_section"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:text="➕ 快速记账"
-            android:textColor="#1C1C1E"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:shadowColor="#80000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="3" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -269,10 +267,10 @@
             <Button
                 android:id="@+id/btn_income_quick"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_3d_income_v2"
+                android:background="@drawable/btn_income_thick"
                 android:gravity="center"
                 android:text="💰 收入"
                 android:textAllCaps="false"
@@ -283,10 +281,10 @@
             <Button
                 android:id="@+id/btn_expense_quick"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="72dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_3d_expense_v2"
+                android:background="@drawable/btn_expense_thick"
                 android:gravity="center"
                 android:text="💸 支出"
                 android:textAllCaps="false"
@@ -295,23 +293,21 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- ========== 更多功能 ========== -->
+        <!-- 更多功能 -->
         <TextView
-            android:id="@+id/section_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_glass_section"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:text="🔧 更多功能"
-            android:textColor="#1C1C1E"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:shadowColor="#80000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="3" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -321,10 +317,10 @@
             <Button
                 android:id="@+id/button_main_about_me"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="68dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_3d_secondary_v2"
+                android:background="@drawable/btn_glass_thick"
                 android:gravity="center"
                 android:text="ℹ️ 关于"
                 android:textAllCaps="false"
@@ -335,10 +331,10 @@
             <Button
                 android:id="@+id/button_main_pls"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="68dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_3d_secondary_v2"
+                android:background="@drawable/btn_glass_thick"
                 android:gravity="center"
                 android:text="👍 点赞"
                 android:textAllCaps="false"
@@ -349,10 +345,10 @@
             <Button
                 android:id="@+id/button_main_back"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="68dp"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_3d_secondary_v2"
+                android:background="@drawable/btn_glass_thick"
                 android:gravity="center"
                 android:text="← 返回"
                 android:textAllCaps="false"

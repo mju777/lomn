@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 第1层：环境阴影 -->
+    <item android:bottom="12dp" android:left="4dp" android:right="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#80000000" />
+            <corners android:radius="44dp" />
+        </shape>
+    </item>
+
+    <!-- 第2层：深色厚度 -->
+    <item android:bottom="10dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#60FFFFFF" />
+            <corners android:radius="42dp" />
+        </shape>
+    </item>
+
+    <!-- 第3层：中层厚度 -->
+    <item android:bottom="8dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#80FFFFFF" />
+            <corners android:radius="42dp" />
+        </shape>
+    </item>
+
+    <!-- 第4层：浅色厚度 -->
+    <item android:bottom="6dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#A0FFFFFF" />
+            <corners android:radius="42dp" />
+        </shape>
+    </item>
+
+    <!-- 第5层：玻璃底层 -->
+    <item android:bottom="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#C0FFFFFF" />
+            <corners android:radius="42dp" />
+        </shape>
+    </item>
+
+    <!-- 第6层：玻璃主体 -->
+    <item android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#E0FFFFFF" />
+            <corners android:radius="42dp" />
+        </shape>
+    </item>
+
+    <!-- 第7层：玻璃表面 -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#F0FFFFFF" />
+            <corners android:radius="42dp" />
+            <stroke
+                android:width="2dp"
+                android:color="#FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- 第8层：高光反射 -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#60FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:angle="90" />
+            <corners android:radius="42dp" />
+        </shape>
+    </item>
+</layer-list>

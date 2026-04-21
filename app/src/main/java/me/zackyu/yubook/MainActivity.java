@@ -1,11 +1,16 @@
 package me.zackyu.yubook;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +34,8 @@ import java.math.RoundingMode;
 import me.zackyu.yubook.db.iDBHelper;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int PERMISSION_REQUEST_CODE = 100;
+
     private Button buttonNewRecord;
     private Button buttonRecords;
     private TextView textIncome;
@@ -61,13 +68,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void setWallpaperAsBackground() {
         try {
+            // 方法1：直接获取桌面壁纸
             WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
             Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+
             if (wallpaperDrawable != null) {
+                // 直接设置壁纸作为窗口背景
                 getWindow().setBackgroundDrawable(wallpaperDrawable);
+            } else {
+                // 备用方案：使用默认渐变背景
+                getWindow().setBackgroundDrawableResource(R.drawable.bg_gradient_glass);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            // 如果获取失败，使用默认背景
+            getWindow().setBackgroundDrawableResource(R.drawable.bg_gradient_glass);
         }
     }
 
