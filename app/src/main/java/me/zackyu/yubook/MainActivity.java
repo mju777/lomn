@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import me.zackyu.yubook.db.iDBHelper;
+import me.zackyu.yubook.util.UnsplashBackgroundManager;
 
 public class MainActivity extends AppCompatActivity {
     private Button buttonNewRecord;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private iDBHelper iDBHelper;
     private Button buttonAboutMe;
     private Button buttonPlsRcd;
+    private UnsplashBackgroundManager backgroundManager;
+    private View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +45,62 @@ public class MainActivity extends AppCompatActivity {
 
         setupTransparentWindow();
 
-        // 不设置任何背景，让布局的透明背景生效
-        // 删除所有设置背景的代码
-
-        applyAppSettings();
         setContentView(R.layout.activity_main);
+
+        // 获取根视图
+        rootView = findViewById(android.R.id.content);
 
         initViews();
         setListeners();
         initDatabase();
         showData();
 
+        // 初始化 Unsplash 背景管理器
+        initUnsplashBackground();
+
         Button button_main_back = findViewById(R.id.button_main_back);
         button_main_back.setOnClickListener(v -> finish());
+    }
+
+    private void initUnsplashBackground() {
+        backgroundManager = new UnsplashBackgroundManager(this);
+        backgroundManager.setOnBackgroundLoadedListener(new UnsplashBackgroundManager.OnBackgroundLoadedListener() {
+            @Override
+            public void onBackgroundLoaded(Drawable drawable) {
+                // 设置背景图片
+                if (rootView != null && drawable != null) {
+                    rootView.setBackground(drawable);
+                }
+                // 也可以设置给 Window
+                // getWindow().setBackgroundDrawable(drawable);
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // 加载随机背景
+        loadRandomBackground();
+    }
+
+    private void loadRandomBackground() {
+        if (backgroundManager != null) {
+            // 方式1：完全随机
+            backgroundManager.loadRandomBackground();
+
+            // 方式2：随机主题（推荐）
+            // backgroundManager.loadRandomThemedBackground();
+
+            // 方式3：指定主题
+            // backgroundManager.loadThemedBackground("nature");
+        }
+    }
+
+    // 刷新背景（可以在下拉刷新或按钮点击时调用）
+    public void refreshBackground() {
+        loadRandomBackground();
     }
 
     private void setupTransparentWindow() {
@@ -99,6 +146,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         showData();
+        // 每次返回应用时更换背景（可选）
+        // loadRandomBackground();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (backgroundManager != null) {
+            backgroundManager.close();
+        }
     }
 
     private void initViews() {
@@ -147,7 +204,17 @@ public class MainActivity extends AppCompatActivity {
 
         buttonPlsRcd.setOnClickListener(v -> {
             Toast.makeText(MainActivity.this, "感谢支持！❤️", Toast.LENGTH_SHORT).show();
+            // 点击点赞时刷新背景
+            refreshBackground();
         });
+
+        Button btnRefresh = findViewById(R.id.button_home_settings);
+        if (btnRefresh != null) {
+            btnRefresh.setOnClickListener(v -> {
+                refreshBackground();
+                Toast.makeText(MainActivity.this, "更换背景中...", Toast.LENGTH_SHORT).show();
+            });
+        }
 
         Button btnSettings = findViewById(R.id.button_home_settings);
         if (btnSettings != null) {
