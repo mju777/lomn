@@ -112,40 +112,6 @@
                 android:layout_height="0.5dp"
                 android:background="#E0E0E0" />
 
-            <!-- 主题颜色 -->
-            <LinearLayout
-                android:id="@+id/layout_theme_color"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="🎨 主题颜色"
-                    android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="›"
-                    android:textColor="#999999"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
-
             <!-- 字体大小 -->
             <LinearLayout
                 android:id="@+id/layout_font_size"
@@ -189,7 +155,7 @@
                 android:layout_height="0.5dp"
                 android:background="#E0E0E0" />
 
-            <!-- 壁纸设置（新增） -->
+            <!-- 壁纸设置 -->
             <LinearLayout
                 android:id="@+id/layout_wallpaper"
                 android:layout_width="match_parent"
@@ -389,7 +355,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ========== 记账管理分组（新增） ========== -->
+        <!-- ========== 记账管理分组 ========== -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -27,18 +27,30 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
+
+import me.zackyu.yubook.db.iDBHelper;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -51,11 +63,13 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView tvFontSize, tvCacheSize, tvVersion;
     private TextView tvWallpaperStatus;
     private LinearLayout layoutBackup, layoutRestore, layoutClearCache;
-    private LinearLayout layoutThemeColor, layoutPrivacy, layoutTerms, layoutLicenses;
     private LinearLayout layoutFontSize;
     private LinearLayout layoutWallpaper;
     private LinearLayout layoutIncomeSources, layoutExpenseSources, layoutAccounts;
     private View rootView;
+
+    // 数据库帮助类
+    private iDBHelper dbHelper;
 
     // 壁纸相关
     private final String[] WALLPAPER_URLS = {
@@ -89,6 +103,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         rootView = findViewById(android.R.id.content);
         mainHandler = new Handler(Looper.getMainLooper());
+        dbHelper = new iDBHelper(this, "MyAccount.db", null, 1);
 
         // 应用保存的壁纸设置
         applyWallpaperSetting();
@@ -236,19 +251,14 @@ public class SettingsActivity extends AppCompatActivity {
         layoutBackup = findViewById(R.id.layout_backup);
         layoutRestore = findViewById(R.id.layout_restore);
         layoutClearCache = findViewById(R.id.layout_clear_cache);
-        layoutThemeColor = findViewById(R.id.layout_theme_color);
-        layoutPrivacy = findViewById(R.id.layout_privacy);
-        layoutTerms = findViewById(R.id.layout_terms);
-        layoutLicenses = findViewById(R.id.layout_licenses);
         layoutWallpaper = findViewById(R.id.layout_wallpaper);
 
-        // 新增管理项
         layoutIncomeSources = findViewById(R.id.layout_income_sources);
         layoutExpenseSources = findViewById(R.id.layout_expense_sources);
         layoutAccounts = findViewById(R.id.layout_accounts);
 
-        String version = sharedPreferences.getString("wallpaper_mode", "渐变");
-        tvWallpaperStatus.setText("online".equals(version) ? "在线图片" : "渐变背景");
+        String wallpaperMode = sharedPreferences.getString("wallpaper_mode", "gradient");
+        tvWallpaperStatus.setText("online".equals(wallpaperMode) ? "在线图片" : "渐变背景");
 
         try {
             String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
@@ -311,23 +321,13 @@ public class SettingsActivity extends AppCompatActivity {
         layoutBackup.setOnClickListener(v -> backupData());
         layoutRestore.setOnClickListener(v -> restoreData());
         layoutClearCache.setOnClickListener(v -> showClearCacheDialog());
-        layoutThemeColor.setOnClickListener(v -> showThemeColorDialog());
-        layoutPrivacy.setOnClickListener(v -> showPrivacyPolicy());
-        layoutTerms.setOnClickListener(v -> showTermsOfService());
-        layoutLicenses.setOnClickListener(v -> showOpenSourceLicenses());
-
-        // 壁纸设置
         layoutWallpaper.setOnClickListener(v -> showWallpaperDialog());
 
-        // 新增管理项
         layoutIncomeSources.setOnClickListener(v -> manageIncomeSources());
         layoutExpenseSources.setOnClickListener(v -> manageExpenseSources());
         layoutAccounts.setOnClickListener(v -> manageAccounts());
     }
 
-    /**
-     * 壁纸设置对话框
-     */
     private void showWallpaperDialog() {
         String[] items = {"渐变背景", "在线随机图片"};
         int current = "online".equals(sharedPreferences.getString("wallpaper_mode", "gradient")) ? 1 : 0;
@@ -358,27 +358,199 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * 收入来源管理
+     * 备份数据 - 完整实现
      */
-    private void manageIncomeSources() {
-        Intent intent = new Intent(this, IncomeSourceActivity.class);
-        startActivity(intent);
+    private void backupData() {
+        AlertDialog progressDialog = new AlertDialog.Builder(this)
+                .setTitle("正在备份")
+                .setMessage("请稍候...")
+                .setCancelable(false)
+                .create();
+        progressDialog.show();
+
+        new Thread(() -> {
+            try {
+                // 创建备份目录
+                File backupDir = new File(Environment.getExternalStorageDirectory(), "YooBook/Backup");
+                if (!backupDir.exists()) {
+                    backupDir.mkdirs();
+                }
+
+                // 创建备份文件名
+                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+                String backupFileName = "backup_" + timestamp + ".json";
+                File backupFile = new File(backupDir, backupFileName);
+
+                // 创建JSON对象存储所有数据
+                JSONObject backupData = new JSONObject();
+
+                // 1. 备份数据库
+                File dbFile = getDatabasePath("MyAccount.db");
+                if (dbFile != null && dbFile.exists()) {
+                    String dbBase64 = encodeFileToBase64(dbFile);
+                    backupData.put("database", dbBase64);
+                    backupData.put("database_name", "MyAccount.db");
+                }
+
+                // 2. 备份SharedPreferences
+                JSONObject settingsData = new JSONObject();
+                settingsData.put("night_mode", sharedPreferences.getBoolean("night_mode", false));
+                settingsData.put("notification", sharedPreferences.getBoolean("notification", true));
+                settingsData.put("font_size", sharedPreferences.getString("font_size", "medium"));
+                settingsData.put("wallpaper_mode", sharedPreferences.getString("wallpaper_mode", "gradient"));
+                backupData.put("settings", settingsData);
+
+                // 3. 备份时间戳
+                backupData.put("backup_time", timestamp);
+                backupData.put("app_version", getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+
+                // 写入文件
+                FileWriter writer = new FileWriter(backupFile);
+                writer.write(backupData.toString());
+                writer.close();
+
+                runOnUiThread(() -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "备份成功！\n保存位置：" + backupFile.getPath(), Toast.LENGTH_LONG).show();
+                });
+
+            } catch (Exception e) {
+                Log.e("Settings", "Backup error", e);
+                runOnUiThread(() -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "备份失败：" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
     }
 
     /**
-     * 支出去向管理
+     * 恢复数据 - 完整实现
      */
-    private void manageExpenseSources() {
-        Intent intent = new Intent(this, ExpenseSourceActivity.class);
-        startActivity(intent);
+    private void restoreData() {
+        // 列出备份目录中的文件
+        File backupDir = new File(Environment.getExternalStorageDirectory(), "YooBook/Backup");
+
+        if (!backupDir.exists() || !backupDir.isDirectory()) {
+            Toast.makeText(this, "没有找到备份文件", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        File[] backupFiles = backupDir.listFiles((dir, name) -> name.startsWith("backup_") && name.endsWith(".json"));
+
+        if (backupFiles == null || backupFiles.length == 0) {
+            Toast.makeText(this, "没有找到备份文件", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // 提取文件名
+        String[] fileNames = new String[backupFiles.length];
+        for (int i = 0; i < backupFiles.length; i++) {
+            fileNames[i] = backupFiles[i].getName();
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("选择备份文件")
+                .setItems(fileNames, (dialog, which) -> {
+                    File selectedFile = backupFiles[which];
+
+                    new AlertDialog.Builder(this)
+                            .setTitle("确认恢复")
+                            .setMessage("恢复数据将覆盖当前所有数据，此操作不可撤销！\n确定要继续吗？")
+                            .setPositiveButton("确定", (d, w) -> performRestore(selectedFile))
+                            .setNegativeButton("取消", null)
+                            .show();
+                })
+                .setNegativeButton("取消", null)
+                .show();
+    }
+
+    private void performRestore(File backupFile) {
+        AlertDialog progressDialog = new AlertDialog.Builder(this)
+                .setTitle("正在恢复")
+                .setMessage("请稍候...")
+                .setCancelable(false)
+                .create();
+        progressDialog.show();
+
+        new Thread(() -> {
+            try {
+                // 读取备份文件
+                StringBuilder content = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new FileReader(backupFile));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line);
+                }
+                reader.close();
+
+                JSONObject backupData = new JSONObject(content.toString());
+
+                // 1. 恢复数据库
+                if (backupData.has("database")) {
+                    String dbBase64 = backupData.getString("database");
+                    byte[] dbBytes = android.util.Base64.decode(dbBase64, android.util.Base64.DEFAULT);
+
+                    // 关闭现有数据库连接
+                    dbHelper.close();
+
+                    // 删除旧数据库
+                    File dbFile = getDatabasePath("MyAccount.db");
+                    if (dbFile.exists()) {
+                        dbFile.delete();
+                    }
+
+                    // 写入新数据库
+                    FileOutputStream fos = new FileOutputStream(dbFile);
+                    fos.write(dbBytes);
+                    fos.close();
+                }
+
+                // 2. 恢复SharedPreferences设置
+                if (backupData.has("settings")) {
+                    JSONObject settings = backupData.getJSONObject("settings");
+                    editor = sharedPreferences.edit();
+                    if (settings.has("night_mode")) editor.putBoolean("night_mode", settings.getBoolean("night_mode"));
+                    if (settings.has("notification")) editor.putBoolean("notification", settings.getBoolean("notification"));
+                    if (settings.has("font_size")) editor.putString("font_size", settings.getString("font_size"));
+                    if (settings.has("wallpaper_mode")) editor.putString("wallpaper_mode", settings.getString("wallpaper_mode"));
+                    editor.apply();
+                }
+
+                runOnUiThread(() -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "数据恢复成功！应用将重启", Toast.LENGTH_LONG).show();
+
+                    // 延迟重启应用
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                        Intent intent = getBaseContext().getPackageManager()
+                                .getLaunchIntentForPackage(getBaseContext().getPackageName());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        System.exit(0);
+                    }, 1500);
+                });
+
+            } catch (Exception e) {
+                Log.e("Settings", "Restore error", e);
+                runOnUiThread(() -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "恢复失败：" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
     }
 
     /**
-     * 账户管理
+     * 将文件转换为Base64字符串
      */
-    private void manageAccounts() {
-        Intent intent = new Intent(this, AccountManageActivity.class);
-        startActivity(intent);
+    private String encodeFileToBase64(File file) throws IOException {
+        FileInputStream fis = new FileInputStream(file);
+        byte[] buffer = new byte[(int) file.length()];
+        fis.read(buffer);
+        fis.close();
+        return android.util.Base64.encodeToString(buffer, android.util.Base64.DEFAULT);
     }
 
     private void showFontSizeDialog() {
@@ -417,103 +589,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    private void showThemeColorDialog() {
-        String[] items = {"金色", "蓝色", "绿色", "紫色"};
-        String[] colorValues = {"gold", "blue", "green", "purple"};
-
-        int current = getCurrentThemeIndex();
-
-        new AlertDialog.Builder(this)
-                .setTitle("主题颜色")
-                .setSingleChoiceItems(items, current, (dialog, which) -> {
-                    editor = sharedPreferences.edit();
-                    editor.putString("theme_color", colorValues[which]);
-                    editor.apply();
-
-                    dialog.dismiss();
-                    Toast.makeText(this, "主题颜色已设置为：" + items[which] + "，重启应用后生效", Toast.LENGTH_LONG).show();
-                })
-                .show();
-    }
-
-    private int getCurrentThemeIndex() {
-        String current = sharedPreferences.getString("theme_color", "gold");
-        switch (current) {
-            case "gold": return 0;
-            case "blue": return 1;
-            case "green": return 2;
-            case "purple": return 3;
-            default: return 0;
-        }
-    }
-
-    private void backupData() {
-        AlertDialog progressDialog = new AlertDialog.Builder(this)
-                .setTitle("正在备份")
-                .setMessage("请稍候...")
-                .setCancelable(false)
-                .create();
-        progressDialog.show();
-
-        new Thread(() -> {
-            try {
-                File dataDir = getFilesDir();
-                File backupDir = new File(Environment.getExternalStorageDirectory(), "YooBook/Backup");
-
-                if (!backupDir.exists()) {
-                    backupDir.mkdirs();
-                }
-
-                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-                File backupFile = new File(backupDir, "backup_" + timestamp + ".json");
-
-                runOnUiThread(() -> {
-                    progressDialog.dismiss();
-                    Toast.makeText(this, "备份成功！\n保存位置：" + backupFile.getPath(), Toast.LENGTH_LONG).show();
-                });
-
-            } catch (Exception e) {
-                runOnUiThread(() -> {
-                    progressDialog.dismiss();
-                    Toast.makeText(this, "备份失败：" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-            }
-        }).start();
-    }
-
-    private void restoreData() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("选择备份文件");
-        String[] backupFiles = {"backup_20240101_120000.json", "backup_20240102_120000.json"};
-
-        builder.setItems(backupFiles, (dialog, which) -> {
-            AlertDialog progressDialog = new AlertDialog.Builder(this)
-                    .setTitle("正在恢复")
-                    .setMessage("请稍候...")
-                    .setCancelable(false)
-                    .create();
-            progressDialog.show();
-
-            new Thread(() -> {
-                try {
-                    Thread.sleep(1500);
-                    runOnUiThread(() -> {
-                        progressDialog.dismiss();
-                        Toast.makeText(this, "数据恢复成功！", Toast.LENGTH_SHORT).show();
-                    });
-                } catch (Exception e) {
-                    runOnUiThread(() -> {
-                        progressDialog.dismiss();
-                        Toast.makeText(this, "恢复失败：" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-                }
-            }).start();
-        });
-
-        builder.setNegativeButton("取消", null);
-        builder.show();
-    }
-
     private void showClearCacheDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("清除缓存")
@@ -531,6 +606,11 @@ public class SettingsActivity extends AppCompatActivity {
         try {
             deleteDir(getCacheDir());
             deleteDir(getCodeCacheDir());
+
+            // 清除Glide缓存
+            Glide.get(this).clearDiskCache();
+            Glide.get(this).clearMemory();
+
             Log.d("Settings", "Cache cleared");
         } catch (Exception e) {
             Log.e("Settings", "Error clearing cache", e);
@@ -599,40 +679,18 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    private void showPrivacyPolicy() {
-        new AlertDialog.Builder(this)
-                .setTitle("隐私政策")
-                .setMessage("本应用尊重并保护您的隐私。\n\n" +
-                        "1. 我们不会收集您的个人信息\n" +
-                        "2. 所有数据仅保存在本地\n" +
-                        "3. 不会上传任何数据到服务器\n\n" +
-                        "如有疑问，请联系：yuzhang@yubook.com")
-                .setPositiveButton("知道了", null)
-                .show();
+    private void manageIncomeSources() {
+        Intent intent = new Intent(this, IncomeSourceActivity.class);
+        startActivity(intent);
     }
 
-    private void showTermsOfService() {
-        new AlertDialog.Builder(this)
-                .setTitle("用户协议")
-                .setMessage("欢迎使用 YooBook！\n\n" +
-                        "1. 本应用完全免费使用\n" +
-                        "2. 您可以自由使用所有功能\n" +
-                        "3. 数据安全由您自己负责\n" +
-                        "4. 建议定期备份数据\n\n" +
-                        "使用本应用即表示您同意以上条款。")
-                .setPositiveButton("同意", null)
-                .show();
+    private void manageExpenseSources() {
+        Intent intent = new Intent(this, ExpenseSourceActivity.class);
+        startActivity(intent);
     }
 
-    private void showOpenSourceLicenses() {
-        new AlertDialog.Builder(this)
-                .setTitle("开源许可")
-                .setMessage("本应用使用了以下开源项目：\n\n" +
-                        "• AndroidX - Apache 2.0\n" +
-                        "• Material Design Components - Apache 2.0\n" +
-                        "• Glide - BSD 3-Clause\n\n" +
-                        "感谢所有开源贡献者！")
-                .setPositiveButton("关闭", null)
-                .show();
+    private void manageAccounts() {
+        Intent intent = new Intent(this, AccountManageActivity.class);
+        startActivity(intent);
     }
 }
