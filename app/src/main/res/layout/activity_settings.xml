@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp" />
 
-        <!-- ========== 头部 ========== -->
+        <!-- 头部 - iOS 风格 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,65 +29,54 @@
 
             <Button
                 android:id="@+id/btn_settings_back"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:background="@drawable/btn_3d_glass"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/btn_ios_back"
                 android:text="←"
-                android:textColor="#1C1C1E"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textColor="#007AFF"
+                android:textSize="28sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="⚙️ 设置"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:shadowColor="#80000000"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="4" />
+                android:text="设置"
+                android:textColor="#1C1C1E"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <View
-                android:layout_width="52dp"
-                android:layout_height="52dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:visibility="invisible" />
 
         </LinearLayout>
 
-        <!-- ========== 个性化设置分组 ========== -->
+        <!-- iOS 风格分组 -->
+
+        <!-- 个性化分组 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="12dp"
-            android:text="🎨 个性化"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:shadowColor="#80000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="3" />
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="个性化"
+            android:textColor="#8E8E93"
+            android:textSize="13sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_glass_card_clear"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/ios_group_bg"
+            android:orientation="vertical">
 
             <!-- 夜间模式 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
+                android:layout_height="44dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
@@ -99,7 +88,7 @@
                     android:layout_weight="1"
                     android:text="🌙 夜间模式"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <Switch
                     android:id="@+id/switch_night_mode"
@@ -110,13 +99,14 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
             <!-- 字体大小 -->
             <LinearLayout
                 android:id="@+id/layout_font_size"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -131,35 +121,36 @@
                     android:layout_weight="1"
                     android:text="📝 字体大小"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_font_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="中等"
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
+                    android:textColor="#8E8E93"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
             <!-- 壁纸设置 -->
             <LinearLayout
                 android:id="@+id/layout_wallpaper"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -174,37 +165,35 @@
                     android:layout_weight="1"
                     android:text="🖼️ 壁纸设置"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_wallpaper_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="渐变背景"
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
+                    android:textColor="#8E8E93"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
             <!-- 通知提醒 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
+                android:layout_height="44dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
@@ -216,7 +205,7 @@
                     android:layout_weight="1"
                     android:text="🔔 记账提醒"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <Switch
                     android:id="@+id/switch_notification"
@@ -225,34 +214,28 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ========== 数据管理分组 ========== -->
+        <!-- 数据管理分组 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="12dp"
-            android:text="💾 数据管理"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:shadowColor="#80000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="3" />
+            android:layout_marginBottom="8dp"
+            android:text="数据管理"
+            android:textColor="#8E8E93"
+            android:textSize="13sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_glass_card_clear"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/ios_group_bg"
+            android:orientation="vertical">
 
-            <!-- 备份数据 -->
             <LinearLayout
                 android:id="@+id/layout_backup"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -267,26 +250,26 @@
                     android:layout_weight="1"
                     android:text="💿 备份数据"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
-            <!-- 恢复数据 -->
             <LinearLayout
                 android:id="@+id/layout_restore"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -301,26 +284,26 @@
                     android:layout_weight="1"
                     android:text="🔄 恢复数据"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
-            <!-- 清除缓存 -->
             <LinearLayout
                 android:id="@+id/layout_clear_cache"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -335,54 +318,48 @@
                     android:layout_weight="1"
                     android:text="🗑️ 清除缓存"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_cache_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 MB"
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
+                    android:text="0 KB"
+                    android:textColor="#8E8E93"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ========== 记账管理分组 ========== -->
+        <!-- 记账管理分组 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="12dp"
-            android:text="📊 记账管理"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:shadowColor="#80000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="3" />
+            android:layout_marginBottom="8dp"
+            android:text="记账管理"
+            android:textColor="#8E8E93"
+            android:textSize="13sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_glass_card_clear"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/ios_group_bg"
+            android:orientation="vertical">
 
-            <!-- 收入来源管理 -->
             <LinearLayout
                 android:id="@+id/layout_income_sources"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -397,26 +374,26 @@
                     android:layout_weight="1"
                     android:text="💰 收入来源管理"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
-            <!-- 支出去向管理 -->
             <LinearLayout
                 android:id="@+id/layout_expense_sources"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -431,26 +408,26 @@
                     android:layout_weight="1"
                     android:text="💸 支出去向管理"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
-            <!-- 账户管理 -->
             <LinearLayout
                 android:id="@+id/layout_accounts"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -465,44 +442,39 @@
                     android:layout_weight="1"
                     android:text="🏦 账户管理"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ========== 关于分组 ========== -->
+        <!-- 关于分组 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="12dp"
-            android:text="ℹ️ 关于"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:shadowColor="#80000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="3" />
+            android:layout_marginBottom="8dp"
+            android:text="关于"
+            android:textColor="#8E8E93"
+            android:textSize="13sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/bg_glass_card_clear"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:background="@drawable/ios_group_bg"
+            android:orientation="vertical">
 
-            <!-- 版本号 -->
             <LinearLayout
+                android:id="@+id/layout_version"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
@@ -514,27 +486,27 @@
                     android:layout_weight="1"
                     android:text="📌 版本号"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1.0.0"
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
+                    android:textColor="#8E8E93"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
-            <!-- 隐私政策 -->
             <LinearLayout
                 android:id="@+id/layout_privacy"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -549,26 +521,26 @@
                     android:layout_weight="1"
                     android:text="🔒 隐私政策"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
-            <!-- 用户协议 -->
             <LinearLayout
                 android:id="@+id/layout_terms"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -583,26 +555,26 @@
                     android:layout_weight="1"
                     android:text="📄 用户协议"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#E0E0E0" />
+                android:layout_marginStart="16dp"
+                android:background="#C6C6C8" />
 
-            <!-- 开源许可 -->
             <LinearLayout
                 android:id="@+id/layout_licenses"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -617,35 +589,15 @@
                     android:layout_weight="1"
                     android:text="📚 开源许可"
                     android:textColor="#1C1C1E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="›"
-                    android:textColor="#999999"
+                    android:textColor="#C6C6C8"
                     android:textSize="18sp" />
             </LinearLayout>
-        </LinearLayout>
-
-        <!-- 底部版权 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="32dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="© 2025 YooBook"
-                android:textColor="#CCCCCC"
-                android:textSize="12sp"
-                android:shadowColor="#80000000"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2" />
         </LinearLayout>
 
     </LinearLayout>

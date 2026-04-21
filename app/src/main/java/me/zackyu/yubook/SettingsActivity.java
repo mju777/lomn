@@ -12,9 +12,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -27,10 +27,9 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.documentfile.provider.DocumentFile;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -73,16 +72,16 @@ public class SettingsActivity extends AppCompatActivity {
     // 数据库帮助类
     private iDBHelper dbHelper;
 
-    // 文件选择器 - 必须在 onCreate 中尽早注册
+    // 文件选择器
     private ActivityResultLauncher<String[]> restoreFileLauncher;
     private ActivityResultLauncher<Intent> backupFolderLauncher;
 
-    // 壁纸相关
+    // 壁纸相关 - 使用更稳定的图片源
     private final String[] WALLPAPER_URLS = {
-            "https://picsum.photos/1080/2400",
-            "https://picsum.photos/1080/2400?random=1",
-            "https://picsum.photos/1080/2400?random=2",
-            "https://picsum.photos/1080/2400?random=3"
+            "https://fastly.picsum.photos/id/13/1080/2400.jpg?hmac=Z1J1J1J1J1J1J1J1J1J1J1J1J1J1",
+            "https://fastly.picsum.photos/id/15/1080/2400.jpg?hmac=Z1J1J1J1J1J1J1J1J1J1J1J1J1J1",
+            "https://fastly.picsum.photos/id/20/1080/2400.jpg?hmac=Z1J1J1J1J1J1J1J1J1J1J1J1J1J1",
+            "https://fastly.picsum.photos/id/26/1080/2400.jpg?hmac=Z1J1J1J1J1J1J1J1J1J1J1J1J1J1"
     };
 
     private final int[][] GRADIENT_COLORS = {
@@ -100,14 +99,19 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // 1. 先读取设置
         sharedPreferences = getSharedPreferences("app_settings", MODE_PRIVATE);
-        applyTheme();
 
-        // 2. 注册文件选择器 - 必须在 super.onCreate 之前或之后立即执行，不能在后面
+        // 2. 应用夜间模式（必须在 super.onCreate 之前）
+        applyNightMode();
+
+        // 3. 注册文件选择器
         registerFilePickers();
 
         super.onCreate(savedInstanceState);
 
-        setupTransparentWindow();
+        // 4. 应用字体大小
+        applyFontSize();
+
+        setupIOSStyleWindow();
         setContentView(R.layout.activity_settings);
 
         rootView = findViewById(android.R.id.content);
@@ -124,10 +128,77 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * 注册文件选择器 - 必须在 onCreate 中尽早调用
+     * 应用夜间模式
+     */
+    private void applyNightMode() {
+        boolean isNightMode = sharedPreferences.getBoolean("night_mode", false);
+        if (isNightMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
+    /**
+     * 应用字体大小
+     */
+    private void applyFontSize() {
+        String fontSize = sharedPreferences.getString("font_size", "medium");
+        Resources res = getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+
+        switch (fontSize) {
+            case "small":
+                config.fontScale = 0.85f;
+                break;
+            case "medium":
+                config.fontScale = 1.0f;
+                break;
+            case "large":
+                config.fontScale = 1.15f;
+                break;
+            case "xlarge":
+                config.fontScale = 1.3f;
+                break;
+            default:
+                config.fontScale = 1.0f;
+                break;
+        }
+
+        res.updateConfiguration(config, res.getDisplayMetrics());
+    }
+
+    /**
+     * iOS 26 风格窗口设置
+     */
+    private void setupIOSStyleWindow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            boolean isNightMode = sharedPreferences.getBoolean("night_mode", false);
+            if (isNightMode) {
+                window.setStatusBarColor(Color.parseColor("#1C1C1E"));
+                window.setNavigationBarColor(Color.parseColor("#1C1C1E"));
+            } else {
+                window.setStatusBarColor(Color.TRANSPARENT);
+                window.setNavigationBarColor(Color.TRANSPARENT);
+            }
+
+            View decorView = window.getDecorView();
+            if (!isNightMode) {
+                decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else {
+                decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            }
+        }
+    }
+
+    /**
+     * 注册文件选择器
      */
     private void registerFilePickers() {
-        // 恢复文件选择器 - 使用 RegisterForActivityResult 的正确方式
         restoreFileLauncher = registerForActivityResult(
                 new ActivityResultContracts.OpenDocument(),
                 uri -> {
@@ -137,17 +208,19 @@ public class SettingsActivity extends AppCompatActivity {
                 }
         );
 
-        // 备份文件夹选择器
         backupFolderLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         android.net.Uri treeUri = result.getData().getData();
                         if (treeUri != null) {
-                            // 持久化权限
-                            getContentResolver().takePersistableUriPermission(treeUri,
-                                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION |
-                                            Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            try {
+                                getContentResolver().takePersistableUriPermission(treeUri,
+                                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION |
+                                                Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            } catch (SecurityException e) {
+                                e.printStackTrace();
+                            }
                             performBackupToUri(treeUri);
                         }
                     }
@@ -155,25 +228,12 @@ public class SettingsActivity extends AppCompatActivity {
         );
     }
 
-    private void setupTransparentWindow() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-            window.setNavigationBarColor(Color.TRANSPARENT);
-
-            View decorView = window.getDecorView();
-            decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-    }
-
     private void applyWallpaperSetting() {
         String wallpaperMode = sharedPreferences.getString("wallpaper_mode", "gradient");
 
         if ("online".equals(wallpaperMode)) {
             loadOnlineWallpaper();
-        } else if ("gradient".equals(wallpaperMode)) {
+        } else {
             setGradientWallpaper();
         }
     }
@@ -182,13 +242,13 @@ public class SettingsActivity extends AppCompatActivity {
         if (isLoadingImage) return;
         isLoadingImage = true;
 
-        String imageUrl = WALLPAPER_URLS[currentUrlIndex] + "?t=" + System.currentTimeMillis();
+        String imageUrl = "https://picsum.photos/1080/2400?random=" + System.currentTimeMillis();
 
         Glide.with(this)
                 .load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
-                .timeout(15000)
+                .timeout(10000)
                 .into(new CustomTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
@@ -207,6 +267,7 @@ public class SettingsActivity extends AppCompatActivity {
                         } else {
                             isLoadingImage = false;
                             setGradientWallpaper();
+                            Toast.makeText(SettingsActivity.this, "使用渐变背景", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -240,43 +301,6 @@ public class SettingsActivity extends AppCompatActivity {
             setGradientWallpaper();
         }
         Toast.makeText(this, "壁纸已更换", Toast.LENGTH_SHORT).show();
-    }
-
-    private void applyTheme() {
-        boolean isNightMode = sharedPreferences.getBoolean("night_mode", false);
-        if (isNightMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-
-        String fontSize = sharedPreferences.getString("font_size", "medium");
-        applyFontSize(fontSize);
-    }
-
-    private void applyFontSize(String fontSize) {
-        Resources res = getResources();
-        Configuration config = new Configuration(res.getConfiguration());
-
-        switch (fontSize) {
-            case "small":
-                config.fontScale = 0.85f;
-                break;
-            case "medium":
-                config.fontScale = 1.0f;
-                break;
-            case "large":
-                config.fontScale = 1.15f;
-                break;
-            case "xlarge":
-                config.fontScale = 1.3f;
-                break;
-            default:
-                config.fontScale = 1.0f;
-                break;
-        }
-
-        res.updateConfiguration(config, res.getDisplayMetrics());
     }
 
     private void initViews() {
@@ -327,24 +351,23 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    private String getFontSizeValue(String text) {
-        switch (text) {
-            case "小": return "small";
-            case "中等": return "medium";
-            case "大": return "large";
-            case "超大": return "xlarge";
-            default: return "medium";
-        }
-    }
-
     private void setupListeners() {
         btnBack.setOnClickListener(v -> finish());
 
+        // 夜间模式开关 - 修复
         switchNightMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
             editor = sharedPreferences.edit();
             editor.putBoolean("night_mode", isChecked);
             editor.apply();
-            Toast.makeText(this, isChecked ? "夜间模式已开启，重启应用后生效" : "夜间模式已关闭，重启应用后生效", Toast.LENGTH_LONG).show();
+
+            // 立即应用夜间模式
+            AppCompatDelegate.setDefaultNightMode(
+                    isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+            );
+
+            Toast.makeText(this, isChecked ? "夜间模式已开启" : "夜间模式已关闭", Toast.LENGTH_SHORT).show();
+
+            // 重启 Activity 使主题生效
             recreate();
         });
 
@@ -369,9 +392,6 @@ public class SettingsActivity extends AppCompatActivity {
         layoutAccounts.setOnClickListener(v -> manageAccounts());
     }
 
-    /**
-     * 选择备份文件夹
-     */
     private void selectBackupFolder() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
@@ -383,16 +403,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 选择恢复文件
-     */
     private void selectRestoreFile() {
         restoreFileLauncher.launch(new String[]{"application/json"});
     }
 
-    /**
-     * 执行备份到指定URI
-     */
     private void performBackupToUri(android.net.Uri folderUri) {
         AlertDialog progressDialog = new AlertDialog.Builder(this)
                 .setTitle("正在备份")
@@ -403,7 +417,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         new Thread(() -> {
             try {
-                DocumentFile folder = DocumentFile.fromTreeUri(this, folderUri);
+                androidx.documentfile.provider.DocumentFile folder =
+                        androidx.documentfile.provider.DocumentFile.fromTreeUri(this, folderUri);
                 if (folder == null) {
                     runOnUiThread(() -> {
                         progressDialog.dismiss();
@@ -412,11 +427,11 @@ public class SettingsActivity extends AppCompatActivity {
                     return;
                 }
 
-                // 创建备份文件名
                 String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
                 String backupFileName = "yubook_backup_" + timestamp + ".json";
 
-                DocumentFile backupFile = folder.createFile("application/json", backupFileName);
+                androidx.documentfile.provider.DocumentFile backupFile =
+                        folder.createFile("application/json", backupFileName);
                 if (backupFile == null) {
                     runOnUiThread(() -> {
                         progressDialog.dismiss();
@@ -425,22 +440,14 @@ public class SettingsActivity extends AppCompatActivity {
                     return;
                 }
 
-                // 创建JSON对象存储所有数据
                 JSONObject backupData = new JSONObject();
 
-                // 1. 备份数据库
                 File dbFile = getDatabasePath("MyAccount.db");
                 if (dbFile != null && dbFile.exists()) {
                     String dbBase64 = encodeFileToBase64(dbFile);
                     backupData.put("database", dbBase64);
-                    backupData.put("database_name", "MyAccount.db");
                 }
 
-                // 2. 导出所有记录到JSON
-                JSONObject recordsData = exportAllRecords();
-                backupData.put("records", recordsData);
-
-                // 3. 备份SharedPreferences设置
                 JSONObject settingsData = new JSONObject();
                 settingsData.put("night_mode", sharedPreferences.getBoolean("night_mode", false));
                 settingsData.put("notification", sharedPreferences.getBoolean("notification", true));
@@ -448,18 +455,16 @@ public class SettingsActivity extends AppCompatActivity {
                 settingsData.put("wallpaper_mode", sharedPreferences.getString("wallpaper_mode", "gradient"));
                 backupData.put("settings", settingsData);
 
-                // 4. 备份时间戳
                 backupData.put("backup_time", timestamp);
                 backupData.put("app_version", getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
 
-                // 写入文件
                 OutputStream os = getContentResolver().openOutputStream(backupFile.getUri());
                 os.write(backupData.toString().getBytes());
                 os.close();
 
                 runOnUiThread(() -> {
                     progressDialog.dismiss();
-                    Toast.makeText(this, "备份成功！\n文件：" + backupFileName + "\n位置：" + folder.getName(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "备份成功！\n文件：" + backupFileName, Toast.LENGTH_LONG).show();
                 });
 
             } catch (Exception e) {
@@ -472,9 +477,6 @@ public class SettingsActivity extends AppCompatActivity {
         }).start();
     }
 
-    /**
-     * 确认恢复
-     */
     private void confirmRestore(android.net.Uri uri) {
         new AlertDialog.Builder(this)
                 .setTitle("确认恢复")
@@ -484,9 +486,6 @@ public class SettingsActivity extends AppCompatActivity {
                 .show();
     }
 
-    /**
-     * 执行恢复
-     */
     private void performRestoreFromUri(android.net.Uri uri) {
         AlertDialog progressDialog = new AlertDialog.Builder(this)
                 .setTitle("正在恢复")
@@ -497,7 +496,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         new Thread(() -> {
             try {
-                // 读取备份文件
                 InputStream is = getContentResolver().openInputStream(uri);
                 StringBuilder content = new StringBuilder();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -510,27 +508,22 @@ public class SettingsActivity extends AppCompatActivity {
 
                 JSONObject backupData = new JSONObject(content.toString());
 
-                // 1. 恢复数据库
                 if (backupData.has("database")) {
                     String dbBase64 = backupData.getString("database");
                     byte[] dbBytes = android.util.Base64.decode(dbBase64, android.util.Base64.DEFAULT);
 
-                    // 关闭现有数据库连接
                     dbHelper.close();
 
-                    // 删除旧数据库
                     File dbFile = getDatabasePath("MyAccount.db");
                     if (dbFile.exists()) {
                         dbFile.delete();
                     }
 
-                    // 写入新数据库
                     FileOutputStream fos = new FileOutputStream(dbFile);
                     fos.write(dbBytes);
                     fos.close();
                 }
 
-                // 2. 恢复SharedPreferences设置
                 if (backupData.has("settings")) {
                     JSONObject settings = backupData.getJSONObject("settings");
                     editor = sharedPreferences.edit();
@@ -545,7 +538,6 @@ public class SettingsActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     Toast.makeText(this, "数据恢复成功！应用将重启", Toast.LENGTH_LONG).show();
 
-                    // 延迟重启应用
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         Intent intent = getBaseContext().getPackageManager()
                                 .getLaunchIntentForPackage(getBaseContext().getPackageName());
@@ -568,37 +560,14 @@ public class SettingsActivity extends AppCompatActivity {
         }).start();
     }
 
-    /**
-     * 导出所有记录到JSON
-     */
-    private JSONObject exportAllRecords() throws Exception {
-        JSONObject recordsData = new JSONObject();
-        JSONArray recordsArray = new JSONArray();
-
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM record", null);
-
-        while (cursor.moveToNext()) {
-            JSONObject record = new JSONObject();
-            for (int i = 0; i < cursor.getColumnCount(); i++) {
-                String columnName = cursor.getColumnName(i);
-                String value = cursor.getString(i);
-                record.put(columnName, value);
-            }
-            recordsArray.put(record);
-        }
-        cursor.close();
-        db.close();
-
-        recordsData.put("records", recordsArray);
-        recordsData.put("record_count", recordsArray.length());
-
-        return recordsData;
+    private String encodeFileToBase64(File file) throws java.io.IOException {
+        FileInputStream fis = new FileInputStream(file);
+        byte[] buffer = new byte[(int) file.length()];
+        fis.read(buffer);
+        fis.close();
+        return android.util.Base64.encodeToString(buffer, android.util.Base64.DEFAULT);
     }
 
-    /**
-     * 显示壁纸设置对话框
-     */
     private void showWallpaperDialog() {
         String[] items = {"渐变背景", "在线随机图片"};
         int current = "online".equals(sharedPreferences.getString("wallpaper_mode", "gradient")) ? 1 : 0;
@@ -628,17 +597,6 @@ public class SettingsActivity extends AppCompatActivity {
                 .show();
     }
 
-    /**
-     * 将文件转换为Base64字符串
-     */
-    private String encodeFileToBase64(File file) throws java.io.IOException {
-        FileInputStream fis = new FileInputStream(file);
-        byte[] buffer = new byte[(int) file.length()];
-        fis.read(buffer);
-        fis.close();
-        return android.util.Base64.encodeToString(buffer, android.util.Base64.DEFAULT);
-    }
-
     private void showFontSizeDialog() {
         String[] items = {"小", "中等", "大", "超大"};
         int current = getCurrentFontSizeIndex();
@@ -647,16 +605,13 @@ public class SettingsActivity extends AppCompatActivity {
                 .setTitle("字体大小")
                 .setSingleChoiceItems(items, current, (dialog, which) -> {
                     String sizeText = items[which];
-                    String sizeValue = getFontSizeValue(sizeText);
-
                     tvFontSize.setText(sizeText);
 
                     editor = sharedPreferences.edit();
-                    editor.putString("font_size", sizeValue);
+                    editor.putString("font_size", getFontSizeValue(sizeText));
                     editor.apply();
 
-                    applyFontSize(sizeValue);
-
+                    applyFontSize();
                     dialog.dismiss();
                     Toast.makeText(this, "字体大小已设置为：" + sizeText, Toast.LENGTH_SHORT).show();
                     recreate();
@@ -672,6 +627,16 @@ public class SettingsActivity extends AppCompatActivity {
             case "large": return 2;
             case "xlarge": return 3;
             default: return 1;
+        }
+    }
+
+    private String getFontSizeValue(String text) {
+        switch (text) {
+            case "小": return "small";
+            case "中等": return "medium";
+            case "大": return "large";
+            case "超大": return "xlarge";
+            default: return "medium";
         }
     }
 
@@ -692,12 +657,8 @@ public class SettingsActivity extends AppCompatActivity {
         try {
             deleteDir(getCacheDir());
             deleteDir(getCodeCacheDir());
-
-            // 清除Glide缓存
             Glide.get(this).clearDiskCache();
             Glide.get(this).clearMemory();
-
-            Log.d("Settings", "Cache cleared");
         } catch (Exception e) {
             Log.e("Settings", "Error clearing cache", e);
         }
@@ -709,9 +670,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (children != null) {
                 for (String child : children) {
                     boolean success = deleteDir(new File(dir, child));
-                    if (!success) {
-                        return false;
-                    }
+                    if (!success) return false;
                 }
             }
             return dir.delete();
@@ -725,7 +684,6 @@ public class SettingsActivity extends AppCompatActivity {
         new Thread(() -> {
             long size = getDirSize(getCacheDir()) + getDirSize(getCodeCacheDir());
             String sizeText = formatSize(size);
-
             runOnUiThread(() -> tvCacheSize.setText(sizeText));
         }).start();
     }
