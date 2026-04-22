@@ -47,12 +47,13 @@
             android:layout_marginBottom="20dp"
             app:cardCornerRadius="32dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="#D9FFFFFF"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_glass_card_ultraclear"
                 android:orientation="vertical"
                 android:padding="28dp">
 
@@ -101,12 +102,13 @@
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="28dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="#D9FFFFFF"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_glass_card_ultraclear"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -197,12 +199,13 @@
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="28dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="#D9FFFFFF"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_glass_card_ultraclear"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -309,12 +312,13 @@
             android:layout_marginBottom="24dp"
             app:cardCornerRadius="28dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="#D9FFFFFF"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_glass_card_ultraclear"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -405,7 +409,7 @@
             android:layout_height="56dp"
             android:layout_gravity="center"
             android:layout_marginTop="28dp"
-            android:background="@drawable/btn_3d_glass"
+            android:background="@drawable/btn_glass_ultraclear"
             android:gravity="center"
             android:text="@string/back"
             android:textAllCaps="false"

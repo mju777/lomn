@@ -1,5 +1,6 @@
 package me.zackyu.yubook;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -294,11 +295,16 @@ public class RecordsActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("ResourceAsColor")
     private void showRecordDetail(Record record) {
         if (record == null) return;
 
         String type = record.getAmount() > 0 ? "收入" : "支出";
         int typeColor = record.getAmount() > 0 ? 0xFF4CAF50 : 0xFFFF6B6B;
+        int goldColor = 0xFFD4AF37;
+        int goldHalfTransparent = 0x80D4AF37;
+
+
         String amountText = String.format(Locale.getDefault(), "¥ %.2f", Math.abs(record.getAmount()));
 
         // 创建自定义对话框视图
@@ -324,16 +330,28 @@ public class RecordsActivity extends AppCompatActivity {
         tvTypeValue.setTextColor(typeColor);
 
         tvSourceValue.setText(record.getSource() != null ? record.getSource() : "未知");
+        tvSourceValue.setTextColor(goldColor);
+
+
+
         tvCategoryValue.setText(record.getType() != null ? record.getType() : "未知");
+        tvCategoryValue.setTextColor(goldColor);
+
+
+
         tvAccountValue.setText(record.getAccount() != null ? record.getAccount() : "未知");
+        tvAccountValue.setTextColor(goldColor);
+
+
         tvAmountValue.setText(amountText);
         tvAmountValue.setTextColor(typeColor);
         tvTimeValue.setText(record.getCrttime() != null ? dateFormat.format(record.getCrttime()) : "未知");
+        tvTimeValue.setTextColor(goldColor);
 
         // 应用主题颜色
         SharedPreferences prefs = getSharedPreferences("app_settings", MODE_PRIVATE);
         String themeColor = prefs.getString("theme_color", "gold");
-        int goldColor = getThemeColor(themeColor);
+         goldColor = getThemeColor(themeColor);
         if (goldLine != null) {
             goldLine.setBackgroundColor(goldColor);
         }
@@ -353,6 +371,7 @@ public class RecordsActivity extends AppCompatActivity {
             positiveButton.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
             positiveButton.setTextSize(14);
             positiveButton.setPadding(40, 12, 40, 12);
+            positiveButton.setText("👌👌👌👌👌👌👌👌👌👌");
         }
     }
 
