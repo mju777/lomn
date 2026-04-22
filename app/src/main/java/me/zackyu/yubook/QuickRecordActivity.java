@@ -170,11 +170,11 @@ public class QuickRecordActivity extends AppCompatActivity {
 
     private void updateTypeButtons() {
         if (isIncome) {
-            btnIncome.setBackgroundResource(R.drawable.btn_income_selected);
-            btnExpense.setBackgroundResource(R.drawable.btn_expense);
+            btnIncome.setBackgroundResource(R.drawable.btn_income_selected_glass_ultraclear);
+            btnExpense.setBackgroundResource(R.drawable.btn_expense_glass_ultraclear);
         } else {
-            btnIncome.setBackgroundResource(R.drawable.btn_income);
-            btnExpense.setBackgroundResource(R.drawable.btn_expense_selected);
+            btnIncome.setBackgroundResource(R.drawable.btn_income_glass_ultraclear);
+            btnExpense.setBackgroundResource(R.drawable.btn_expense_selected_glass_ultraclear);
         }
     }
 

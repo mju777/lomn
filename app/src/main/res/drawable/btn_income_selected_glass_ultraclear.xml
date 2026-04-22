@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 极淡阴影 -->
+    <item android:bottom="6dp" android:left="2dp" android:right="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#20000000" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+
+    <!-- 厚度层 -->
+    <item android:bottom="5dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#004CAF50" />
+            <corners android:radius="26dp" />
+        </shape>
+    </item>
+
+    <item android:bottom="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#084CAF50" />
+            <corners android:radius="26dp" />
+        </shape>
+    </item>
+
+    <!-- 玻璃主体 - 收入绿色选中状态（更明显） -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#80CCFDD0" />
+            <corners android:radius="26dp" />
+        </shape>
+    </item>
+
+    <!-- 极淡高光 -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#20FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:angle="90" />
+            <corners android:radius="26dp" />
+        </shape>
+    </item>
+
+    <!-- 按压态 -->
+    <item android:state_pressed="true" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#904CAF50" />
+            <corners android:radius="26dp" />
+        </shape>
+    </item>
+</layer-list>

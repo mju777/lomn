@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/transparent"
     android:scrollbars="none">
 
@@ -25,10 +25,10 @@
 
             <Button
                 android:id="@+id/button_quick_back"
-                android:layout_width="48dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:background="@drawable/btn_icon_ultraclear"
-                android:text="←"
+                android:text="back"
                 android:textSize="24sp"
                 android:textColor="#FFFFFF" />
 
@@ -74,7 +74,7 @@
                 android:layout_height="56dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_income_selected"
+                android:background="@drawable/btn_income_selected_glass_ultraclear"
                 android:gravity="center"
                 android:text="📈 收入"
                 android:textAllCaps="false"
@@ -88,7 +88,7 @@
                 android:layout_height="56dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_expense"
+                android:background="@drawable/btn_expense_glass_ultraclear"
                 android:gravity="center"
                 android:text="📉 支出"
                 android:textAllCaps="false"
@@ -113,6 +113,7 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <!-- 金额输入 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -135,6 +136,7 @@
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
+                <!-- 分类选择 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -247,6 +249,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <!-- 自定义分类 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -267,6 +270,7 @@
                     android:padding="12dp"
                     android:textSize="14sp" />
 
+                <!-- 账户选择 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -286,6 +290,7 @@
                     android:gravity="center"
                     android:padding="12dp" />
 
+                <!-- 备注 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -306,14 +311,15 @@
                     android:padding="12dp"
                     android:textSize="14sp" />
 
+                <!-- 保存按钮 -->
                 <Button
                     android:id="@+id/btn_quick_save"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="24dp"
-                    android:background="@drawable/btn_gold_luxury"
+                    android:background="@drawable/btn_gold_luxury_glass_ultraclear"
                     android:gravity="center"
-                    android:text="💾 一键保存"
+                    android:text="💾 保存"
                     android:textAllCaps="false"
                     android:textColor="#1A1A1A"
                     android:textSize="16sp"
@@ -356,6 +362,31 @@
                     android:textSize="12sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <!-- 底部装饰 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <View
+                android:layout_width="60dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:background="#D4AF37" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="记账，让生活更清晰"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:alpha="0.8" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

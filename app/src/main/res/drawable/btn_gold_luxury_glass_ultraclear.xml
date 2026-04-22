@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 增强阴影 -->
+    <item android:bottom="8dp" android:left="3dp" android:right="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#30000000" />
+            <corners android:radius="30dp" />
+        </shape>
+    </item>
+
+    <!-- 厚度层1 -->
+    <item android:bottom="6dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#00D4AF37" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+
+    <!-- 厚度层2 -->
+    <item android:bottom="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#08D4AF37" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+
+    <!-- 厚度层3 -->
+    <item android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#10D4AF37" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+
+    <!-- 玻璃主体 - 金色半透明 -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#20D4AF37" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+
+    <!-- 顶部高光 -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#60FFD700"
+                android:centerColor="#30D4AF37"
+                android:endColor="#00D4AF37"
+                android:angle="90" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+
+    <!-- 底部内阴影 -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#00D4AF37"
+                android:centerColor="#10D4AF37"
+                android:endColor="#30D4AF37"
+                android:angle="270" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+
+    <!-- 金色边框 -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="1.5dp"
+                android:color="#D4AF37" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+
+    <!-- 按压态 -->
+    <item android:state_pressed="true" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#40D4AF37" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+</layer-list>
