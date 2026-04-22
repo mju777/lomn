@@ -35,6 +35,7 @@ public class AboutMeActivity extends AppCompatActivity {
 
  private View rootView;
  private Handler mainHandler;
+ private SharedPreferences sharedPreferences;
 
  // 多个在线图片源
  private final String[] IMAGE_URLS = {
@@ -59,6 +60,8 @@ public class AboutMeActivity extends AppCompatActivity {
  protected void onCreate(@Nullable Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
 
+  sharedPreferences = getSharedPreferences("app_settings", MODE_PRIVATE);
+
   setupTransparentWindow();
   applyAppSettings();
   setContentView(R.layout.activity_about_me);
@@ -70,6 +73,7 @@ public class AboutMeActivity extends AppCompatActivity {
   loadOnlineBackground();
 
   initViews();
+  applyThemeColor();
 
   Button buttonAboutBack = findViewById(R.id.button_about_me_back);
   buttonAboutBack.setOnClickListener(v -> finish());
@@ -89,8 +93,7 @@ public class AboutMeActivity extends AppCompatActivity {
  }
 
  private void applyAppSettings() {
-  SharedPreferences prefs = getSharedPreferences("app_settings", MODE_PRIVATE);
-  String fontSize = prefs.getString("font_size", "medium");
+  String fontSize = sharedPreferences.getString("font_size", "medium");
   applyFontSize(fontSize);
  }
 
@@ -112,6 +115,27 @@ public class AboutMeActivity extends AppCompatActivity {
     break;
   }
   res.updateConfiguration(config, res.getDisplayMetrics());
+ }
+
+ private void applyThemeColor() {
+  String themeColor = sharedPreferences.getString("theme_color", "gold");
+  int color = getThemeColor(themeColor);
+
+  // 更新金色装饰线颜色
+  View goldLine = findViewById(R.id.gold_line);
+  if (goldLine != null) {
+   goldLine.setBackgroundColor(color);
+  }
+ }
+
+ private int getThemeColor(String themeColor) {
+  switch (themeColor) {
+   case "gold": return 0xFFD4AF37;
+   case "blue": return 0xFF007AFF;
+   case "green": return 0xFF34C759;
+   case "purple": return 0xFFAF52DE;
+   default: return 0xFFD4AF37;
+  }
  }
 
  private void loadOnlineBackground() {

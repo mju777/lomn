@@ -1,0 +1,772 @@
+PS C:\Users\2626262626262626\Documents\GitHub\lomn> tree
+卷 C 的文件夹 PATH 列表
+卷序列号为 76A3-BF88
+C:.
+├─.gradle
+│  ├─9.5.0-rc-2
+│  │  ├─checksums
+│  │  ├─executionHistory
+│  │  ├─expanded
+│  │  ├─fileChanges
+│  │  ├─fileHashes
+│  │  └─vcsMetadata
+│  ├─buildOutputCleanup
+│  └─vcs-1
+├─.idea
+│  ├─codeStyles
+│  └─dictionaries
+├─app
+│  ├─build
+│  │  ├─generated
+│  │  │  ├─ap_generated_sources
+│  │  │  │  ├─debug
+│  │  │  │  │  └─out
+│  │  │  │  └─release
+│  │  │  │      └─out
+│  │  │  ├─res
+│  │  │  │  └─pngs
+│  │  │  │      ├─debug
+│  │  │  │      └─release
+│  │  │  ├─source
+│  │  │  │  └─buildConfig
+│  │  │  │      ├─debug
+│  │  │  │      │  └─me
+│  │  │  │      │      └─zackyu
+│  │  │  │      │          └─yubook
+│  │  │  │      └─release
+│  │  │  │          └─me
+│  │  │  │              └─zackyu
+│  │  │  │                  └─yubook
+│  │  │  └─updated_navigation_xml
+│  │  │      ├─debug
+│  │  │      └─release
+│  │  ├─intermediates
+│  │  │  ├─aar_metadata_check
+│  │  │  │  ├─debug
+│  │  │  │  │  └─checkDebugAarMetadata
+│  │  │  │  └─release
+│  │  │  │      └─checkReleaseAarMetadata
+│  │  │  ├─android_res_source_set_path_map
+│  │  │  │  ├─debug
+│  │  │  │  │  └─mapDebugSourceSetPaths
+│  │  │  │  └─release
+│  │  │  │      └─mapReleaseSourceSetPaths
+│  │  │  ├─annotation_processor_list
+│  │  │  │  ├─debug
+│  │  │  │  │  └─javaPreCompileDebug
+│  │  │  │  └─release
+│  │  │  │      └─javaPreCompileRelease
+│  │  │  ├─apk
+│  │  │  │  └─debug
+│  │  │  ├─apk_ide_redirect_file
+│  │  │  │  ├─debug
+│  │  │  │  │  └─createDebugApkListingFileRedirect
+│  │  │  │  └─release
+│  │  │  │      └─createReleaseApkListingFileRedirect
+│  │  │  ├─app_metadata
+│  │  │  │  ├─debug
+│  │  │  │  │  └─writeDebugAppMetadata
+│  │  │  │  └─release
+│  │  │  │      └─writeReleaseAppMetadata
+│  │  │  ├─assets
+│  │  │  │  ├─debug
+│  │  │  │  │  └─mergeDebugAssets
+│  │  │  │  └─release
+│  │  │  │      └─mergeReleaseAssets
+│  │  │  ├─binary_art_profile
+│  │  │  │  └─release
+│  │  │  │      └─compileReleaseArtProfile
+│  │  │  ├─binary_art_profile_metadata
+│  │  │  │  └─release
+│  │  │  │      └─compileReleaseArtProfile
+│  │  │  ├─combined_art_profile
+│  │  │  │  └─release
+│  │  │  │      └─compileReleaseArtProfile
+│  │  │  ├─compatible_screen_manifest
+│  │  │  │  ├─debug
+│  │  │  │  │  └─createDebugCompatibleScreenManifests
+│  │  │  │  └─release
+│  │  │  │      └─createReleaseCompatibleScreenManifests
+│  │  │  ├─compiled_navigation_res
+│  │  │  │  ├─debug
+│  │  │  │  │  └─compileDebugNavigationResources
+│  │  │  │  └─release
+│  │  │  │      └─compileReleaseNavigationResources
+│  │  │  ├─compile_and_runtime_r_class_jar
+│  │  │  │  ├─debug
+│  │  │  │  │  └─processDebugResources
+│  │  │  │  └─release
+│  │  │  │      └─processReleaseResources
+│  │  │  ├─compile_r_class_jar
+│  │  │  │  ├─debug
+│  │  │  │  │  └─generateDebugRFile
+│  │  │  │  └─release
+│  │  │  │      └─generateReleaseRFile
+│  │  │  ├─compile_symbol_list
+│  │  │  │  ├─debug
+│  │  │  │  │  └─generateDebugRFile
+│  │  │  │  └─release
+│  │  │  │      └─generateReleaseRFile
+│  │  │  ├─compressed_assets
+│  │  │  │  ├─debug
+│  │  │  │  │  └─compressDebugAssets
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─compressReleaseAssets
+│  │  │  │          └─out
+│  │  │  ├─d8_metadata
+│  │  │  │  └─release
+│  │  │  │      └─mergeDexRelease
+│  │  │  ├─data_binding_layout_info_type_merge
+│  │  │  │  ├─debug
+│  │  │  │  │  └─mergeDebugResources
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─mergeReleaseResources
+│  │  │  │          └─out
+│  │  │  ├─data_binding_layout_info_type_package
+│  │  │  │  ├─debug
+│  │  │  │  │  └─packageDebugResources
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─packageReleaseResources
+│  │  │  │          └─out
+│  │  │  ├─default_proguard_files
+│  │  │  │  └─global
+│  │  │  ├─desugar_graph
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  │          ├─currentProject
+│  │  │  │  │          │  ├─dirs_bucket_0
+│  │  │  │  │          │  ├─dirs_bucket_1
+│  │  │  │  │          │  ├─dirs_bucket_2
+│  │  │  │  │          │  ├─dirs_bucket_3
+│  │  │  │  │          │  ├─dirs_bucket_4
+│  │  │  │  │          │  ├─dirs_bucket_5
+│  │  │  │  │          │  ├─dirs_bucket_6
+│  │  │  │  │          │  ├─dirs_bucket_7
+│  │  │  │  │          │  ├─jar_3f49c2cddfe5aec770f1c93f3857e2cdb5efc4f37bdc48e0318e3fbf2438f264_bucket_0
+│  │  │  │  │          │  ├─jar_3f49c2cddfe5aec770f1c93f3857e2cdb5efc4f37bdc48e0318e3fbf2438f264_bucket_1
+│  │  │  │  │          │  ├─jar_3f49c2cddfe5aec770f1c93f3857e2cdb5efc4f37bdc48e0318e3fbf2438f264_bucket_2
+│  │  │  │  │          │  ├─jar_3f49c2cddfe5aec770f1c93f3857e2cdb5efc4f37bdc48e0318e3fbf2438f264_bucket_3
+│  │  │  │  │          │  ├─jar_3f49c2cddfe5aec770f1c93f3857e2cdb5efc4f37bdc48e0318e3fbf2438f264_bucket_4
+│  │  │  │  │          │  ├─jar_3f49c2cddfe5aec770f1c93f3857e2cdb5efc4f37bdc48e0318e3fbf2438f264_bucket_5
+│  │  │  │  │          │  ├─jar_3f49c2cddfe5aec770f1c93f3857e2cdb5efc4f37bdc48e0318e3fbf2438f264_bucket_6
+│  │  │  │  │          │  └─jar_3f49c2cddfe5aec770f1c93f3857e2cdb5efc4f37bdc48e0318e3fbf2438f264_bucket_7
+│  │  │  │  │          ├─externalLibs
+│  │  │  │  │          │  ├─dirs_bucket_0
+│  │  │  │  │          │  ├─dirs_bucket_1
+│  │  │  │  │          │  ├─dirs_bucket_2
+│  │  │  │  │          │  ├─dirs_bucket_3
+│  │  │  │  │          │  ├─dirs_bucket_4
+│  │  │  │  │          │  ├─dirs_bucket_5
+│  │  │  │  │          │  ├─dirs_bucket_6
+│  │  │  │  │          │  └─dirs_bucket_7
+│  │  │  │  │          ├─mixedScopes
+│  │  │  │  │          │  ├─dirs_bucket_0
+│  │  │  │  │          │  ├─dirs_bucket_1
+│  │  │  │  │          │  ├─dirs_bucket_2
+│  │  │  │  │          │  ├─dirs_bucket_3
+│  │  │  │  │          │  ├─dirs_bucket_4
+│  │  │  │  │          │  ├─dirs_bucket_5
+│  │  │  │  │          │  ├─dirs_bucket_6
+│  │  │  │  │          │  └─dirs_bucket_7
+│  │  │  │  │          └─otherProjects
+│  │  │  │  │              ├─dirs_bucket_0
+│  │  │  │  │              ├─dirs_bucket_1
+│  │  │  │  │              ├─dirs_bucket_2
+│  │  │  │  │              ├─dirs_bucket_3
+│  │  │  │  │              ├─dirs_bucket_4
+│  │  │  │  │              ├─dirs_bucket_5
+│  │  │  │  │              ├─dirs_bucket_6
+│  │  │  │  │              └─dirs_bucket_7
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  │              ├─currentProject
+│  │  │  │              │  ├─dirs_bucket_0
+│  │  │  │              │  ├─dirs_bucket_1
+│  │  │  │              │  ├─dirs_bucket_2
+│  │  │  │              │  ├─dirs_bucket_3
+│  │  │  │              │  ├─dirs_bucket_4
+│  │  │  │              │  ├─dirs_bucket_5
+│  │  │  │              │  ├─dirs_bucket_6
+│  │  │  │              │  ├─dirs_bucket_7
+│  │  │  │              │  ├─jar_327f3f77579fda253a75cefe6a9dcc1edef534b7979441e5a87a1ec45ca2cbb2_bucket_0
+│  │  │  │              │  ├─jar_327f3f77579fda253a75cefe6a9dcc1edef534b7979441e5a87a1ec45ca2cbb2_bucket_1
+│  │  │  │              │  ├─jar_327f3f77579fda253a75cefe6a9dcc1edef534b7979441e5a87a1ec45ca2cbb2_bucket_2
+│  │  │  │              │  ├─jar_327f3f77579fda253a75cefe6a9dcc1edef534b7979441e5a87a1ec45ca2cbb2_bucket_3
+│  │  │  │              │  ├─jar_327f3f77579fda253a75cefe6a9dcc1edef534b7979441e5a87a1ec45ca2cbb2_bucket_4
+│  │  │  │              │  ├─jar_327f3f77579fda253a75cefe6a9dcc1edef534b7979441e5a87a1ec45ca2cbb2_bucket_5
+│  │  │  │              │  ├─jar_327f3f77579fda253a75cefe6a9dcc1edef534b7979441e5a87a1ec45ca2cbb2_bucket_6
+│  │  │  │              │  └─jar_327f3f77579fda253a75cefe6a9dcc1edef534b7979441e5a87a1ec45ca2cbb2_bucket_7
+│  │  │  │              ├─externalLibs
+│  │  │  │              │  ├─dirs_bucket_0
+│  │  │  │              │  ├─dirs_bucket_1
+│  │  │  │              │  ├─dirs_bucket_2
+│  │  │  │              │  ├─dirs_bucket_3
+│  │  │  │              │  ├─dirs_bucket_4
+│  │  │  │              │  ├─dirs_bucket_5
+│  │  │  │              │  ├─dirs_bucket_6
+│  │  │  │              │  └─dirs_bucket_7
+│  │  │  │              ├─mixedScopes
+│  │  │  │              │  ├─dirs_bucket_0
+│  │  │  │              │  ├─dirs_bucket_1
+│  │  │  │              │  ├─dirs_bucket_2
+│  │  │  │              │  ├─dirs_bucket_3
+│  │  │  │              │  ├─dirs_bucket_4
+│  │  │  │              │  ├─dirs_bucket_5
+│  │  │  │              │  ├─dirs_bucket_6
+│  │  │  │              │  └─dirs_bucket_7
+│  │  │  │              └─otherProjects
+│  │  │  │                  ├─dirs_bucket_0
+│  │  │  │                  ├─dirs_bucket_1
+│  │  │  │                  ├─dirs_bucket_2
+│  │  │  │                  ├─dirs_bucket_3
+│  │  │  │                  ├─dirs_bucket_4
+│  │  │  │                  ├─dirs_bucket_5
+│  │  │  │                  ├─dirs_bucket_6
+│  │  │  │                  └─dirs_bucket_7
+│  │  │  ├─dex
+│  │  │  │  ├─debug
+│  │  │  │  │  ├─mergeExtDexDebug
+│  │  │  │  │  ├─mergeLibDexDebug
+│  │  │  │  │  │  ├─0
+│  │  │  │  │  │  ├─1
+│  │  │  │  │  │  ├─10
+│  │  │  │  │  │  ├─11
+│  │  │  │  │  │  ├─12
+│  │  │  │  │  │  ├─13
+│  │  │  │  │  │  ├─14
+│  │  │  │  │  │  ├─15
+│  │  │  │  │  │  ├─2
+│  │  │  │  │  │  ├─3
+│  │  │  │  │  │  ├─4
+│  │  │  │  │  │  ├─5
+│  │  │  │  │  │  ├─6
+│  │  │  │  │  │  ├─7
+│  │  │  │  │  │  ├─8
+│  │  │  │  │  │  └─9
+│  │  │  │  │  └─mergeProjectDexDebug
+│  │  │  │  │      ├─0
+│  │  │  │  │      ├─1
+│  │  │  │  │      ├─10
+│  │  │  │  │      ├─11
+│  │  │  │  │      ├─12
+│  │  │  │  │      ├─13
+│  │  │  │  │      ├─14
+│  │  │  │  │      ├─15
+│  │  │  │  │      ├─2
+│  │  │  │  │      ├─3
+│  │  │  │  │      ├─4
+│  │  │  │  │      ├─5
+│  │  │  │  │      ├─6
+│  │  │  │  │      ├─7
+│  │  │  │  │      ├─8
+│  │  │  │  │      └─9
+│  │  │  │  └─release
+│  │  │  │      └─mergeDexRelease
+│  │  │  ├─dex_archive_input_jar_hashes
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  ├─dex_metadata_directory
+│  │  │  │  └─release
+│  │  │  │      └─compileReleaseArtProfile
+│  │  │  │          ├─0
+│  │  │  │          └─1
+│  │  │  ├─dex_number_of_buckets_file
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  ├─duplicate_classes_check
+│  │  │  │  ├─debug
+│  │  │  │  │  └─checkDebugDuplicateClasses
+│  │  │  │  └─release
+│  │  │  │      └─checkReleaseDuplicateClasses
+│  │  │  ├─external_file_lib_dex_archives
+│  │  │  │  ├─debug
+│  │  │  │  │  └─desugarDebugFileDependencies
+│  │  │  │  └─release
+│  │  │  │      └─desugarReleaseFileDependencies
+│  │  │  ├─external_libs_dex
+│  │  │  │  └─release
+│  │  │  │      └─mergeExtDexRelease
+│  │  │  ├─external_libs_dex_archive
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  ├─external_libs_dex_archive_with_artifact_transforms
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  ├─global_synthetics_dex
+│  │  │  │  ├─debug
+│  │  │  │  │  └─mergeDebugGlobalSynthetics
+│  │  │  │  └─release
+│  │  │  │      └─mergeReleaseGlobalSynthetics
+│  │  │  ├─global_synthetics_external_lib
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  ├─global_synthetics_external_libs_artifact_transform
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  ├─global_synthetics_file_lib
+│  │  │  │  ├─debug
+│  │  │  │  │  └─desugarDebugFileDependencies
+│  │  │  │  └─release
+│  │  │  │      └─desugarReleaseFileDependencies
+│  │  │  ├─global_synthetics_mixed_scope
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  ├─global_synthetics_project
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  │          └─me
+│  │  │  │  │              └─zackyu
+│  │  │  │  │                  └─yubook
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  ├─global_synthetics_subproject
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  ├─incremental
+│  │  │  │  ├─debug
+│  │  │  │  │  ├─mergeDebugResources
+│  │  │  │  │  │  ├─merged.dir
+│  │  │  │  │  │  └─stripped.dir
+│  │  │  │  │  └─packageDebugResources
+│  │  │  │  │      ├─merged.dir
+│  │  │  │  │      └─stripped.dir
+│  │  │  │  ├─debug-mergeJavaRes
+│  │  │  │  │  └─zip-cache
+│  │  │  │  ├─lintVitalAnalyzeRelease
+│  │  │  │  ├─mergeDebugAssets
+│  │  │  │  ├─mergeDebugJniLibFolders
+│  │  │  │  ├─mergeReleaseAssets
+│  │  │  │  ├─mergeReleaseJniLibFolders
+│  │  │  │  ├─packageDebug
+│  │  │  │  │  └─tmp
+│  │  │  │  │      └─debug
+│  │  │  │  │          └─zip-cache
+│  │  │  │  ├─packageRelease
+│  │  │  │  │  └─tmp
+│  │  │  │  │      └─release
+│  │  │  │  │          └─zip-cache
+│  │  │  │  ├─processDebugResources
+│  │  │  │  ├─release
+│  │  │  │  │  ├─mergeReleaseResources
+│  │  │  │  │  │  ├─merged.dir
+│  │  │  │  │  │  │  ├─values
+│  │  │  │  │  │  │  ├─values-af
+│  │  │  │  │  │  │  ├─values-am
+│  │  │  │  │  │  │  ├─values-ar
+│  │  │  │  │  │  │  ├─values-as
+│  │  │  │  │  │  │  ├─values-az
+│  │  │  │  │  │  │  ├─values-b+sr+Latn
+│  │  │  │  │  │  │  ├─values-be
+│  │  │  │  │  │  │  ├─values-bg
+│  │  │  │  │  │  │  ├─values-bn
+│  │  │  │  │  │  │  ├─values-bs
+│  │  │  │  │  │  │  ├─values-ca
+│  │  │  │  │  │  │  ├─values-cs
+│  │  │  │  │  │  │  ├─values-da
+│  │  │  │  │  │  │  ├─values-de
+│  │  │  │  │  │  │  ├─values-el
+│  │  │  │  │  │  │  ├─values-en-rAU
+│  │  │  │  │  │  │  ├─values-en-rCA
+│  │  │  │  │  │  │  ├─values-en-rGB
+│  │  │  │  │  │  │  ├─values-en-rIN
+│  │  │  │  │  │  │  ├─values-en-rXC
+│  │  │  │  │  │  │  ├─values-es
+│  │  │  │  │  │  │  ├─values-es-rUS
+│  │  │  │  │  │  │  ├─values-et
+│  │  │  │  │  │  │  ├─values-eu
+│  │  │  │  │  │  │  ├─values-fa
+│  │  │  │  │  │  │  ├─values-fi
+│  │  │  │  │  │  │  ├─values-fr
+│  │  │  │  │  │  │  ├─values-fr-rCA
+│  │  │  │  │  │  │  ├─values-gl
+│  │  │  │  │  │  │  ├─values-gu
+│  │  │  │  │  │  │  ├─values-h720dp-v13
+│  │  │  │  │  │  │  ├─values-hdpi-v4
+│  │  │  │  │  │  │  ├─values-hi
+│  │  │  │  │  │  │  ├─values-hr
+│  │  │  │  │  │  │  ├─values-hu
+│  │  │  │  │  │  │  ├─values-hy
+│  │  │  │  │  │  │  ├─values-in
+│  │  │  │  │  │  │  ├─values-is
+│  │  │  │  │  │  │  ├─values-it
+│  │  │  │  │  │  │  ├─values-iw
+│  │  │  │  │  │  │  ├─values-ja
+│  │  │  │  │  │  │  ├─values-ka
+│  │  │  │  │  │  │  ├─values-kk
+│  │  │  │  │  │  │  ├─values-km
+│  │  │  │  │  │  │  ├─values-kn
+│  │  │  │  │  │  │  ├─values-ko
+│  │  │  │  │  │  │  ├─values-ky
+│  │  │  │  │  │  │  ├─values-land
+│  │  │  │  │  │  │  ├─values-large-v4
+│  │  │  │  │  │  │  ├─values-ldltr-v21
+│  │  │  │  │  │  │  ├─values-lo
+│  │  │  │  │  │  │  ├─values-lt
+│  │  │  │  │  │  │  ├─values-lv
+│  │  │  │  │  │  │  ├─values-mk
+│  │  │  │  │  │  │  ├─values-ml
+│  │  │  │  │  │  │  ├─values-mn
+│  │  │  │  │  │  │  ├─values-mr
+│  │  │  │  │  │  │  ├─values-ms
+│  │  │  │  │  │  │  ├─values-my
+│  │  │  │  │  │  │  ├─values-nb
+│  │  │  │  │  │  │  ├─values-ne
+│  │  │  │  │  │  │  ├─values-night-v8
+│  │  │  │  │  │  │  ├─values-nl
+│  │  │  │  │  │  │  ├─values-or
+│  │  │  │  │  │  │  ├─values-pa
+│  │  │  │  │  │  │  ├─values-pl
+│  │  │  │  │  │  │  ├─values-port
+│  │  │  │  │  │  │  ├─values-pt
+│  │  │  │  │  │  │  ├─values-pt-rBR
+│  │  │  │  │  │  │  ├─values-pt-rPT
+│  │  │  │  │  │  │  ├─values-ro
+│  │  │  │  │  │  │  ├─values-ru
+│  │  │  │  │  │  │  ├─values-si
+│  │  │  │  │  │  │  ├─values-sk
+│  │  │  │  │  │  │  ├─values-sl
+│  │  │  │  │  │  │  ├─values-sq
+│  │  │  │  │  │  │  ├─values-sr
+│  │  │  │  │  │  │  ├─values-sv
+│  │  │  │  │  │  │  ├─values-sw
+│  │  │  │  │  │  │  ├─values-sw600dp-v13
+│  │  │  │  │  │  │  ├─values-ta
+│  │  │  │  │  │  │  ├─values-te
+│  │  │  │  │  │  │  ├─values-th
+│  │  │  │  │  │  │  ├─values-tl
+│  │  │  │  │  │  │  ├─values-tr
+│  │  │  │  │  │  │  ├─values-uk
+│  │  │  │  │  │  │  ├─values-ur
+│  │  │  │  │  │  │  ├─values-uz
+│  │  │  │  │  │  │  ├─values-v16
+│  │  │  │  │  │  │  ├─values-v17
+│  │  │  │  │  │  │  ├─values-v18
+│  │  │  │  │  │  │  ├─values-v21
+│  │  │  │  │  │  │  ├─values-v22
+│  │  │  │  │  │  │  ├─values-v23
+│  │  │  │  │  │  │  ├─values-v24
+│  │  │  │  │  │  │  ├─values-v25
+│  │  │  │  │  │  │  ├─values-v26
+│  │  │  │  │  │  │  ├─values-v28
+│  │  │  │  │  │  │  ├─values-vi
+│  │  │  │  │  │  │  ├─values-watch-v20
+│  │  │  │  │  │  │  ├─values-watch-v21
+│  │  │  │  │  │  │  ├─values-xlarge-v4
+│  │  │  │  │  │  │  ├─values-zh-rCN
+│  │  │  │  │  │  │  ├─values-zh-rHK
+│  │  │  │  │  │  │  ├─values-zh-rTW
+│  │  │  │  │  │  │  └─values-zu
+│  │  │  │  │  │  └─stripped.dir
+│  │  │  │  │  └─packageReleaseResources
+│  │  │  │  │      ├─merged.dir
+│  │  │  │  │      │  └─values
+│  │  │  │  │      └─stripped.dir
+│  │  │  │  └─release-mergeJavaRes
+│  │  │  │      └─zip-cache
+│  │  │  ├─javac
+│  │  │  │  ├─debug
+│  │  │  │  │  └─compileDebugJavaWithJavac
+│  │  │  │  │      └─classes
+│  │  │  │  │          └─me
+│  │  │  │  │              └─zackyu
+│  │  │  │  │                  └─yubook
+│  │  │  │  │                      ├─constant
+│  │  │  │  │                      ├─db
+│  │  │  │  │                      └─util
+│  │  │  │  └─release
+│  │  │  │      └─compileReleaseJavaWithJavac
+│  │  │  │          └─classes
+│  │  │  │              └─me
+│  │  │  │                  └─zackyu
+│  │  │  │                      └─yubook
+│  │  │  │                          ├─constant
+│  │  │  │                          ├─db
+│  │  │  │                          └─util
+│  │  │  ├─java_res
+│  │  │  │  └─debug
+│  │  │  │      └─processDebugJavaRes
+│  │  │  │          └─out
+│  │  │  │              └─me
+│  │  │  │                  └─zackyu
+│  │  │  │                      └─yubook
+│  │  │  │                          ├─constant
+│  │  │  │                          ├─db
+│  │  │  │                          └─util
+│  │  │  ├─linked_resources_binary_format
+│  │  │  │  ├─debug
+│  │  │  │  │  └─processDebugResources
+│  │  │  │  └─release
+│  │  │  │      └─processReleaseResources
+│  │  │  ├─lint-cache
+│  │  │  │  ├─lintVitalAnalyzeRelease
+│  │  │  │  │  ├─maven.google
+│  │  │  │  │  └─sdk_index
+│  │  │  │  └─lintVitalReportRelease
+│  │  │  ├─lint_vital_intermediate_text_report
+│  │  │  │  └─release
+│  │  │  │      └─lintVitalReportRelease
+│  │  │  ├─lint_vital_output
+│  │  │  │  └─release
+│  │  │  │      └─lintVitalRelease
+│  │  │  ├─lint_vital_partial_results
+│  │  │  │  └─release
+│  │  │  │      └─lintVitalAnalyzeRelease
+│  │  │  │          └─out
+│  │  │  ├─lint_vital_report_lint_model
+│  │  │  │  └─release
+│  │  │  │      └─generateReleaseLintVitalReportModel
+│  │  │  ├─lint_vital_return_value
+│  │  │  │  └─release
+│  │  │  │      └─lintVitalReportRelease
+│  │  │  ├─local_only_symbol_list
+│  │  │  │  ├─debug
+│  │  │  │  │  └─parseDebugLocalResources
+│  │  │  │  └─release
+│  │  │  │      └─parseReleaseLocalResources
+│  │  │  ├─manifest_merge_blame_file
+│  │  │  │  ├─debug
+│  │  │  │  │  └─processDebugMainManifest
+│  │  │  │  └─release
+│  │  │  │      └─processReleaseMainManifest
+│  │  │  ├─merged_art_profile
+│  │  │  │  └─release
+│  │  │  │      └─mergeReleaseArtProfile
+│  │  │  ├─merged_java_res
+│  │  │  │  ├─debug
+│  │  │  │  │  └─mergeDebugJavaResource
+│  │  │  │  └─release
+│  │  │  │      └─mergeReleaseJavaResource
+│  │  │  ├─merged_jni_libs
+│  │  │  │  ├─debug
+│  │  │  │  │  └─mergeDebugJniLibFolders
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─mergeReleaseJniLibFolders
+│  │  │  │          └─out
+│  │  │  ├─merged_manifest
+│  │  │  │  ├─debug
+│  │  │  │  │  └─processDebugMainManifest
+│  │  │  │  └─release
+│  │  │  │      └─processReleaseMainManifest
+│  │  │  ├─merged_manifests
+│  │  │  │  ├─debug
+│  │  │  │  │  └─processDebugManifest
+│  │  │  │  └─release
+│  │  │  │      └─processReleaseManifest
+│  │  │  ├─merged_res
+│  │  │  │  ├─debug
+│  │  │  │  │  └─mergeDebugResources
+│  │  │  │  └─release
+│  │  │  │      └─mergeReleaseResources
+│  │  │  ├─merged_res_blame_folder
+│  │  │  │  ├─debug
+│  │  │  │  │  └─mergeDebugResources
+│  │  │  │  │      └─out
+│  │  │  │  │          ├─multi-v2
+│  │  │  │  │          └─single
+│  │  │  │  └─release
+│  │  │  │      └─mergeReleaseResources
+│  │  │  │          └─out
+│  │  │  │              ├─multi-v2
+│  │  │  │              └─single
+│  │  │  ├─metadata_library_dependencies_report
+│  │  │  │  └─release
+│  │  │  │      └─collectReleaseDependencies
+│  │  │  ├─mixed_scope_dex_archive
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  ├─navigation_json
+│  │  │  │  ├─debug
+│  │  │  │  │  └─extractDeepLinksDebug
+│  │  │  │  └─release
+│  │  │  │      └─extractDeepLinksRelease
+│  │  │  ├─nested_resources_validation_report
+│  │  │  │  ├─debug
+│  │  │  │  │  └─generateDebugResources
+│  │  │  │  └─release
+│  │  │  │      └─generateReleaseResources
+│  │  │  ├─optimized_processed_res
+│  │  │  │  └─release
+│  │  │  │      └─optimizeReleaseResources
+│  │  │  ├─packaged_manifests
+│  │  │  │  ├─debug
+│  │  │  │  │  └─processDebugManifestForPackage
+│  │  │  │  └─release
+│  │  │  │      └─processReleaseManifestForPackage
+│  │  │  ├─packaged_res
+│  │  │  │  ├─debug
+│  │  │  │  │  └─packageDebugResources
+│  │  │  │  │      ├─drawable
+│  │  │  │  │      ├─drawable-v24
+│  │  │  │  │      ├─layout
+│  │  │  │  │      ├─menu
+│  │  │  │  │      ├─mipmap-anydpi-v26
+│  │  │  │  │      ├─mipmap-hdpi-v4
+│  │  │  │  │      ├─mipmap-mdpi-v4
+│  │  │  │  │      ├─mipmap-xhdpi-v4
+│  │  │  │  │      ├─mipmap-xxhdpi-v4
+│  │  │  │  │      ├─mipmap-xxxhdpi-v4
+│  │  │  │  │      └─values
+│  │  │  │  └─release
+│  │  │  │      └─packageReleaseResources
+│  │  │  │          ├─drawable
+│  │  │  │          ├─drawable-v24
+│  │  │  │          ├─layout
+│  │  │  │          ├─menu
+│  │  │  │          ├─mipmap-anydpi-v26
+│  │  │  │          ├─mipmap-hdpi-v4
+│  │  │  │          ├─mipmap-mdpi-v4
+│  │  │  │          ├─mipmap-xhdpi-v4
+│  │  │  │          ├─mipmap-xxhdpi-v4
+│  │  │  │          ├─mipmap-xxxhdpi-v4
+│  │  │  │          └─values
+│  │  │  ├─project_dex_archive
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  │          └─me
+│  │  │  │  │              └─zackyu
+│  │  │  │  │                  └─yubook
+│  │  │  │  │                      ├─constant
+│  │  │  │  │                      ├─db
+│  │  │  │  │                      └─util
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  │              └─me
+│  │  │  │                  └─zackyu
+│  │  │  │                      └─yubook
+│  │  │  │                          ├─constant
+│  │  │  │                          ├─db
+│  │  │  │                          └─util
+│  │  │  ├─runtime_symbol_list
+│  │  │  │  ├─debug
+│  │  │  │  │  └─processDebugResources
+│  │  │  │  └─release
+│  │  │  │      └─processReleaseResources
+│  │  │  ├─sdk_dependency_data
+│  │  │  │  └─release
+│  │  │  │      └─sdkReleaseDependencyData
+│  │  │  ├─signing_config_versions
+│  │  │  │  ├─debug
+│  │  │  │  │  └─writeDebugSigningConfigVersions
+│  │  │  │  └─release
+│  │  │  │      └─writeReleaseSigningConfigVersions
+│  │  │  ├─stable_resource_ids_file
+│  │  │  │  ├─debug
+│  │  │  │  │  └─processDebugResources
+│  │  │  │  └─release
+│  │  │  │      └─processReleaseResources
+│  │  │  ├─sub_project_dex_archive
+│  │  │  │  ├─debug
+│  │  │  │  │  └─dexBuilderDebug
+│  │  │  │  │      └─out
+│  │  │  │  └─release
+│  │  │  │      └─dexBuilderRelease
+│  │  │  │          └─out
+│  │  │  ├─symbol_list_with_package_name
+│  │  │  │  ├─debug
+│  │  │  │  │  └─generateDebugRFile
+│  │  │  │  └─release
+│  │  │  │      └─generateReleaseRFile
+│  │  │  ├─validate_signing_config
+│  │  │  │  ├─debug
+│  │  │  │  │  └─validateSigningDebug
+│  │  │  │  └─release
+│  │  │  │      └─validateSigningRelease
+│  │  │  └─version_control_info_file
+│  │  │      └─release
+│  │  │          └─extractReleaseVersionControlInfo
+│  │  ├─outputs
+│  │  │  ├─logs
+│  │  │  └─sdk-dependencies
+│  │  │      └─release
+│  │  ├─reports
+│  │  │  └─resources_config_map_file
+│  │  │      └─release
+│  │  └─tmp
+│  │      ├─compileDebugJavaWithJavac
+│  │      │  └─compileTransaction
+│  │      │      ├─backup-dir
+│  │      │      └─stash-dir
+│  │      └─compileReleaseJavaWithJavac
+│  ├─release
+│  │  └─baselineProfiles
+│  │      ├─0
+│  │      └─1
+│  ├─sampledata
+│  └─src
+│      ├─androidTest
+│      │  └─java
+│      │      └─me
+│      │          └─zackyu
+│      │              └─yubook
+│      ├─main
+│      │  ├─java
+│      │  │  └─me
+│      │  │      └─zackyu
+│      │  │          └─yubook
+│      │  │              ├─constant
+│      │  │              ├─db
+│      │  │              └─util
+│      │  └─res
+│      │      ├─drawable
+│      │      ├─drawable-v24
+│      │      ├─layout
+│      │      ├─menu
+│      │      ├─mipmap-anydpi-v26
+│      │      ├─mipmap-hdpi
+│      │      ├─mipmap-mdpi
+│      │      ├─mipmap-xhdpi
+│      │      ├─mipmap-xxhdpi
+│      │      ├─mipmap-xxxhdpi
+│      │      └─values
+│      └─test
+│          └─java
+│              └─me
+│                  └─zackyu
+│                      └─yubook
+├─build
+│  └─reports
+│      └─problems
+└─gradle
+    └─wrapper

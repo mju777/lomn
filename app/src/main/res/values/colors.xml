@@ -1,16 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFBC5</color>
-    <color name="colorPrimaryDark">#FFFBC5</color>
-    <color name="colorAccent">#FFFBC5</color>
+    <!-- 主色调 -->
+    <color name="gold">#D4AF37</color>
+    <color name="gold_dark">#B8960C</color>
+    <color name="gold_light">#FFD700</color>
 
+    <!-- 主题颜色 -->
+    <color name="blue">#007AFF</color>
+    <color name="blue_dark">#0055CC</color>
+    <color name="green">#34C759</color>
+    <color name="green_dark">#248A3D</color>
+    <color name="purple">#AF52DE</color>
+    <color name="purple_dark">#8B3DBF</color>
 
+    <!-- 收入和支出颜色 -->
+    <color name="income">#4CAF50</color>
+    <color name="income_dark">#388E3C</color>
+    <color name="expense">#FF3B30</color>
+    <color name="expense_dark">#D32F2F</color>
 
+    <!-- 基础颜色 -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
 
-        <color name="gold">#FFD700</color>
-        <color name="blue">#007AFF</color>
-        <color name="green">#34C759</color>
-        <color name="purple">#AF52DE</color>
+    <!-- 文本颜色 -->
+    <color name="text_primary">#1C1C1E</color>
+    <color name="text_secondary">#8E8E93</color>
+    <color name="text_hint">#C6C6C8</color>
+    <color name="text_light">#FFFFFF</color>
 
+    <!-- 背景颜色 -->
+    <color name="bg_glass">#D9FFFFFF</color>
+    <color name="bg_glass_light">#80FFFFFF</color>
+    <color name="bg_glass_dark">#B3FFFFFF</color>
+    <color name="bg_card">#F5F5F5</color>
 
+    <!-- 分割线颜色 -->
+    <color name="divider">#E0E0E0</color>
+    <color name="divider_light">#F0F0F0</color>
+
+    <!-- 状态栏和导航栏 -->
+    <color name="status_bar_light">#00FFFFFF</color>
+    <color name="status_bar_dark">#1C1C1E</color>
+    <color name="nav_bar_light">#00FFFFFF</color>
+    <color name="nav_bar_dark">#1C1C1E</color>
+
+    <!-- 阴影和效果 -->
+    <color name="shadow">#80000000</color>
+    <color name="shadow_light">#20000000</color>
+
+    <!-- 渐变颜色 -->
+    <color name="gradient_start_1">#667eea</color>
+    <color name="gradient_end_1">#764ba2</color>
+    <color name="gradient_start_2">#f093fb</color>
+    <color name="gradient_end_2">#f5576c</color>
+    <color name="gradient_start_3">#4facfe</color>
+    <color name="gradient_end_3">#00f2fe</color>
+    <color name="gradient_start_4">#43e97b</color>
+    <color name="gradient_end_4">#38f9d7</color>
+    <color name="gradient_start_5">#fa709a</color>
+    <color name="gradient_end_5">#fee140</color>
+    <color name="gradient_start_6">#30cfd0</color>
+    <color name="gradient_end_6">#330867</color>
+    <color name="gradient_start_7">#a8edea</color>
+    <color name="gradient_end_7">#fed6e3</color>
+    <color name="gradient_start_8">#ff9a9e</color>
+    <color name="gradient_end_8">#fecfef</color>
+    <color name="gradient_start_9">#ffecd2</color>
+    <color name="gradient_end_9">#fcb69f</color>
+    <color name="gradient_start_10">#a1c4fd</color>
+    <color name="gradient_end_10">#c2e9fb</color>
 </resources>
