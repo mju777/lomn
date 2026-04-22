@@ -7,7 +7,8 @@
     android:background="@android:color/transparent"
     android:fitsSystemWindows="true"
     android:scrollbars="none"
-    tools:ignore="ScrollViewCount">
+    tools:ignore="ScrollViewCount"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,7 +65,11 @@
                     android:text="📖 关于应用"
                     android:textColor="#1C1C1E"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
 
                 <View
                     android:id="@+id/gold_line"
@@ -79,19 +84,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="YooBook"
+                    android:text="Micro Bill 微账单"
                     android:textColor="#1C1C1E"
                     android:textSize="28sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
-                    android:text="沉浸式阅读体验"
+                    android:text="微小的"
                     android:textColor="#666666"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -119,7 +132,11 @@
                     android:text="👨‍💻 开发者"
                     android:textColor="#1C1C1E"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
 
                 <View
                     android:layout_width="40dp"
@@ -143,7 +160,11 @@
                         android:layout_weight="1"
                         android:text="📛 姓名"
                         android:textColor="#666666"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
 
                     <TextView
                         android:id="@+id/tv_author_name"
@@ -153,7 +174,11 @@
                         android:text="@string/myname"
                         android:textColor="#1C1C1E"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
                 </LinearLayout>
 
                 <View
@@ -177,7 +202,11 @@
                         android:layout_weight="1"
                         android:text="📧 邮箱"
                         android:textColor="#666666"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
 
                     <TextView
                         android:id="@+id/tv_email"
@@ -187,7 +216,11 @@
                         android:text="yuzhang@yubook.com"
                         android:textColor="#1C1C1E"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -216,7 +249,11 @@
                     android:text="💬 联系方式"
                     android:textColor="#1C1C1E"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
 
                 <View
                     android:layout_width="40dp"
@@ -241,7 +278,11 @@
                         android:text="💬 微信"
                         android:textColor="#D4AF37"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
 
                     <TextView
                         android:id="@+id/tv_wechat_account"
@@ -251,7 +292,11 @@
                         android:gravity="end"
                         android:text="@string/wechat_no"
                         android:textColor="#1C1C1E"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -259,7 +304,11 @@
                         android:layout_marginStart="8dp"
                         android:text="📋"
                         android:textColor="#D4AF37"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
                 </LinearLayout>
 
                 <View
@@ -282,7 +331,11 @@
                         android:text="🐧 QQ"
                         android:textColor="#D4AF37"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
 
                     <TextView
                         android:id="@+id/tv_qq_account"
@@ -292,7 +345,11 @@
                         android:gravity="end"
                         android:text="@string/qq_no"
                         android:textColor="#1C1C1E"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -300,7 +357,11 @@
                         android:layout_marginStart="8dp"
                         android:text="📋"
                         android:textColor="#D4AF37"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -329,7 +390,11 @@
                     android:text="📌 版本信息"
                     android:textColor="#1C1C1E"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
 
                 <View
                     android:layout_width="40dp"
@@ -354,7 +419,11 @@
                         android:gravity="center"
                         android:text="@string/version_string"
                         android:textColor="#666666"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -364,7 +433,11 @@
                         android:text="@string/version"
                         android:textColor="#D4AF37"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -380,26 +453,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="© 2025 YooBook"
+                android:text="© 2025 MicroBill"
                 android:textColor="#CCCCCC"
                 android:textSize="12sp"
                 android:shadowColor="#80000000"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2" />
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
-                android:text="Made with ❤️"
+                android:text="Made with ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️️"
                 android:textColor="#CCCCCC"
                 android:textSize="11sp"
                 android:shadowColor="#80000000"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2" />
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"/>
         </LinearLayout>
 
         <!-- 返回按钮 -->
@@ -415,7 +488,10 @@
             android:textAllCaps="false"
             android:textColor="#1C1C1E"
             android:textSize="16sp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            android:shadowColor="#80000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"/>
     </LinearLayout>
 </ScrollView>

@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         buttonPlsRcd.setOnClickListener(v -> {
-            Toast.makeText(MainActivity.this, "感谢支持！❤️", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "感谢支持！❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️️️", Toast.LENGTH_SHORT).show();
             refreshBackground();
         });
 
@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
             btnShare.setOnClickListener(v -> {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "推荐使用小金库记账应用！");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "推荐使用小记账应用！");
                 startActivity(Intent.createChooser(shareIntent, "分享"));
             });
         }

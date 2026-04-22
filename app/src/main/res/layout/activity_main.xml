@@ -66,7 +66,11 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" >
 
                 <Button
                     android:id="@+id/button_home_settings"
@@ -74,7 +78,11 @@
                     android:layout_height="56dp"
                     android:background="@drawable/btn_icon_ultraclear"
                     android:text="⚙️"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
 
                 <Button
                     android:id="@+id/button_share"
@@ -83,7 +91,11 @@
                     android:layout_marginStart="12dp"
                     android:background="@drawable/btn_icon_ultraclear"
                     android:text="📤"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
             </LinearLayout>
         </LinearLayout>
 
@@ -95,7 +107,8 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_glass_card_ultraclear"
             android:orientation="vertical"
-            android:padding="28dp">
+            android:padding="28dp"
+            >
 
             <TextView
                 android:id="@+id/label_total"
@@ -104,7 +117,11 @@
                 android:text="总资产"
                 android:textColor="#CCCCCC"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <TextView
                 android:id="@+id/text_total"
@@ -114,7 +131,11 @@
                 android:text="0.00"
                 android:textColor="#FFFFFF"
                 android:textSize="44sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -126,7 +147,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" >
 
                     <TextView
                         android:id="@+id/label_income"
@@ -134,7 +159,11 @@
                         android:layout_height="wrap_content"
                         android:text="📈 总收入"
                         android:textColor="#CCCCCC"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
 
                     <TextView
                         android:id="@+id/text_income"
@@ -144,7 +173,11 @@
                         android:text="0.00"
                         android:textColor="#4CD964"
                         android:textSize="22sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
                 </LinearLayout>
 
                 <View
@@ -165,7 +198,11 @@
                         android:layout_height="wrap_content"
                         android:text="📉 总支出"
                         android:textColor="#CCCCCC"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
 
                     <TextView
                         android:id="@+id/text_pay"
@@ -175,7 +212,11 @@
                         android:text="0.00"
                         android:textColor="#FF3B30"
                         android:textSize="22sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:shadowColor="#80000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -192,9 +233,10 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:shadowColor="#80000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="3" />
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -213,7 +255,11 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <Button
                 android:id="@+id/button_records"
@@ -227,7 +273,11 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <Button
                 android:id="@+id/button_new_account"
@@ -241,7 +291,11 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
         </LinearLayout>
 
         <!-- 快速记账 -->
@@ -256,9 +310,10 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:shadowColor="#80000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="3" />
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -277,7 +332,11 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <Button
                 android:id="@+id/btn_expense_quick"
@@ -291,7 +350,11 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
         </LinearLayout>
 
         <!-- 更多功能 -->
@@ -306,9 +369,9 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:shadowColor="#80000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="3" />
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -327,7 +390,11 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <Button
                 android:id="@+id/button_main_pls"
@@ -341,7 +408,11 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <Button
                 android:id="@+id/button_main_back"
@@ -355,7 +426,11 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
         </LinearLayout>
 
         <View
