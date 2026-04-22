@@ -11,30 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="48dp">
-
-        <!-- 状态栏占位 -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="32dp" />
+        android:paddingBottom="48dp"
+        android:paddingTop="48dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
         <!-- 头部 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
             android:paddingBottom="16dp">
 
             <Button
                 android:id="@+id/button_new_pay_back"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/btn_icon_round"
+                android:background="@drawable/btn_icon_ultraclear"
                 android:text="←"
                 android:textSize="24sp"
-                android:textColor="#D4AF37" />
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:layout_width="0dp"
@@ -42,9 +38,13 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="📉 新增支出"
-                android:textColor="#1A1A1A"
+                android:textColor="#FFFFFF"
                 android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
 
             <View
                 android:layout_width="48dp"
@@ -54,181 +54,185 @@
 
         <!-- 装饰金线 -->
         <View
+            android:id="@+id/gold_line"
             android:layout_width="80dp"
             android:layout_height="3dp"
             android:layout_gravity="center"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/gold_line" />
+            android:background="#D4AF37" />
 
         <!-- 表单卡片 -->
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/card_white_bg"
-            android:orientation="vertical"
-            android:padding="20dp">
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#D9FFFFFF"
+            app:cardUseCompatPadding="true">
 
-            <!-- 支出类型 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="💸 支出类型"
-                android:textColor="#D4AF37"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/new_pay_sources"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/spinner_background"
-                android:entries="@array/pay_from"
-                android:gravity="center"
-                android:padding="12dp"
-                android:theme="@style/CustomSpinnerStyle1" />
-
-            <!-- 支出分类/去向 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="📍 支出分类"
-                android:textColor="#D4AF37"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/new_pay_type"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/spinner_background"
-                android:entries="@array/pay_to"
-                android:gravity="center"
-                android:padding="12dp"
-                android:theme="@style/CustomSpinnerStyle1" />
-
-            <!-- 账户名称 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="🏦 账户名称"
-                android:textColor="#D4AF37"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/new_pay_account"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:autofillHints=""
-                android:background="@drawable/edittext_background"
-                android:gravity="center"
-                android:hint="请输入账户名称"
-                android:inputType="text"
-                android:maxLines="1"
-                android:padding="12dp"
-                android:singleLine="true"
-                android:textSize="14sp" />
-
-            <!-- 支出金额 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="💵 支出金额"
-                android:textColor="#D4AF37"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/new_pay_amount"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="24dp"
-                android:autofillHints=""
-                android:background="@drawable/edittext_background"
-                android:gravity="center"
-                android:hint="请输入金额（如：100.00）"
-                android:inputType="numberDecimal"
-                android:maxLength="16"
-                android:padding="12dp"
-                android:singleLine="true"
-                android:textSize="14sp" />
-
-            <!-- 按钮区域 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <Button
-                    android:id="@+id/button_new_pay_record"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_expense"
-                    android:gravity="center"
-                    android:text="💾 保存支出"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💸 支出类型"
+                    android:textColor="#D4AF37"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button_new_pay_reset"
-                    android:layout_width="0dp"
+                <Spinner
+                    android:id="@+id/new_pay_sources"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_secondary"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/spinner_background_white"
+                    android:entries="@array/pay_from"
                     android:gravity="center"
-                    android:text="🔄 重置"
-                    android:textAllCaps="false"
-                    android:textColor="#555555"
-                    android:textSize="15sp" />
+                    android:padding="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="📍 支出分类"
+                    android:textColor="#D4AF37"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/new_pay_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/spinner_background_white"
+                    android:entries="@array/pay_to"
+                    android:gravity="center"
+                    android:padding="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="🏦 账户名称"
+                    android:textColor="#D4AF37"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/new_pay_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_background_white"
+                    android:gravity="center"
+                    android:hint="请输入账户名称"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="12dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="💵 支出金额"
+                    android:textColor="#D4AF37"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/new_pay_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/edittext_background_white"
+                    android:gravity="center"
+                    android:hint="请输入金额（如：100.00）"
+                    android:inputType="numberDecimal"
+                    android:maxLength="16"
+                    android:padding="12dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button_new_pay_record"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_expense_ultraclear"
+                        android:gravity="center"
+                        android:text="💾 保存支出"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/button_new_pay_reset"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_glass_ultraclear"
+                        android:gravity="center"
+                        android:text="🔄 重置"
+                        android:textAllCaps="false"
+                        android:textColor="#1C1C1E"
+                        android:textSize="15sp" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <!-- 提示卡片 -->
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/card_dark_bg"
-            android:orientation="vertical"
-            android:padding="16dp">
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#80FFFFFF"
+            app:cardUseCompatPadding="true">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="💡 小贴士"
-                android:textColor="#D4AF37"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="记录每一笔支出，让消费更加理性"
-                android:textColor="#CCCCCC"
-                android:textSize="12sp" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="💡 小贴士"
+                    android:textColor="#D4AF37"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="记录每一笔支出，让消费更加理性"
+                    android:textColor="#1C1C1E"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </ScrollView>
