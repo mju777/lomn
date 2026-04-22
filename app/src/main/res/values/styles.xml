@@ -16,7 +16,17 @@
     <style name="CalendarDateText"></style>
 
 
-
+    <!-- 玻璃质感对话框主题 -->
+    <style name="GlassDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
     <!-- Switch 金色主题 -->
     <style name="SwitchTheme" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">#D4AF37</item>

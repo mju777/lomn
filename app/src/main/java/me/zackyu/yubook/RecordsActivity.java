@@ -1,5 +1,6 @@
 package me.zackyu.yubook;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -296,31 +298,73 @@ public class RecordsActivity extends AppCompatActivity {
         if (record == null) return;
 
         String type = record.getAmount() > 0 ? "收入" : "支出";
-        String amountColor = record.getAmount() > 0 ? "#4CAF50" : "#FF6B6B";
+        int typeColor = record.getAmount() > 0 ? 0xFF4CAF50 : 0xFFFF6B6B;
+        String amountText = String.format(Locale.getDefault(), "¥ %.2f", Math.abs(record.getAmount()));
 
-        String detail = String.format(Locale.getDefault(),
-                "📋 记账详情\n\n" +
-                        "类型：%s\n" +
-                        "来源：%s\n" +
-                        "分类：%s\n" +
-                        "账户：%s\n" +
-                        "金额：%.2f\n" +
-                        "时间：%s",
-                type,
-                record.getSource() != null ? record.getSource() : "未知",
-                record.getType() != null ? record.getType() : "未知",
-                record.getAccount() != null ? record.getAccount() : "未知",
-                Math.abs(record.getAmount()),
-                record.getCrttime() != null ? dateFormat.format(record.getCrttime()) : "未知"
-        );
+        // 创建自定义对话框视图
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_record_detail, null);
 
-        new AlertDialog.Builder(this)
-                .setTitle("记账详情")
-                .setMessage(detail)
+        // 获取控件
+        TextView tvType = dialogView.findViewById(R.id.tv_detail_type);
+        TextView tvTypeValue = dialogView.findViewById(R.id.tv_detail_type_value);
+        TextView tvSource = dialogView.findViewById(R.id.tv_detail_source);
+        TextView tvSourceValue = dialogView.findViewById(R.id.tv_detail_source_value);
+        TextView tvCategory = dialogView.findViewById(R.id.tv_detail_category);
+        TextView tvCategoryValue = dialogView.findViewById(R.id.tv_detail_category_value);
+        TextView tvAccount = dialogView.findViewById(R.id.tv_detail_account);
+        TextView tvAccountValue = dialogView.findViewById(R.id.tv_detail_account_value);
+        TextView tvAmount = dialogView.findViewById(R.id.tv_detail_amount);
+        TextView tvAmountValue = dialogView.findViewById(R.id.tv_detail_amount_value);
+        TextView tvTime = dialogView.findViewById(R.id.tv_detail_time);
+        TextView tvTimeValue = dialogView.findViewById(R.id.tv_detail_time_value);
+        View goldLine = dialogView.findViewById(R.id.gold_line_detail);
+
+        // 设置数据
+        tvTypeValue.setText(type);
+        tvTypeValue.setTextColor(typeColor);
+
+        tvSourceValue.setText(record.getSource() != null ? record.getSource() : "未知");
+        tvCategoryValue.setText(record.getType() != null ? record.getType() : "未知");
+        tvAccountValue.setText(record.getAccount() != null ? record.getAccount() : "未知");
+        tvAmountValue.setText(amountText);
+        tvAmountValue.setTextColor(typeColor);
+        tvTimeValue.setText(record.getCrttime() != null ? dateFormat.format(record.getCrttime()) : "未知");
+
+        // 应用主题颜色
+        SharedPreferences prefs = getSharedPreferences("app_settings", MODE_PRIVATE);
+        String themeColor = prefs.getString("theme_color", "gold");
+        int goldColor = getThemeColor(themeColor);
+        if (goldLine != null) {
+            goldLine.setBackgroundColor(goldColor);
+        }
+
+        // 创建对话框
+        AlertDialog dialog = new AlertDialog.Builder(this, R.style.GlassDialogTheme)
+                .setView(dialogView)
                 .setPositiveButton("关闭", null)
-                .show();
+                .create();
+
+        dialog.show();
+
+        // 设置按钮样式
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        if (positiveButton != null) {
+            positiveButton.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.btn_glass_ultraclear));
+            positiveButton.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+            positiveButton.setTextSize(14);
+            positiveButton.setPadding(40, 12, 40, 12);
+        }
     }
 
+    private int getThemeColor(String themeColor) {
+        switch (themeColor) {
+            case "gold": return 0xFFD4AF37;
+            case "blue": return 0xFF007AFF;
+            case "green": return 0xFF34C759;
+            case "purple": return 0xFFAF52DE;
+            default: return 0xFFD4AF37;
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
